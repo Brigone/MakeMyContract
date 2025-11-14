@@ -1,0 +1,39 @@
+{
+  "name": "makemycontract",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@radix-ui/react-slot": "^1.2.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "firebase": "^12.5.0",
+    "firebase-admin": "^13.6.0",
+    "lucide-react": "^0.553.0",
+    "next": "14.2.12",
+    "pdfmake": "^0.2.20",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.66.0",
+    "stripe": "^19.3.1",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@eslint/eslintrc": "^3.0.4",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.12",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
