@@ -42,7 +42,7 @@ export function FeaturesGrid() {
         Tools that feel like your own legal department
       </h2>
       <p className="mt-2 max-w-3xl text-base text-slate-800">
-        MakeMyContract blends attorney-grade structure with the speed and polish of a modern SaaS platform. Every feature keeps you focused on running your business—not juggling paperwork.
+        Make My Contract blends attorney-grade structure with the speed and polish of a modern SaaS platform. Every feature keeps you focused on running your business—not juggling paperwork.
       </p>
       <div className="mt-10 grid gap-6 md:grid-cols-2">
         {features.map(({ icon: Icon, title, description }) => (

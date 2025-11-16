@@ -22,7 +22,7 @@ export default async function SignupPage() {
       <div className="flex-1 rounded-[32px] border border-slate-200 bg-white p-8 shadow-xl">
         <SignupForm />
         <p className="mt-4 text-center text-sm text-slate-800">
-          Already using MakeMyContract?{" "}
+          Already using Make My Contract?{" "}
           <Link href="/login" className="font-semibold text-blue-600">
             Sign in instead
           </Link>

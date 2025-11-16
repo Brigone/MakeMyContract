@@ -12,12 +12,12 @@ const SITE_URL = "https://makemycontract.example.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    template: "%s | MakeMyContract",
+    template: "%s | Make My Contract",
     default:
-      "MakeMyContract — Professional U.S. contracts without the law firm",
+      "Make My Contract — Professional U.S. contracts without the law firm",
   },
   description:
-    "MakeMyContract helps founders, operators, and teams create attorney-level U.S. contracts online in minutes.",
+    "Make My Contract helps founders, operators, and teams create attorney-level U.S. contracts online in minutes.",
   keywords: [
     "create contract online",
     "legal contract generator",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     "PDF contract creator",
     "NDA generator",
     "lease agreement generator",
-    "MakeMyContract",
+    "Make My Contract",
     "U.S. contract templates",
   ],
   alternates: {
@@ -43,24 +43,24 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "MakeMyContract — Create legally binding contracts online",
+    title: "Make My Contract — Create legally binding contracts online",
     description:
       "Guided intake, attorney-style templates, and signature-ready PDFs for modern U.S. businesses.",
     url: SITE_URL,
-    siteName: "MakeMyContract",
+    siteName: "Make My Contract",
     type: "website",
     images: [
       {
         url: `${SITE_URL}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "MakeMyContract dashboard preview",
+        alt: "Make My Contract dashboard preview",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "MakeMyContract",
+    title: "Make My Contract",
     description:
       "Generate professional U.S. contracts in minutes—no law firm retainer or confusing legal jargon.",
     site: "@makemycontract",
@@ -73,7 +73,7 @@ const structuredData = [
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "MakeMyContract",
+    name: "Make My Contract",
     url: SITE_URL,
     description:
       "SaaS platform for generating attorney-style U.S. contracts online in minutes.",
@@ -86,16 +86,16 @@ const structuredData = [
   {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: "MakeMyContract Subscription",
+    name: "Make My Contract Subscription",
     description:
       "Online contract builder offering unlimited attorney-style agreements, PDF exports, and contract storage.",
     brand: {
       "@type": "Brand",
-      name: "MakeMyContract",
+      name: "Make My Contract",
     },
     offers: {
       "@type": "OfferCatalog",
-      name: "MakeMyContract Pricing",
+      name: "Make My Contract Pricing",
       itemListElement: [
         {
           "@type": "Offer",
@@ -124,7 +124,7 @@ const structuredData = [
   {
     "@context": "https://schema.org",
     "@type": "LegalService",
-    name: "MakeMyContract Legal Document Automation",
+    name: "Make My Contract Legal Document Automation",
     url: SITE_URL,
     areaServed: "US",
     serviceType: [
@@ -134,13 +134,13 @@ const structuredData = [
     ],
     provider: {
       "@type": "Organization",
-      name: "MakeMyContract",
+      name: "Make My Contract",
     },
   },
   {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
-    name: "MakeMyContract Pricing Catalog",
+    name: "Make My Contract Pricing Catalog",
     itemListElement: ["Weekly", "Monthly", "Annual"].map((tier) => ({
       "@type": "Offer",
       name: `Unlimited ${tier}`,

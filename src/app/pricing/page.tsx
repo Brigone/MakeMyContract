@@ -7,14 +7,14 @@ import { PLAN_CONFIG } from "@/lib/plans";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "MakeMyContract Pricing | Unlimited Online Contract Generator Plans",
+  title: "Make My Contract Pricing | Unlimited Online Contract Generator Plans",
   description:
-    "Choose Unlimited Weekly, Unlimited Monthly, or Unlimited Annual access to create contracts online, download PDFs, and track history with MakeMyContract.",
+    "Choose Unlimited Weekly, Unlimited Monthly, or Unlimited Annual access to create contracts online, download PDFs, and track history with Make My Contract.",
   keywords: [
     "contract generator pricing",
     "online contract builder cost",
     "legal contract subscription",
-    "MakeMyContract plans",
+    "Make My Contract plans",
   ],
   alternates: {
     canonical: "https://makemycontract.example.com/pricing",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Transparent pricing for online contract generation",
     description:
-      "MakeMyContract offers predictable weekly, monthly, and annual plans for unlimited attorney-style contracts.",
+      "Make My Contract offers predictable weekly, monthly, and annual plans for unlimited attorney-style contracts.",
     url: "https://makemycontract.example.com/pricing",
   },
 };
@@ -66,7 +66,7 @@ const pricingFaq = [
   {
     question: "Is there a free plan?",
     answer:
-      "MakeMyContract is a paid-only SaaS. Requiring an active subscription keeps legal content behind a secure paywall and protects customer data.",
+      "Make My Contract is a paid-only SaaS. Requiring an active subscription keeps legal content behind a secure paywall and protects customer data.",
   },
 ];
 
@@ -79,7 +79,7 @@ export default async function PricingPage() {
   const offerSchema = {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
-    name: "MakeMyContract Pricing",
+    name: "Make My Contract Pricing",
     itemListElement: PLAN_CONFIG.map((plan) => ({
       "@type": "Offer",
       name: plan.label,
@@ -151,7 +151,7 @@ export default async function PricingPage() {
 
         <section aria-labelledby="benefits" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
           <h2 id="benefits" className="text-3xl font-semibold text-slate-900">
-            Why subscribers trust MakeMyContract over hourly legal fees
+            Why subscribers trust Make My Contract over hourly legal fees
           </h2>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
             {benefitHighlights.map((benefit) => (
@@ -188,7 +188,7 @@ export default async function PricingPage() {
         <section id="compliance" className="rounded-[32px] border border-slate-200 bg-white p-8  mt-10 shadow-xl">
           <h2 className="text-2xl font-semibold text-slate-900">Compliance commitments</h2>
           <p className="mt-2 text-sm text-slate-700">
-            MakeMyContract isn’t a law firm, but every template mirrors U.S. attorney structure. Your data stays in
+            Make My Contract isn’t a law firm, but every template mirrors U.S. attorney structure. Your data stays in
             Firebase + Stripe, and every contract is ready for outside counsel review.
           </p>
         </section>

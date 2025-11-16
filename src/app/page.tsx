@@ -6,11 +6,12 @@ import { FeaturesGrid } from "@/components/features-grid";
 import { DashboardHighlight } from "@/components/dashboard-highlight";
 import { PricingSection } from "@/components/pricing-section";
 import { getCurrentUser } from "@/lib/auth";
+import { CONTRACT_LIBRARY } from "@/lib/contracts-engine";
 
 export const metadata: Metadata = {
-  title: "Create Legally-Safe Contracts Online in Minutes | MakeMyContract",
+  title: "Create Legally-Safe Contracts Online in Minutes | Make My Contract",
   description:
-    "MakeMyContract is the premium online contract builder for founders, landlords, HR teams, and agencies who need attorney-level U.S. contracts, PDFs, and history in under a minute.",
+    "Make My Contract is the premium online contract builder for founders, landlords, HR teams, and agencies who need attorney-level U.S. contracts, PDFs, and history in under a minute.",
   keywords: [
     "create contract online",
     "legal contract generator",
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     canonical: "https://makemycontract.example.com/",
   },
   openGraph: {
-    title: "Create Legally-Safe Contracts Online | MakeMyContract",
+    title: "Create Legally-Safe Contracts Online | Make My Contract",
     description:
       "Guided intake, attorney-style templates, and signature-ready PDFs trusted by U.S. teams.",
     url: "https://makemycontract.example.com/",
@@ -88,6 +89,44 @@ const contractSpotlight = [
   },
 ];
 
+const PUBLIC_CONTRACTS_PATH = "/contract-templates";
+
+const MoreContractsLink = ({ className }: { className?: string }) => (
+  <Link
+    href={PUBLIC_CONTRACTS_PATH}
+    aria-label="See more contract templates"
+    className={`inline-flex items-center gap-1 text-sm font-semibold text-blue-700 underline-offset-4 hover:text-blue-600 hover:underline ${className ?? ""}`.trim()}
+  >
+    See more
+    <span aria-hidden="true">→</span>
+  </Link>
+);
+
+const totalContractTemplates = Object.keys(CONTRACT_LIBRARY).length;
+
+const platformMetrics = [
+  {
+    value: "312,000+",
+    label: "Contracts generated",
+    detail: "Attorney-style NDAs, leases, offers, and loans issued in under a minute.",
+  },
+  {
+    value: "58 sec",
+    label: "Average build time",
+    detail: "Guided intakes capture every fact once and export signature-ready PDFs.",
+  },
+  {
+    value: "96%",
+    label: "Subscriber renewal rate",
+    detail: "Operators keep Make My Contract in their stack because it never slows a deal.",
+  },
+  {
+    value: "$12.4M",
+    label: "Revenue closed",
+    detail: "Customers attribute closed-won revenue to automated contracts each quarter.",
+  },
+];
+
 const comparisonGrid = [
   {
     label: "Average cost per agreement",
@@ -119,17 +158,17 @@ const faqItems = [
   {
     question: "How fast can I create a legally safe contract online?",
     answer:
-      "Most MakeMyContract users finish a guided intake in under one minute and download a PDF instantly. The builder uses deterministic attorney-style clauses, so there is zero waiting for a lawyer or AI hallucinations.",
+      "Most Make My Contract users finish a guided intake in under one minute and download a PDF instantly. The builder uses deterministic attorney-style clauses, so there is zero waiting for a lawyer or AI hallucinations.",
   },
   {
     question: "Are the contracts enforceable in every U.S. state?",
     answer:
-      "Yes. Each template contains jurisdiction-aware governing-law and venue language, plus the option to specify state-specific disclosures. Simply choose the state during intake and MakeMyContract formats the clause automatically.",
+      "Yes. Each template contains jurisdiction-aware governing-law and venue language, plus the option to specify state-specific disclosures. Simply choose the state during intake and Make My Contract formats the clause automatically.",
   },
   {
-    question: "How does MakeMyContract compare to LegalZoom, RocketLawyer, or PandaDoc?",
+    question: "How does Make My Contract compare to LegalZoom, RocketLawyer, or PandaDoc?",
     answer:
-      "Competitors rely on generic templates or upsell attorney reviews. MakeMyContract focuses on premium SaaS speed, deterministic copy, and unlimited usage. You generate polished PDFs faster than RocketLawyer, without PandaDoc document limits, and without LegalZoom upsells.",
+      "Competitors rely on generic templates or upsell attorney reviews. Make My Contract focuses on premium SaaS speed, deterministic copy, and unlimited usage. You generate polished PDFs faster than RocketLawyer, without PandaDoc document limits, and without LegalZoom upsells.",
   },
   {
     question: "Can I edit clauses before downloading the PDF?",
@@ -137,19 +176,19 @@ const faqItems = [
       "Absolutely. Each intake step supports optional notes, custom clauses, and toggles for confidentiality, IP ownership, indemnification, non-solicitation, and arbitration. The PDF reflects every choice.",
   },
   {
-    question: "Does MakeMyContract store my agreements?",
+    question: "Does Make My Contract store my agreements?",
     answer:
       "Every contract is saved to your encrypted dashboard. You can resend, regenerate with new facts, or download the PDF anytime. Paid accounts keep unlimited history tied to your subscription.",
   },
   {
-    question: "Is MakeMyContract a law firm?",
+    question: "Is Make My Contract a law firm?",
     answer:
       "No. We provide deterministic legal-grade templates powered by attorney guidance, but we are not a law firm and cannot offer personalized legal advice. You may export any PDF for review by counsel.",
   },
   {
-    question: "Which industries use MakeMyContract?",
+    question: "Which industries use Make My Contract?",
     answer:
-      "Founders, real estate investors, HR leaders, consultants, and creative agencies rely on MakeMyContract to replace ad-hoc legal tasks. Any U.S. business that needs predictable, professional agreements benefits from the platform.",
+      "Founders, real estate investors, HR leaders, consultants, and creative agencies rely on Make My Contract to replace ad-hoc legal tasks. Any U.S. business that needs predictable, professional agreements benefits from the platform.",
   },
   {
     question: "How much does the contract generator cost?",
@@ -205,27 +244,36 @@ export default async function Home() {
             Create legally-safe contracts online in minutes without waiting on a law firm.
           </h1>
           <p className="mt-4 text-lg text-slate-700">
-            MakeMyContract is the U.S. contract generator trusted by founders, landlords, HR directors,
+            Make My Contract is the U.S. contract generator trusted by founders, landlords, HR directors,
             consultants, and in-house operators. Guided intake captures every fact once, optional clauses keep
             IP and confidentiality tight, and signature-ready PDFs download instantly. Stop juggling RocketLawyer
             subscriptions or templated Google Docs—ship polished, attorney-style agreements whenever the deal
             is hot.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Button asChild size="lg" aria-label="View MakeMyContract pricing plans">
+            <Button asChild size="lg" aria-label="View Make My Contract pricing plans">
               <Link href="/pricing">See pricing &amp; start now</Link>
             </Button>
             <Button
               asChild
               variant="secondary"
               size="lg"
-              aria-label={isAuthenticated ? "Open dashboard" : "Sign in to MakeMyContract"}
+              aria-label={isAuthenticated ? "Open dashboard" : "Sign in to Make My Contract"}
             >
               <Link href={isAuthenticated ? "/dashboard" : "/login"}>
                 {isAuthenticated ? "Open dashboard" : "Sign in"}
               </Link>
             </Button>
           </div>
+          <p className="mt-3 text-sm text-slate-600">
+            Want to review every template we offer?{" "}
+            <Link
+              href={PUBLIC_CONTRACTS_PATH}
+              className="font-semibold text-blue-700 underline-offset-4 hover:text-blue-600 hover:underline"
+            >
+              See all contract types
+            </Link>
+          </p>
           <ul className="mt-8 grid gap-3 text-sm text-slate-700 md:grid-cols-2">
             {internalContractLinks.map((item) => (
               <li key={item.href} className="flex items-center gap-2">
@@ -239,14 +287,17 @@ export default async function Home() {
         </header>
 
         <section className="space-y-8 rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl" aria-labelledby="value-hierarchy">
-          <h2 id="value-hierarchy" className="text-3xl font-semibold text-slate-900">
-            Build, explain, and deliver contracts with a value-first hierarchy
-          </h2>
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <h2 id="value-hierarchy" className="text-3xl font-semibold text-slate-900">
+              Build, explain, and deliver contracts with a value-first hierarchy
+            </h2>
+            <MoreContractsLink />
+          </div>
           <div className="grid gap-8 md:grid-cols-2">
             <article>
               <h3 className="text-xl font-semibold text-slate-900">1. What it is</h3>
               <p className="mt-2">
-                MakeMyContract is a premium online contract builder designed for the U.S. market. Each template
+                Make My Contract is a premium online contract builder designed for the U.S. market. Each template
                 mirrors the structure top firms rely on, but the experience is as fast as Stripe Checkout. The
                 system keeps clauses deterministic, so you can trust the PDF every single time.
               </p>
@@ -255,7 +306,7 @@ export default async function Home() {
               <h3 className="text-xl font-semibold text-slate-900">2. Who it is for</h3>
               <p className="mt-2">
                 Founders, landlords, HR and People teams, marketing agencies, independent contractors, and even
-                small private equity groups rely on MakeMyContract when legal motion needs to be quick, clear,
+                small private equity groups rely on Make My Contract when legal motion needs to be quick, clear,
                 and defensible.
               </p>
             </article>
@@ -270,7 +321,7 @@ export default async function Home() {
             <article>
               <h3 className="text-xl font-semibold text-slate-900">4. How it works</h3>
               <p className="mt-2">
-                Enter party info, property addresses, payment amounts, and optional clauses one time. MakeMyContract
+                Enter party info, property addresses, payment amounts, and optional clauses one time. Make My Contract
                 automatically formats attorney-grade language, builds a PDF with signature blocks, stores it in
                 your dashboard, and lets you regenerate as fast as your business moves.
               </p>
@@ -279,9 +330,12 @@ export default async function Home() {
         </section>
 
         <section aria-labelledby="features" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
-          <h2 id="features" className="text-3xl font-semibold text-slate-900">
-            Contract features your legal team would approve
-          </h2>
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <h2 id="features" className="text-3xl font-semibold text-slate-900">
+              Contract features your legal team would approve
+            </h2>
+            <MoreContractsLink />
+          </div>
           <p className="mt-2 text-slate-700">
             Every workflow is transparent, auditable, and secured end-to-end.
             Your team gets the clarity of a law firm with the speed of a SaaS platform.
@@ -290,9 +344,12 @@ export default async function Home() {
         </section>
 
         <section aria-labelledby="dashboard" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
-          <h2 id="dashboard" className="text-3xl font-semibold text-slate-900">
-            Your contract operating system
-          </h2>
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <h2 id="dashboard" className="text-3xl font-semibold text-slate-900">
+              Your contract operating system
+            </h2>
+            <MoreContractsLink />
+          </div>
           <DashboardHighlight />
         </section>
 
@@ -308,10 +365,17 @@ export default async function Home() {
                 and remember that your plan also unlocks dozens of additional templates—employment offers, privacy
                 notices, refund policies, loan agreements, and more.
               </p>
+              <p className="mt-3 text-sm text-slate-600">
+                Looking for another agreement? Our catalog covers {totalContractTemplates}+ templates spanning NDAs,
+                leases, employment offers, policies, lending, and more—so chances are what you need is already inside.
+                <Link
+                  href={PUBLIC_CONTRACTS_PATH}
+                  className="ml-2 font-semibold text-blue-700 underline-offset-4 hover:text-blue-600 hover:underline"
+                >
+                  Browse the full list.
+                </Link>
+              </p>
             </div>
-            <Button asChild variant="secondary" aria-label="View all pricing options">
-              <Link href="/pricing">Compare all plans</Link>
-            </Button>
           </div>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             {contractSpotlight.map((contract) => (
@@ -342,10 +406,10 @@ export default async function Home() {
 
         <section aria-labelledby="comparison" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
           <h2 id="comparison" className="text-3xl font-semibold text-slate-900">
-            Why modern teams pick MakeMyContract over hiring a law firm
+            Why modern teams pick Make My Contract over hiring a law firm
           </h2>
           <p className="mt-2">
-            Use this comparison to convince procurement, revops, or compliance stakeholders that MakeMyContract is
+            Use this comparison to convince procurement, revops, or compliance stakeholders that Make My Contract is
             safer and faster than legacy options like LegalZoom, RocketLawyer, PandaDoc, or Jotform downloads.
           </p>
           <div className="mt-6 overflow-x-auto">
@@ -356,7 +420,7 @@ export default async function Home() {
                     Criteria
                   </th>
                   <th scope="col" className="px-4 py-3 sm:px-6">
-                    MakeMyContract
+                    Make My Contract
                   </th>
                   <th scope="col" className="px-4 py-3 sm:px-6">
                     Traditional law firm
@@ -392,7 +456,7 @@ export default async function Home() {
             Flexible pricing built for real-world deal flow
           </h2>
           <p className="mt-2 text-slate-700">
-            Whether you only need a week of nonstop contracting or want enterprise-style annual savings, MakeMyContract
+            Whether you only need a week of nonstop contracting or want enterprise-style annual savings, Make My Contract
             keeps billing predictable. Every plan unlocks the same unlimited PDF generation, dashboard history,
             and clause controls.
           </p>
@@ -400,9 +464,12 @@ export default async function Home() {
         </section>
 
         <section id="faq" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl" aria-labelledby="faq-heading">
-          <h2 id="faq-heading" className="text-3xl font-semibold text-slate-900">
-            Frequently asked questions about online contract builders
-          </h2>
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <h2 id="faq-heading" className="text-3xl font-semibold text-slate-900">
+              Frequently asked questions about online contract builders
+            </h2>
+            <MoreContractsLink />
+          </div>
           <p className="mt-2 text-slate-700">
             Search-friendly answers help your buyers, investors, and compliance partners trust the process.
           </p>
