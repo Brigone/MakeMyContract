@@ -4,9 +4,17 @@ import { getContractsForUser } from "@/lib/firestore";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-export default async function DashboardPage() {
+interface DashboardPageProps {
+  searchParams?: {
+    session_id?: string;
+    [key: string]: string | string[] | undefined;
+  };
+}
+
+export default async function DashboardPage({ searchParams }: DashboardPageProps) {
   const user = await requireActiveSubscription();
   const contracts = await getContractsForUser(user.uid);
+  const hasCheckoutSession = typeof searchParams?.session_id === "string" && searchParams.session_id.length > 0;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 text-slate-700">
@@ -71,6 +79,20 @@ export default async function DashboardPage() {
           ))}
         </div>
       </div>
+      {hasCheckoutSession && (
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof window !== "undefined" && window.gtag) {
+                window.gtag('event', 'conversion', {
+                  send_to: 'AW-17730578494/JZMsCLeLpsEbEL7QzIZC',
+                  transaction_id: '${searchParams?.session_id ?? ""}'
+                });
+              }
+            `,
+          }}
+        />
+      )}
     </div>
   );
 }

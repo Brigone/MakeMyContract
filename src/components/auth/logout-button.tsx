@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
+import { signOut } from "firebase/auth";
+import { getFirebaseAuth } from "@/lib/firebase/client";
 import { Button } from "@/components/ui/button";
 
 interface LogoutButtonProps {
@@ -15,9 +17,26 @@ export function LogoutButton({ variant = "ghost", size = "md" }: LogoutButtonPro
 
   const handleLogout = () => {
     startTransition(async () => {
-      await fetch("/api/auth/session", { method: "DELETE" });
-      router.push("/pricing");
-      router.refresh();
+      try {
+        const auth = getFirebaseAuth();
+        await signOut(auth);
+      } catch {
+        // Ignore client auth errors during logout
+      }
+
+      await fetch("/logout", {
+        method: "POST",
+        credentials: "include",
+      }).catch(() => {
+        // ignore network errors, still redirect user
+      });
+
+      if (typeof window !== "undefined") {
+        window.location.href = "/pricing";
+      } else {
+        router.push("/pricing");
+        router.refresh();
+      }
     });
   };
 

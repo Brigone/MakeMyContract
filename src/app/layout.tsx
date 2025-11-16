@@ -7,7 +7,7 @@ import { Footer } from "@/components/layout/footer";
 import { GA_TRACKING_ID } from "@/lib/analytics";
 import { GA4Tracker } from "@/components/analytics/ga-tracker";
 
-const SITE_URL = "https://makemycontract.example.com";
+const SITE_URL = "https://makemycontract.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

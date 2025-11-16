@@ -17,13 +17,13 @@ export const metadata: Metadata = {
     "Make My Contract plans",
   ],
   alternates: {
-    canonical: "https://makemycontract.example.com/pricing",
+    canonical: "https://makemycontract.com/pricing",
   },
   openGraph: {
     title: "Transparent pricing for online contract generation",
     description:
       "Make My Contract offers predictable weekly, monthly, and annual plans for unlimited attorney-style contracts.",
-    url: "https://makemycontract.example.com/pricing",
+    url: "https://makemycontract.com/pricing",
   },
 };
 
@@ -85,7 +85,7 @@ export default async function PricingPage() {
       name: plan.label,
       price: plan.price.replace("$", ""),
       priceCurrency: "USD",
-      url: "https://makemycontract.example.com/pricing",
+      url: "https://makemycontract.com/pricing",
       description: plan.description,
       availability: "https://schema.org/InStock",
     })),
@@ -130,7 +130,7 @@ export default async function PricingPage() {
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg">
-              <Link href="/signup">Start your subscription</Link>
+              <Link href="/signup">Start Now</Link>
             </Button>
             <Button asChild variant="secondary" size="lg">
               <Link href="/#contract-library">Browse contract templates</Link>

@@ -73,3 +73,15 @@ export const requireActiveSubscription = async () => {
   }
   return user;
 };
+
+export const logout = async () => {
+  const store = cookies();
+  // Remove the session cookie by setting an expired cookie
+  store.set(SESSION_COOKIE, "", {
+    httpOnly: true,
+    path: "/",
+    secure: true,
+    sameSite: "lax",
+    expires: new Date(0),
+  });
+};

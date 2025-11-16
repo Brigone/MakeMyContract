@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     "independent contractor agreement template",
   ],
   alternates: {
-    canonical: "https://makemycontract.example.com/",
+    canonical: "https://makemycontract.com/",
   },
   openGraph: {
     title: "Create Legally-Safe Contracts Online | Make My Contract",
     description:
       "Guided intake, attorney-style templates, and signature-ready PDFs trusted by U.S. teams.",
-    url: "https://makemycontract.example.com/",
+    url: "https://makemycontract.com/",
   },
 };
 
@@ -251,8 +251,8 @@ export default async function Home() {
             is hot.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Button asChild size="lg" aria-label="View Make My Contract pricing plans">
-              <Link href="/pricing">See pricing &amp; start now</Link>
+            <Button asChild size="lg" aria-label="Create your contract now">
+              <Link href="/signup">Create your contract now</Link>
             </Button>
             <Button
               asChild
