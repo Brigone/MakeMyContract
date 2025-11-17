@@ -136,6 +136,11 @@ export default async function PricingPage() {
               <Link href="/#contract-library">Browse contract templates</Link>
             </Button>
           </div>
+          <p className="mt-4 text-sm text-blue-800">
+            Premium Welcome Offer: Enter coupon <span className="font-semibold text-blue-900">WELCOME</span> at
+            checkout on the Unlimited Weekly plan to lock in a $1 first week—full feature access, minimal risk, and a
+            limited invitation to experience Make My Contract before paying standard rates.
+          </p>
         </header>
 
         <section aria-labelledby="pricing-table" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">

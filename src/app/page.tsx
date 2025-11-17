@@ -266,7 +266,9 @@ export default async function Home() {
             </Button>
           </div>
           <p className="mt-2 text-sm text-slate-600">
-            New user offer: Use code START5 for $5 OFF your first week.
+            Premium Welcome Offer: Apply coupon <span className="font-semibold text-blue-700">WELCOME</span> on the
+            Weekly Plan to run Make My Contract for just $1 during your first week—experience every feature before paying
+            full price and keep the risk near zero while this invitation is live.
           </p>
           <p className="mt-3 text-sm text-slate-600">
             Want to review every template we offer?{" "}

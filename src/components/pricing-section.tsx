@@ -56,6 +56,15 @@ export function PricingSection({ isAuthenticated }: PricingSectionProps) {
         <p className="mt-2 text-base text-slate-800">
           Run unlimited contracts for a week, stay covered month-to-month, or lock annual access for the best value.
         </p>
+        <div className="mx-auto mt-4 max-w-3xl rounded-2xl border border-blue-200 bg-blue-50 px-5 py-4 text-blue-900">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-700">Welcome Offer</p>
+          <p className="mt-1 text-sm">
+            Apply coupon <span className="font-semibold text-blue-800">WELCOME</span> on the Unlimited Weekly plan to
+            experience Make My Contract for just $1 during your first 7 days. Immediate access to every feature, almost
+            zero risk, and a rare invitation to feel the product before paying full price—exclusive to new Weekly
+            activations while it’s live.
+          </p>
+        </div>
       </div>
       <div className="mt-10 grid items-stretch gap-8 md:grid-cols-3 lg:gap-10">
         {PLAN_CONFIG.map((plan) => (
@@ -67,17 +76,20 @@ export function PricingSection({ isAuthenticated }: PricingSectionProps) {
           >
             {plan.id === "weekly" && (
               <span className="inline-flex w-fit items-center rounded-full bg-[#1d4ed8]/10 px-3 py-1 text-xs font-semibold text-[#1d4ed8]">
-                Use code START5
+                WELCOME Offer
               </span>
             )}
-            <div className="flex items-baseline gap-2">
+            <div>
               {plan.id === "weekly" ? (
-                <>
-                  <p className="text-3xl font-semibold text-slate-900">
-                    <span className="mr-2 text-2xl text-slate-400 line-through">$9</span>$4
-                  </p>
-                  <span className="text-sm text-slate-500">{plan.cadence}</span>
-                </>
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-baseline gap-2">
+                    <p className="text-3xl font-semibold text-slate-900">
+                      <span className="mr-2 text-2xl text-slate-400 line-through">$9</span>$1
+                    </p>
+                    <span className="text-sm text-slate-500">first 7 days</span>
+                  </div>
+                  <p className="text-xs text-slate-500">Then $9 per week after your welcome access.</p>
+                </div>
               ) : (
                 <>
                   <p className="text-3xl font-semibold text-slate-900">{plan.price}</p>
@@ -87,7 +99,8 @@ export function PricingSection({ isAuthenticated }: PricingSectionProps) {
             </div>
             {plan.id === "weekly" && (
               <p className="mt-1 text-xs font-medium text-blue-700">
-                Get $5 off your first week with START5
+                $1 welcome period: experience the full dashboard, PDF exports, and automation before paying standard
+                rates—only for new Weekly activations using WELCOME code.
               </p>
             )}
             <h3 className="mt-3 text-xl font-semibold text-slate-900">{plan.label}</h3>
