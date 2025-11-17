@@ -36,6 +36,12 @@ Key vars from `.env.example`:
 - `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` – Stripe API + webhook secret.
 - `NEXT_PUBLIC_STRIPE_PRICE_*` – Checkout price IDs for Weekly/Monthly/Annual subscriptions.
 - `NEXT_PUBLIC_APP_URL` – used for Stripe return URLs in server routes.
+- `NEXT_PUBLIC_CLARITY_ID` – Microsoft Clarity site ID (optional, omit to disable tracking).
+
+Example:
+```bash
+NEXT_PUBLIC_CLARITY_ID="SUA_CHAVE_AQUI"
+```
 
 Stripe webhook endpoint: `/api/stripe/webhook` (remember to pass the signed raw body when configuring locally with `stripe listen`).
 
