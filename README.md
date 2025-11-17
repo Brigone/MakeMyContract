@@ -1,6 +1,6 @@
-# MakeMyRental
+# Make My Rental
 
-MakeMyRental is a modern U.S.-focused rental paperwork SaaS built with Next.js 14 (App Router). It guides paying subscribers through deterministic intake flows, renders attorney-style rental PDFs with pdfmake, persists history in Firestore, and charges through Stripe Checkout.
+Make My Rental is a modern U.S.-focused rental paperwork SaaS built with Next.js 14 (App Router). It guides paying subscribers through deterministic intake flows, renders attorney-style rental PDFs with pdfmake, persists history in Firestore, and charges through Stripe Checkout.
 
 ## Key Capabilities
 - Deterministic template engine covering Residential Lease, Month-to-Month Lease, Short-Term Rental (Airbnb), Pet Addendum, Eviction Notice, Rent Increase Notice, and more landlord-focused paperwork.

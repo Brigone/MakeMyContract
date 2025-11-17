@@ -21,7 +21,7 @@ export const buildPdfDefinition = (contract: ContractRecord): TDocumentDefinitio
   return {
     info: {
       title: contract.title,
-      author: "MakeMyRental",
+      author: "Make My Rental",
       subject: contract.contractType,
     },
     header: {

@@ -9,7 +9,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { CONTRACT_LIBRARY } from "@/lib/contracts-engine";
 
 export const metadata: Metadata = {
-  title: "MakeMyRental – Create Rental Agreements Online",
+  title: "Make My Rental – Create Rental Agreements Online",
   description:
     "Landlord forms, leases, notices, and addendums. Fully editable rental documents in minutes.",
   keywords: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     canonical: "https://makemyrental.com/",
   },
   openGraph: {
-    title: "MakeMyRental – Create Rental Agreements Online",
+    title: "Make My Rental – Create Rental Agreements Online",
     description:
       "Landlords, renters, and hosts edit guided templates and download rental PDFs instantly.",
     url: "https://makemyrental.com/",
