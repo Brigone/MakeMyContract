@@ -265,6 +265,9 @@ export default async function Home() {
               </Link>
             </Button>
           </div>
+          <p className="mt-2 text-sm text-slate-600">
+            New user offer: Use code START5 for $5 OFF your first week.
+          </p>
           <p className="mt-3 text-sm text-slate-600">
             Want to review every template we offer?{" "}
             <Link
@@ -397,7 +400,7 @@ export default async function Home() {
                   ))}
                 </ul>
                 <Button asChild aria-label={`View pricing to unlock the ${contract.title}`}>
-                  <Link href="/pricing">Unlock with a paid plan</Link>
+                  <Link href="/signup">Unlock with a paid plan</Link>
                 </Button>
               </article>
             ))}
@@ -446,7 +449,7 @@ export default async function Home() {
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild>
-              <Link href="/pricing">Secure unlimited access</Link>
+              <Link href="/signup">Secure unlimited access</Link>
             </Button>
           </div>
         </section>

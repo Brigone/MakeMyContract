@@ -65,10 +65,31 @@ export function PricingSection({ isAuthenticated }: PricingSectionProps) {
               plan.id === "annual" ? "border-blue-200 ring-2 ring-blue-100 shadow-lg" : ""
             }`}
           >
+            {plan.id === "weekly" && (
+              <span className="inline-flex w-fit items-center rounded-full bg-[#1d4ed8]/10 px-3 py-1 text-xs font-semibold text-[#1d4ed8]">
+                Use code START5
+              </span>
+            )}
             <div className="flex items-baseline gap-2">
-              <p className="text-3xl font-semibold text-slate-900">{plan.price}</p>
-              <span className="text-sm text-slate-500">{plan.cadence}</span>
+              {plan.id === "weekly" ? (
+                <>
+                  <p className="text-3xl font-semibold text-slate-900">
+                    <span className="mr-2 text-2xl text-slate-400 line-through">$9</span>$4
+                  </p>
+                  <span className="text-sm text-slate-500">{plan.cadence}</span>
+                </>
+              ) : (
+                <>
+                  <p className="text-3xl font-semibold text-slate-900">{plan.price}</p>
+                  <span className="text-sm text-slate-500">{plan.cadence}</span>
+                </>
+              )}
             </div>
+            {plan.id === "weekly" && (
+              <p className="mt-1 text-xs font-medium text-blue-700">
+                Get $5 off your first week with START5
+              </p>
+            )}
             <h3 className="mt-3 text-xl font-semibold text-slate-900">{plan.label}</h3>
             <p className="text-sm text-slate-800">{plan.description}</p>
             <ul className="mt-4 flex-1 space-y-2 text-sm text-slate-800">
