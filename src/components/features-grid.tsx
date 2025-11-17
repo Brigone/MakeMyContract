@@ -5,32 +5,32 @@ const features = [
   {
     icon: Timer,
     title: "Lightning-fast creation",
-    description: "Answer a short guided form and review a polished agreement in under a minute.",
+    description: "Answer a short guided form and review a polished rental agreement in under a minute.",
   },
   {
     icon: Sparkles,
     title: "Crystal clear language",
-    description: "Clauses read like a top-tier attorney drafted them—no confusing legalese.",
+    description: "Clauses read like a top-tier landlord attorney drafted them—no confusing legalese.",
   },
   {
     icon: Shield,
     title: "U.S. legal confidence",
-    description: "Every contract mirrors the structure attorneys rely on for nationwide enforcement.",
+    description: "Every template mirrors the structure attorneys rely on for nationwide enforcement.",
   },
   {
     icon: FileText,
     title: "Signature-ready PDFs",
-    description: "Download beautiful documents with signature blocks, pagination, and professional styling.",
+    description: "Download beautiful rental documents with signature blocks, pagination, and professional styling.",
   },
   {
     icon: CreditCard,
     title: "Fair, simple pricing",
-    description: "Switch between weekly, monthly, or annual access so billing matches your deal flow.",
+    description: "Switch between weekly, monthly, or annual access so billing matches your vacancy flow.",
   },
   {
     icon: Database,
     title: "Always-on recordkeeping",
-    description: "Your dashboard stores every version, making it easy to resend, duplicate, or update contracts.",
+    description: "Your dashboard stores every version, making it easy to resend, duplicate, or update rental forms.",
   },
 ];
 
@@ -39,10 +39,10 @@ export function FeaturesGrid() {
     <section className="mx-auto max-w-6xl py-16">
       <Badge>Why teams switch</Badge>
       <h2 className="mt-3 text-3xl font-semibold text-slate-900">
-        Tools that feel like your own legal department
+        Tools that feel like your own leasing department
       </h2>
       <p className="mt-2 max-w-3xl text-base text-slate-800">
-        Make My Contract blends attorney-grade structure with the speed and polish of a modern SaaS platform. Every feature keeps you focused on running your business—not juggling paperwork.
+        Make My Rental blends attorney-grade structure with the speed and polish of a modern SaaS platform. Every feature keeps you focused on managing properties—not juggling paperwork.
       </p>
       <div className="mt-10 grid gap-6 md:grid-cols-2">
         {features.map(({ icon: Icon, title, description }) => (

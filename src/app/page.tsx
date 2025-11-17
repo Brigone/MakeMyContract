@@ -9,26 +9,26 @@ import { getCurrentUser } from "@/lib/auth";
 import { CONTRACT_LIBRARY } from "@/lib/contracts-engine";
 
 export const metadata: Metadata = {
-  title: "Create Legally-Safe Contracts Online in Minutes | Make My Contract",
+  title: "MakeMyRental – Create Rental Agreements Online",
   description:
-    "Make My Contract is the premium online contract builder for founders, landlords, HR teams, and agencies who need attorney-level U.S. contracts, PDFs, and history in under a minute.",
+    "Landlord forms, leases, notices, and addendums. Fully editable rental documents in minutes.",
   keywords: [
-    "create contract online",
-    "legal contract generator",
-    "online contract builder",
-    "PDF contract creator",
-    "lease agreement generator",
-    "NDA generator",
-    "independent contractor agreement template",
+    "rental agreement generator",
+    "landlord forms",
+    "rental templates",
+    "lease builder",
+    "Airbnb rental agreement",
+    "tenant notice template",
+    "property management paperwork",
   ],
   alternates: {
-    canonical: "https://makemycontract.com/",
+    canonical: "https://makemyrental.com/",
   },
   openGraph: {
-    title: "Create Legally-Safe Contracts Online | Make My Contract",
+    title: "MakeMyRental – Create Rental Agreements Online",
     description:
-      "Guided intake, attorney-style templates, and signature-ready PDFs trusted by U.S. teams.",
-    url: "https://makemycontract.com/",
+      "Landlords, renters, and hosts edit guided templates and download rental PDFs instantly.",
+    url: "https://makemyrental.com/",
   },
 };
 
@@ -37,47 +37,47 @@ export const revalidate = 0;
 
 const contractSpotlight = [
   {
-    id: "contract-nda",
-    title: "Mutual NDA Generator",
-    summary:
-      "Lock down confidential conversations for hiring, fundraising, and vendor onboarding with clauses that mirror U.S. counsel standards.",
-    bullets: [
-      "Plain-English summary plus attorney-style clauses",
-      "Optional investor-specific confidentiality language",
-      "Automatic governing-law clause for all 50 states",
-    ],
-  },
-  {
-    id: "contract-lease",
+    id: "contract-residential",
     title: "Residential Lease Agreement",
     summary:
-      "Customize rent schedules, inspections, deposits, and move-out rules while keeping statutory language intact.",
+      "Lock in rent, deposits, inspections, and maintenance for long-term tenants while honoring state disclosures.",
     bullets: [
-      "Fill in property details, rent escalations, and deposits",
-      "Built-in warranty of habitability + maintenance duties",
-      "Ready for tenants to sign digitally",
+      "Auto-builds payment schedules and late-fee logic",
+      "Maintenance, entry, and renewal clauses included",
+      "Instantly exportable to signature-ready PDF",
     ],
   },
   {
-    id: "contract-contractor",
-    title: "Independent Contractor Agreement",
+    id: "contract-monthly",
+    title: "Month-to-Month Lease",
     summary:
-      "Protect IP, payment schedules, and non-solicitation promises for freelancers or agencies running U.S. projects.",
+      "Keep flexible rentals compliant with rolling renewals, notice requirements, and prorated rent options.",
     bullets: [
-      "Scope, deliverable, and milestone tracking",
-      "Automatic confidentiality and indemnity toggles",
-      "IRS 1099-compliant work-made-for-hire clause",
+      "Pick termination notice windows for each party",
+      "Handles rent changes and deposit increases",
+      "Ideal for hybrid or short occupancy cycles",
     ],
   },
   {
-    id: "contract-safe",
-    title: "Investor SAFE Template",
+    id: "contract-str",
+    title: "Short-Term Rental (Airbnb)",
     summary:
-      "Generate YC-style SAFEs with valuation caps, discount rates, and Delaware or California governing law.",
+      "Give guests crystal-clear rules, check-in details, and damage terms before they arrive at your Airbnb or vacation rental.",
     bullets: [
-      "Pre-seed and seed-ready format",
-      "Cap tables stay clean with deterministic text",
-      "Shareable PDF for signature stacks",
+      "Customizable house rules and amenity schedules",
+      "Security deposit and incidental fee language",
+      "Great for Airbnb, Vrbo, and direct bookings",
+    ],
+  },
+  {
+    id: "contract-eviction",
+    title: "Eviction & Notice Pack",
+    summary:
+      "Deliver compliant cure-or-quit instructions, proof of service, and timelines that match your state’s statute.",
+    bullets: [
+      "Auto-adjusts to pay-or-quit and no-cause versions",
+      "Explains amounts owed in friendly language",
+      "Keeps a PDF audit trail for courts",
     ],
   },
 ];
@@ -87,10 +87,10 @@ const PUBLIC_CONTRACTS_PATH = "/contract-templates";
 const MoreContractsLink = ({ className }: { className?: string }) => (
   <Link
     href={PUBLIC_CONTRACTS_PATH}
-    aria-label="See more contract templates"
+    aria-label="See more rental templates"
     className={`inline-flex items-center gap-1 text-sm font-semibold text-blue-700 underline-offset-4 hover:text-blue-600 hover:underline ${className ?? ""}`.trim()}
   >
-    See more
+    See more rental templates
     <span aria-hidden="true">→</span>
   </Link>
 );
@@ -100,85 +100,92 @@ const totalContractTemplates = Object.keys(CONTRACT_LIBRARY).length;
 const platformMetrics = [
   {
     value: "312,000+",
-    label: "Contracts generated",
-    detail: "Attorney-style NDAs, leases, offers, and loans issued in under a minute.",
+    label: "Rental forms generated",
+    detail: "Landlords send leases, notices, and checklists in under a minute.",
   },
   {
     value: "58 sec",
     label: "Average build time",
-    detail: "Guided intakes capture every fact once and export signature-ready PDFs.",
+    detail: "Guided intake collects property, tenant, and rent terms once.",
   },
   {
     value: "96%",
     label: "Subscriber renewal rate",
-    detail: "Operators keep Make My Contract in their stack because it never slows a deal.",
+    detail: "Operators keep Make My Rental because paperwork never slows turnovers.",
   },
   {
     value: "$12.4M",
-    label: "Revenue closed",
-    detail: "Customers attribute closed-won revenue to automated contracts each quarter.",
+    label: "Deposits protected",
+    detail: "Customers credit automated forms with preserving deposits and cash flow.",
   },
 ];
 
-const targetAudience = ["Founders", "Landlords", "Consultants", "Service providers", "Startup teams", "HR + People"];
+const targetAudience = [
+  "Landlords",
+  "Property managers",
+  "Airbnb hosts",
+  "Tenant screening teams",
+  "Real estate investors",
+  "Short-term rentals",
+];
 
 const conversionHighlights = [
   {
-    title: "Attorney-grade without waiting",
+    title: "Lease-grade speed",
     detail:
-      "Guided intake captures the facts once, then renders the same structure outside counsel would draft—ready for signatures in under a minute.",
+      "Guided intake collects property, rent, deposit, and notice requirements so you can send signature-ready PDFs before prospects tour their next unit.",
   },
   {
-    title: "Unlimited usage, predictable billing",
-    detail: "Generate, revise, resend, and store every agreement with zero per-document upsells or retainer surprises.",
+    title: "Unlimited landlord paperwork",
+    detail: "Revise, resend, and archive every agreement with zero per-document fees—built for growing portfolios.",
   },
   {
-    title: "Instant trust for counterparties",
+    title: "Confidence for renters and co-signers",
     detail:
-      "Every PDF includes clear clause explanations, governing-law logic for all 50 states, and shareable history so decision makers sign faster.",
+      "Plain-English summaries sit on top of legal clauses so tenants, guarantors, and guests understand every term instantly.",
   },
 ];
 
 const activationSteps = [
   {
-    title: "Claim the $1 welcome access",
-    detail: "Use coupon WELCOME on the Weekly plan to unlock a full week of unlimited contracts for one dollar.",
+    title: "Claim the $1 landlord trial",
+    detail: "Apply coupon WELCOME on Unlimited Weekly to unlock every rental template for one dollar.",
   },
   {
     title: "Answer the guided intake once",
-    detail: "Enter parties, assets, payment terms, and optional protections. We apply the right attorney-reviewed clauses instantly.",
+    detail: "Enter property details, tenant info, rent terms, and optional addendums. The engine applies state-specific clauses instantly.",
   },
   {
     title: "Download & reuse",
     detail:
-      "Export signature-ready PDFs, duplicate prior contracts, and keep every version in a dashboard that your team can access anytime.",
+      "Export signature-ready rental PDFs, duplicate prior leases, and keep version history synced to every unit.",
   },
 ];
 
 const reassurancePoints = [
   {
     title: "Security + audit readiness",
-    detail: "Firebase Auth, encrypted history, and Stripe subscriptions keep sensitive deal data locked down.",
+    detail: "Firebase Auth, encrypted history, and Stripe billing keep lease data, SSNs, and deposits under lock and key.",
   },
   {
     title: "Zero-risk welcome week",
-    detail: "Start for $1, unlock every feature, and cancel before the week ends if Make My Contract isn’t a fit.",
+    detail: "Start for $1, unlock every rental template, and cancel before the week ends if Make My Rental isn’t a fit.",
   },
   {
-    title: "Human support on standby",
-    detail: "Chat with our contract specialists for onboarding help, clause recommendations, or Stripe billing adjustments.",
+    title: "Landlord support on standby",
+    detail: "Chat with our rental specialists for clause guidance, screening tips, or Stripe billing adjustments.",
   },
 ];
 
 const testimonialQuotes = [
   {
     quote:
-      "We replaced our patchwork of Google Docs with Make My Contract and now issue NDAs and contractor agreements in minutes, not days.",
+      "We replaced our folder of old leases with Make My Rental. Every resident now gets the right addendums and deposit rules in under a minute.",
     author: "Maya Thompson",
-    role: "Fractional COO, RevOps Collective",
+    role: "Portfolio Manager, RevOps Collective Rentals",
   },
   {
-    quote: "The $1 welcome week paid for itself by day two—we closed a tenant with a compliant lease before the competitor even replied.",
+    quote: "The $1 welcome week paid for itself by day two—we approved an Airbnb guest, sent a short-term agreement, and collected deposits before the competitor even replied.",
     author: "Eric Lopez",
     role: "Principal, Sunbelt Property Group",
   },
@@ -186,26 +193,26 @@ const testimonialQuotes = [
 
 const comparisonGrid = [
   {
-    label: "Average cost per agreement",
-    makeMyContract: "$0 after subscription",
+    label: "Average cost per rental form",
+    makeMyRental: "$0 after subscription",
     lawFirm: "$450+ per document",
     template: "Hidden upsells",
   },
   {
     label: "Time to generate",
-    makeMyContract: "30–60 seconds",
+    makeMyRental: "30–60 seconds",
     lawFirm: "2–5 business days",
     template: "30 minutes + manual edits",
   },
   {
     label: "PDF + signature-ready formatting",
-    makeMyContract: "Included and automatic",
+    makeMyRental: "Included and automatic",
     lawFirm: "Extra billing",
     template: "Requires copy/paste",
   },
   {
     label: "Storage & history",
-    makeMyContract: "Unlimited dashboard history",
+    makeMyRental: "Unlimited dashboard history",
     lawFirm: "Email attachments only",
     template: "No archival",
   },
@@ -213,44 +220,44 @@ const comparisonGrid = [
 
 const faqItems = [
   {
-    question: "How fast can I create a legally safe contract online?",
+    question: "How fast can I create a rental agreement online?",
     answer:
-      "Most Make My Contract users finish a guided intake in under one minute and download a PDF instantly. The builder uses deterministic attorney-style clauses, so there is zero waiting for a lawyer or AI hallucinations.",
+      "Most Make My Rental users finish a guided intake in under one minute and download a PDF instantly. The builder uses deterministic landlord language, so there is zero waiting on an attorney.",
   },
   {
-    question: "Are the contracts enforceable in every U.S. state?",
+    question: "Are the rental forms compliant in every U.S. state?",
     answer:
-      "Yes. Each template contains jurisdiction-aware governing-law and venue language, plus the option to specify state-specific disclosures. Simply choose the state during intake and Make My Contract formats the clause automatically.",
+      "Yes. Each template contains jurisdiction-aware governing-law, disclosures, and notice timelines. Pick the state during intake and Make My Rental formats the clauses automatically.",
   },
   {
-    question: "How does Make My Contract compare to LegalZoom, RocketLawyer, or PandaDoc?",
+    question: "How does Make My Rental compare to LegalZoom, RocketLawyer, or PandaDoc?",
     answer:
-      "Competitors rely on generic templates or upsell attorney reviews. Make My Contract focuses on premium SaaS speed, deterministic copy, and unlimited usage. You generate polished PDFs faster than RocketLawyer, without PandaDoc document limits, and without LegalZoom upsells.",
+      "Competitors rely on generic business contracts or upsell attorney reviews. Make My Rental is purpose-built for leases, notices, checklists, and Airbnb paperwork with unlimited usage baked in.",
   },
   {
     question: "Can I edit clauses before downloading the PDF?",
     answer:
-      "Absolutely. Each intake step supports optional notes, custom clauses, and toggles for confidentiality, IP ownership, indemnification, non-solicitation, and arbitration. The PDF reflects every choice.",
+      "Absolutely. Each intake step supports custom clauses, house rules, rent escalations, inspection notes, and more. The PDF reflects your edits instantly.",
   },
   {
-    question: "Does Make My Contract store my agreements?",
+    question: "Does Make My Rental store my agreements?",
     answer:
-      "Every contract is saved to your encrypted dashboard. You can resend, regenerate with new facts, or download the PDF anytime. Paid accounts keep unlimited history tied to your subscription.",
+      "Every rental form is saved to your encrypted dashboard. Resend, regenerate with new facts, or download the PDF anytime. Paid accounts keep unlimited history per unit.",
   },
   {
-    question: "Is Make My Contract a law firm?",
+    question: "Is Make My Rental a law firm?",
     answer:
-      "No. We provide deterministic legal-grade templates powered by attorney guidance, but we are not a law firm and cannot offer personalized legal advice. You may export any PDF for review by counsel.",
+      "No. We provide deterministic legal-grade templates for landlords, but we are not a law firm and cannot offer personalized legal advice. Export any PDF for review by counsel.",
   },
   {
-    question: "Which industries use Make My Contract?",
+    question: "Which property types use Make My Rental?",
     answer:
-      "Founders, real estate investors, HR leaders, consultants, and creative agencies rely on Make My Contract to replace ad-hoc legal tasks. Any U.S. business that needs predictable, professional agreements benefits from the platform.",
+      "Single-family landlords, multifamily operators, Airbnb hosts, property managers, and short-term rental teams rely on Make My Rental to replace ad-hoc paperwork.",
   },
   {
-    question: "How much does the contract generator cost?",
+    question: "How much does the rental paperwork generator cost?",
     answer:
-      "Choose Unlimited Weekly ($9), Unlimited Monthly ($19), or Unlimited Annual ($99). Use coupon WELCOME to make your first Weekly plan just $1, then continue with whichever cadence matches your pipeline. Every option unlocks unlimited agreements, dashboard history, and PDF downloads.",
+      "Choose Unlimited Weekly ($9), Unlimited Monthly ($19), or Unlimited Annual ($99). Use coupon WELCOME to make your first Weekly plan just $1, then stick with the cadence that matches your units. All tiers unlock unlimited forms, history, and PDF downloads.",
   },
 ];
 
@@ -275,14 +282,16 @@ export default async function Home() {
     <main className="bg-slate-50 px-4 pb-20 pt-8 text-slate-800">
       <article className="mx-auto max-w-6xl space-y-16">
         <header id="hero" className="rounded-[36px] border border-slate-200 bg-white p-10 shadow-2xl">
-          <Badge className="w-fit bg-blue-600/10 text-blue-800">Attorney-grade in 60 seconds</Badge>
+          <Badge className="w-fit bg-blue-600/10 text-blue-800">Landlord-ready in 60 seconds</Badge>
           <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 md:text-6xl">
-            Generate enforceable U.S. contracts the moment your deal is ready.
+            Create Rental Agreements in Minutes
           </h1>
           <p className="mt-4 text-lg text-slate-700">
-            Make My Contract lets founders, landlords, consultants, and service providers spin up attorney-level NDAs,
-            leases, contractor agreements, and SAFEs before a prospect cools off. No waiting on outside counsel, no
-            Frankenstein templates—just instant, defensible paperwork.
+            Landlord forms, leases, notices, and addendums. Fully editable and ready to download instantly.
+          </p>
+          <p className="mt-3 text-base text-slate-700">
+            Make My Rental lets landlords, property managers, renters, and Airbnb hosts spin up attorney-structured
+            leases, tenant notices, and turnover checklists without juggling Word docs or waiting on counsel.
           </p>
           <ul className="mt-4 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.4em] text-blue-700">
             {targetAudience.map((persona) => (
@@ -292,24 +301,24 @@ export default async function Home() {
             ))}
           </ul>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Button asChild size="lg" aria-label="Start drafting contracts for $1">
-              <Link href="/signup">Start drafting for $1</Link>
+            <Button asChild size="lg" aria-label="Start drafting rental forms for $1">
+              <Link href="/signup">Start rental form for $1</Link>
             </Button>
             <Button
               asChild
               variant="secondary"
               size="lg"
-              aria-label={isAuthenticated ? "Open dashboard" : "See contract templates"}
+              aria-label={isAuthenticated ? "Open dashboard" : "See rental templates"}
             >
               <Link href={isAuthenticated ? "/dashboard" : PUBLIC_CONTRACTS_PATH}>
-                {isAuthenticated ? "Open dashboard" : "Browse templates"}
+                {isAuthenticated ? "Open dashboard" : "Browse rental templates"}
               </Link>
             </Button>
           </div>
           <p className="mt-3 text-sm text-blue-900">
             Limited Welcome Offer: Use coupon <span className="font-semibold">WELCOME</span> on the Weekly plan to unlock
             every feature for $1 during your first 7 days. Experience the full platform, cancel anytime, and keep every
-            contract you generate.
+            rental form you generate.
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {platformMetrics.slice(0, 3).map((metric) => (
@@ -321,8 +330,8 @@ export default async function Home() {
             ))}
           </div>
           <p className="mt-6 text-sm text-slate-600">
-            Trusted by operators who need legal-grade paperwork without slowing down acquisitions, tenant onboarding, or
-            client work.
+            Trusted by landlords who need legal-grade paperwork without slowing down acquisitions, turnovers, or guest
+            onboarding.
           </p>
         </header>
 
@@ -332,7 +341,7 @@ export default async function Home() {
         >
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <h2 id="conversion-highlights" className="text-3xl font-semibold text-slate-900">
-              Why high-value operators upgrade on their first visit
+              Why landlords upgrade before their next vacancy
             </h2>
             <MoreContractsLink />
           </div>
@@ -352,14 +361,14 @@ export default async function Home() {
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 id="proof" className="text-3xl font-semibold text-slate-900">
-                Proof that Make My Contract keeps revenue moving
+                Proof that Make My Rental keeps units filled
               </h2>
               <p className="mt-2 text-slate-700">
-                Subscriber metrics and renewals show exactly how much friction disappears once paperwork is automated.
+                Subscriber metrics and renewals show how much vacancy time disappears once paperwork is automated.
               </p>
             </div>
             <Button asChild variant="secondary">
-              <Link href="/signup">Join the next cohort</Link>
+              <Link href="/signup">Start issuing rental forms</Link>
             </Button>
           </div>
           <div className="mt-8 grid gap-10 md:grid-cols-2">
@@ -392,10 +401,10 @@ export default async function Home() {
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 id="how-it-works" className="text-3xl font-semibold text-slate-900">
-                From idea to signed contract in three steps
+                From vacancy to signed rental form in three steps
               </h2>
               <p className="mt-2 text-slate-700">
-                Each intake is deterministic, so you can trust the PDF without looping in counsel every time.
+                Every intake is deterministic, so you can trust the PDF without calling your attorney before every move-in.
               </p>
             </div>
             <Button asChild>
@@ -416,13 +425,13 @@ export default async function Home() {
         <section aria-labelledby="features" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <h2 id="features" className="text-3xl font-semibold text-slate-900">
-              Everything you need to remove contract friction
+              Everything you need to remove rental paperwork friction
             </h2>
             <MoreContractsLink />
           </div>
           <p className="mt-2 text-slate-700">
             Clause controls, compliance-ready exports, and real-time storage are included in every plan so nothing stands
-            between you and a signed deal.
+            between you and a signed lease.
           </p>
           <FeaturesGrid />
         </section>
@@ -431,10 +440,10 @@ export default async function Home() {
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 id="dashboard" className="text-3xl font-semibold text-slate-900">
-                Monitor every agreement from a single source of truth
+                Monitor every rental form from a single source of truth
               </h2>
               <p className="mt-2 text-slate-700">
-                Smart filters, resend links, and PDF history keep finance, legal, and operations fully aligned.
+                Smart filters, resend links, and PDF history keep property managers, leasing teams, and accounting aligned.
               </p>
             </div>
             <Button asChild variant="secondary">
@@ -448,11 +457,11 @@ export default async function Home() {
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 id="template-gallery" className="text-3xl font-semibold text-slate-900">
-                Template library built for urgent U.S. deals
+                Rental template library built for urgent move-ins
               </h2>
               <p className="text-slate-700">
-                Launch instantly with attorney-structured NDAs, leases, contractor agreements, SAFEs, employment offers,
-                policies, and more. Every plan unlocks {totalContractTemplates}+ templates plus unlimited revisions.
+                Launch instantly with attorney-structured leases, notices, checklists, and Airbnb agreements. Every plan
+                unlocks {totalContractTemplates}+ templates plus unlimited revisions.
               </p>
               <p className="mt-3 text-sm text-slate-600">
                 Looking for another agreement?{" "}
@@ -462,11 +471,11 @@ export default async function Home() {
                 >
                   Open the full directory
                 </Link>{" "}
-                to see every contract that’s included.
+                to see every rental form that’s included.
               </p>
             </div>
             <Button asChild size="lg">
-              <Link href="/signup">Claim the $1 welcome week</Link>
+              <Link href="/signup">Claim the $1 landlord week</Link>
             </Button>
           </div>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
@@ -500,7 +509,7 @@ export default async function Home() {
 
         <section aria-labelledby="reassurance" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
           <h2 id="reassurance" className="text-3xl font-semibold text-slate-900">
-            Confidence boosters baked into every subscription
+            Confidence boosters built for landlords and hosts
           </h2>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
             {reassurancePoints.map((point) => (
@@ -514,10 +523,10 @@ export default async function Home() {
 
         <section aria-labelledby="comparison" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
           <h2 id="comparison" className="text-3xl font-semibold text-slate-900">
-            The fastest ROI compared to law firms or template shops
+            The fastest ROI compared to attorneys or template shops
           </h2>
           <p className="mt-2 text-slate-700">
-            Share this table with investors, CFOs, or compliance teams when they ask why Make My Contract wins.
+            Share this table with partners, owners, or counsel when they ask why Make My Rental wins.
           </p>
           <div className="mt-6 overflow-x-auto">
             <table className="min-w-full border-collapse rounded-3xl border border-slate-200 text-left text-sm">
@@ -527,7 +536,7 @@ export default async function Home() {
                     Criteria
                   </th>
                   <th scope="col" className="px-4 py-3 sm:px-6">
-                    Make My Contract
+                    Make My Rental
                   </th>
                   <th scope="col" className="px-4 py-3 sm:px-6">
                     Traditional law firm
@@ -543,7 +552,7 @@ export default async function Home() {
                     <th scope="row" className="px-4 py-4 font-medium text-slate-900 sm:px-6">
                       {row.label}
                     </th>
-                    <td className="px-4 py-4 text-slate-800 sm:px-6">{row.makeMyContract}</td>
+                    <td className="px-4 py-4 text-slate-800 sm:px-6">{row.makeMyRental}</td>
                     <td className="px-4 py-4 text-slate-600 sm:px-6">{row.lawFirm}</td>
                     <td className="px-4 py-4 text-slate-600 sm:px-6">{row.template}</td>
                   </tr>
@@ -563,11 +572,11 @@ export default async function Home() {
 
         <section aria-labelledby="pricing" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
           <h2 id="pricing" className="text-3xl font-semibold text-slate-900">
-            Upgrade in minutes, keep every contract forever
+            Upgrade in minutes, keep every rental form forever
           </h2>
           <p className="mt-2 text-slate-700">
-            Weekly, monthly, and annual plans include unlimited documents, dashboard history, and PDF exports. Use coupon
-            WELCOME to test the Weekly plan for $1, then scale to the cadence that matches your pipeline.
+            Weekly, monthly, and annual plans include unlimited rental documents, dashboard history, and PDF exports. Use coupon
+            WELCOME to test the Weekly plan for $1, then scale to the cadence that matches your property pipeline.
           </p>
           <PricingSection isAuthenticated={isAuthenticated} />
         </section>
@@ -580,7 +589,7 @@ export default async function Home() {
             <MoreContractsLink />
           </div>
           <p className="mt-2 text-slate-700">
-            Share these answers with co-founders, CFOs, and attorneys to keep the approval loop tight.
+            Share these answers with owners, leasing teams, and attorneys to keep the approval loop tight.
           </p>
           <dl className="mt-8 space-y-6">
             {faqItems.map((item) => (

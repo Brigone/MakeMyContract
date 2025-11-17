@@ -22,14 +22,14 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <Badge>Dashboard</Badge>
-            <h1 className="mt-3 text-3xl font-semibold text-slate-900">Your contract command center</h1>
+            <h1 className="mt-3 text-3xl font-semibold text-slate-900">Your rental paperwork command center</h1>
             <p className="text-sm text-slate-800">
-              Keep every agreement in one secure, organized place with instant downloads and quick filters.
+              Keep every rental form in one secure, organized place with instant downloads and quick filters.
             </p>
           </div>
           <div className="flex gap-3">
             <Button asChild variant="secondary">
-              <Link href="/contracts">New contract</Link>
+              <Link href="/contracts">New rental form</Link>
             </Button>
             <Button asChild>
               <Link href="/pricing">Manage plan</Link>
@@ -40,12 +40,12 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
         <div className="mt-10 grid gap-4">
           {contracts.length === 0 && (
             <div className="rounded-3xl border border-dashed border-slate-200 bg-slate-50 p-10 text-center">
-              <h3 className="text-xl font-semibold text-slate-900">No contracts yet</h3>
+              <h3 className="text-xl font-semibold text-slate-900">No rental forms yet</h3>
               <p className="mt-2 text-sm text-slate-800">
-                Generate your first attorney-style agreement to unlock this space with organized history and quick actions.
+                Generate your first attorney-style rental form to unlock this space with organized history and quick actions.
               </p>
               <Button asChild className="mt-6">
-                <Link href="/contracts">Create your first contract</Link>
+                <Link href="/contracts">Create your first rental form</Link>
               </Button>
             </div>
           )}
@@ -69,7 +69,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
               <p className="mt-3 line-clamp-4 text-sm text-slate-600">{contract.content}</p>
               <div className="mt-4 flex flex-wrap gap-3">
                 <Button asChild>
-                  <Link href={`/api/contracts/pdf?contractId=${contract.id}`}>Download PDF</Link>
+                  <Link href={`/api/contracts/pdf?contractId=${contract.id}`}>Download rental PDF</Link>
                 </Button>
                 <Button asChild variant="secondary">
                   <Link href={`/contracts/${contract.id}`}>View details</Link>

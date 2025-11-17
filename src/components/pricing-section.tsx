@@ -49,18 +49,18 @@ export function PricingSection({ isAuthenticated }: PricingSectionProps) {
   return (
     <section id="pricing" className="mx-auto max-w-6xl py-16">
       <div className="text-center">
-        <Badge>Plans</Badge>
+        <Badge>Landlord access</Badge>
         <h2 className="mt-2 text-3xl font-semibold text-slate-900">
-          Choose the access that matches your deal flow
+          Choose the access that matches your vacancy flow
         </h2>
         <p className="mt-2 text-base text-slate-800">
-          Run unlimited contracts for a week, stay covered month-to-month, or lock annual access for the best value.
+          Run unlimited rental forms for a week, stay covered month-to-month, or lock annual access for the best value.
         </p>
         <div className="mx-auto mt-4 max-w-3xl rounded-2xl border border-blue-200 bg-blue-50 px-5 py-4 text-blue-900">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-700">Welcome Offer</p>
           <p className="mt-1 text-sm">
             Apply coupon <span className="font-semibold text-blue-800">WELCOME</span> on the Unlimited Weekly plan to
-            experience Make My Contract for just $1 during your first 7 days. Immediate access to every feature, almost
+            experience Make My Rental for just $1 during your first 7 days. Immediate access to every template, almost
             zero risk, and a rare invitation to feel the product before paying full price—exclusive to new Weekly
             activations while it’s live.
           </p>
@@ -99,7 +99,7 @@ export function PricingSection({ isAuthenticated }: PricingSectionProps) {
             </div>
             {plan.id === "weekly" && (
               <p className="mt-1 text-xs font-medium text-blue-700">
-                $1 welcome period: experience the full dashboard, PDF exports, and automation before paying standard
+                $1 welcome period: experience the full dashboard, rental PDFs, and automation before paying standard
                 rates—only for new Weekly activations using WELCOME code.
               </p>
             )}

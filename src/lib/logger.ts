@@ -2,7 +2,7 @@ type Level = "info" | "warn" | "error";
 
 const log = (level: Level, message: string, meta?: Record<string, unknown>) => {
   const payload = meta ? { message, ...meta } : { message };
-  console[level](`[MakeMyContract] ${message}`, meta ? meta : "");
+  console[level](`[MakeMyRental] ${message}`, meta ? meta : "");
   return payload;
 };
 

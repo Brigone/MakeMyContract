@@ -16,7 +16,7 @@ export default async function LoginPage() {
         <Badge>Account access</Badge>
         <h1 className="mt-4 text-4xl font-semibold text-slate-900">Welcome back.</h1>
         <p className="mt-3 text-sm text-slate-900">
-          Sign in to pick up where you left off, revisit your contract history, and download PDFs anytime.
+          Sign in to pick up where you left off, revisit your rental history, and download PDFs anytime.
         </p>
       </div>
       <div className="flex-1 rounded-[32px] border border-slate-200 bg-white p-8 shadow-xl">

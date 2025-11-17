@@ -37,11 +37,11 @@ export default async function ContractDetailPage({ params }: ContractDetailPageP
           <div className="flex flex-wrap gap-3">
             <Button asChild>
               <a href={`/api/contracts/pdf?contractId=${contract.id}`} target="_blank" rel="noreferrer">
-                Download PDF
+                Download rental PDF
               </a>
             </Button>
             <Button asChild variant="secondary">
-              <Link href="/contracts">Generate new</Link>
+              <Link href="/contracts">Generate new rental form</Link>
             </Button>
           </div>
         </div>

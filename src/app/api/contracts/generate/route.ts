@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
       { status: 201 }
     );
   } catch (error) {
-    logger.error("Contract generation error", {
+    logger.error("Rental form generation error", {
       error:
         error instanceof Error ? error.message : "Unknown server error",
     });
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
       );
     }
     return NextResponse.json(
-      { error: "Unable to generate contract" },
+      { error: "Unable to generate rental form" },
       { status: 500 }
     );
   }

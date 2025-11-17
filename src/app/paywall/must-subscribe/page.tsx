@@ -12,10 +12,10 @@ export default async function MustSubscribePage() {
       <div className="rounded-[32px] border border-slate-200 bg-white p-12 shadow-2xl">
         <p className="text-xs uppercase tracking-[0.3em] text-blue-700">Subscription required</p>
         <h1 className="mt-4 text-4xl font-semibold text-slate-900">
-          Activate your plan to keep generating contracts.
+          Activate your plan to keep generating rental forms.
         </h1>
         <p className="mt-3 text-sm text-slate-800">
-          Choose the plan that fits—single contract or unlimited access—and your dashboard unlocks immediately.
+          Choose the plan that fits—single property or unlimited access—and your dashboard unlocks immediately.
         </p>
         <div className="mt-8 flex justify-center gap-4">
           <Button asChild size="lg">

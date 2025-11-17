@@ -1,18 +1,18 @@
-# MakeMyContract
+# MakeMyRental
 
-MakeMyContract is a modern U.S.-focused contract generation SaaS built with Next.js 14 (App Router). It guides paying subscribers through deterministic intake flows, renders attorney-style PDFs with pdfmake, persists history in Firestore, and charges through Stripe Checkout.
+MakeMyRental is a modern U.S.-focused rental paperwork SaaS built with Next.js 14 (App Router). It guides paying subscribers through deterministic intake flows, renders attorney-style rental PDFs with pdfmake, persists history in Firestore, and charges through Stripe Checkout.
 
 ## Key Capabilities
-- Deterministic template engine covering Residential Lease, NDA, Freelance Agreement, Bill of Sale, Employment Offer Letter, and General Service Agreement.
-- Firebase Auth + HTTP-only sessions enforced on every request; only authenticated + subscribed users can reach dashboards, forms, previews, or PDFs.
+- Deterministic template engine covering Residential Lease, Month-to-Month Lease, Short-Term Rental (Airbnb), Pet Addendum, Eviction Notice, Rent Increase Notice, and more landlord-focused paperwork.
+- Firebase Auth + HTTP-only sessions enforced on every request; only authenticated + subscribed users can reach dashboards, rental forms, previews, or PDFs.
 - Stripe billing: monthly ($19) and annual ($99) subscriptions via hosted Checkout + webhooks that keep Firestore `users/{userId}` plans in sync.
-- pdfmake server renderer for signature-ready PDFs with headers, sections, and page numbers.
-- Modern UI: Tailwind CSS v4, premium SaaS layouts, protected contract workspace, marketing landing, pricing, login, signup, and dedicated paywall screens.
+- pdfmake server renderer for signature-ready rental PDFs with headers, sections, and page numbers.
+- Modern UI: Tailwind CSS v4, premium SaaS layouts, protected rental workspace, marketing landing, pricing, login, signup, and dedicated paywall screens.
 
 ## Tech Stack
 - **Frontend:** Next.js 14 App Router, React 18 client components, Tailwind CSS v4, Radix Slot powered UI primitives, premium marketing + protected layouts.
-- **Backend:** Next.js Route Handlers (`/app/api/*`) for contract generation, PDF rendering, Stripe checkout/session management, Stripe webhook processing.
-- **Persistence:** Firebase Admin SDK → Firestore (users + contracts collections, no insecure fallbacks).
+- **Backend:** Next.js Route Handlers (`/app/api/*`) for rental paperwork generation, PDF rendering, Stripe checkout/session management, Stripe webhook processing.
+- **Persistence:** Firebase Admin SDK → Firestore (users + contracts/rentals collections, no insecure fallbacks).
 - **Integrations:** Firebase Auth (client SDK + Admin verification), Stripe Checkout/Subs, pdfmake.
 
 ## Getting Started
@@ -27,7 +27,7 @@ MakeMyContract is a modern U.S.-focused contract generation SaaS built with Next
    ```bash
    npm run dev
    ```
-4. Visit http://localhost:3000 to browse marketing pages, then create an account, subscribe, and access the protected dashboard + contract flows.
+4. Visit http://localhost:3000 to browse marketing pages, then create an account, subscribe, and access the protected dashboard + rental flows.
 
 ### Environment Variables
 Key vars from `.env.example`:
@@ -58,7 +58,7 @@ Stripe webhook endpoint: `/api/stripe/webhook` (remember to pass the signed raw 
                ▼
 ┌─────────────────────────────────────────────────────────┐
 │ API Routes (/app/api)                                   │
-│  • contracts/generate – deterministic template engine    │
+│  • contracts/generate – deterministic rental engine      │
 │  • contracts/pdf – pdfmake renderer                      │
 │  • stripe/checkout – hosted checkout session             │
 │  • stripe/webhook – subscription lifecycle sync          │
@@ -67,7 +67,7 @@ Stripe webhook endpoint: `/api/stripe/webhook` (remember to pass the signed raw 
       ┌────────┴─────────────┐
       │ Firebase Firestore   │
       │  • users plan/stripe │
-      │  • contracts history │
+      │  • rental form history │
       └────────┬─────────────┘
                │
       ┌────────┴─────────────┐

@@ -9,12 +9,12 @@ export default function ContractTypeSelection() {
       <div className="rounded-[32px] border border-slate-200 bg-white p-10 shadow-2xl">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <Badge>Contract library</Badge>
+            <Badge>Rental form library</Badge>
             <h1 className="mt-3 text-3xl font-semibold text-slate-900">
-              Choose a contract to generate.
+              Choose a rental form to generate.
             </h1>
             <p className="text-sm text-slate-600">
-              Every template is deterministic, U.S. focused, and renders directly to PDF with your subscription.
+              Every rental template is deterministic, U.S. focused, and renders directly to PDF with your subscription.
             </p>
           </div>
           <Button asChild variant="secondary">
@@ -45,7 +45,7 @@ export default function ContractTypeSelection() {
                 ))}
               </div>
               <Button asChild className="mt-6">
-                <Link href={`/contracts/create/${type}`}>Use template</Link>
+                <Link href={`/contracts/create/${type}`}>Use rental template</Link>
               </Button>
             </div>
           ))}

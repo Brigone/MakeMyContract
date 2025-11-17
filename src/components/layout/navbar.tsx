@@ -21,7 +21,7 @@ export async function Navbar() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 text-slate-700 sm:px-6 lg:px-8">
         <div className="flex items-center gap-10">
           <Link href="/" className="text-lg font-semibold tracking-tight text-slate-900">
-            Make My Contract
+            Make My Rental
           </Link>
           <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
             {navLinks.map((item) => (

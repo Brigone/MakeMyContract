@@ -37,28 +37,28 @@ export function ContractForm({ contractType }: ContractFormProps) {
 
   const clauseOptions = [
     {
-      label: "Confidentiality",
-      helper: "Keeps sensitive information private.",
+      label: "Privacy & quiet enjoyment",
+      helper: "Keeps tenant data and house rules discreet.",
       name: "includeConfidentiality",
     },
     {
-      label: "IP ownership",
-      helper: "Clarifies who owns deliverables.",
+      label: "Listing assets & photos",
+      helper: "Clarifies who owns furnishings, photos, and marketing assets.",
       name: "includeIpOwnership",
     },
     {
-      label: "Indemnification",
-      helper: "Requires a party to cover losses they cause.",
+      label: "Damage & indemnification",
+      helper: "Requires a party to cover losses or damage they cause.",
       name: "includeIndemnification",
     },
     {
-      label: "Limitation of liability",
+      label: "Liability limits",
       helper: "Caps damages to a predictable amount.",
       name: "includeLiabilityCap",
     },
     {
-      label: "Non-solicitation",
-      helper: "Prevents poaching employees or clients.",
+      label: "Non-solicitation & no poaching",
+      helper: "Prevents tenants from subletting or poaching staff without permission.",
       name: "includeNonSolicitation",
     },
     {
@@ -137,7 +137,7 @@ export function ContractForm({ contractType }: ContractFormProps) {
       });
       if (!response.ok) {
         const errorBody = await response.json().catch(() => ({}));
-        throw new Error(errorBody?.error ?? "Unable to generate the contract right now.");
+        throw new Error(errorBody?.error ?? "Unable to generate the rental form right now.");
       }
       const data = await response.json();
       router.push(`/contracts/${data.contractId}`);
@@ -174,32 +174,32 @@ export function ContractForm({ contractType }: ContractFormProps) {
 
       <div className="grid gap-6 md:grid-cols-2">
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h3 className="text-lg font-semibold text-slate-900">Party information</h3>
+          <h3 className="text-lg font-semibold text-slate-900">Landlord & tenant information</h3>
           <p className="mt-1 text-sm text-slate-700">
-            Identify who is signing and where notices should be delivered.
+            Identify who is signing and where notices or rent reminders should be delivered.
           </p>
           <div className="mt-4 space-y-4">
             <label className="block text-sm font-medium text-slate-900">
-              Party A legal name
-              {helper("Typically your company or the service provider.")}
-              <Input placeholder="Acme Studios LLC" {...register("partyOneName")} />
+              Landlord or host legal name
+              {helper("Typically your LLC, trust, or property management company.")}
+              <Input placeholder="Oakview Homes LLC" {...register("partyOneName")} />
               <FieldError message={errors.partyOneName?.message} />
             </label>
             <label className="block text-sm font-medium text-slate-900">
-              Party A address
-              {helper("Street, city, state, and ZIP for formal notices.")}
+              Landlord mailing address
+              {helper("Street, city, state, and ZIP for formal notices or rent payments.")}
               <Input placeholder="123 Market St, San Francisco, CA" {...register("partyOneAddress")} />
               <FieldError message={errors.partyOneAddress?.message} />
             </label>
             <label className="block text-sm font-medium text-slate-900">
-              Party B legal name
-              {helper("Client, counterparty, or recipient of the services.")}
-              <Input placeholder="Northwind Ventures Inc." {...register("partyTwoName")} />
+              Tenant or guest legal name
+              {helper("Add every occupant or responsible party who must sign.")}
+              <Input placeholder="Jordan Ellis" {...register("partyTwoName")} />
               <FieldError message={errors.partyTwoName?.message} />
             </label>
             <label className="block text-sm font-medium text-slate-900">
-              Party B address
-              {helper("Use the official mailing address for notices.")}
+              Tenant mailing address
+              {helper("Use the tenant’s current or forwarding address for notices.")}
               <Input placeholder="200 Liberty St, New York, NY" {...register("partyTwoAddress")} />
               <FieldError message={errors.partyTwoAddress?.message} />
             </label>
@@ -209,7 +209,7 @@ export function ContractForm({ contractType }: ContractFormProps) {
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <h3 className="text-lg font-semibold text-slate-900">Dates & governing law</h3>
           <p className="mt-1 text-sm text-slate-700">
-            Lock in the effective date, term, and the state that will govern disputes.
+            Lock in the lease start, end, renewal cadence, and the state that will govern disputes.
           </p>
           <div className="mt-4 space-y-4">
             <label className="block text-sm font-medium text-slate-900">
@@ -247,107 +247,107 @@ export function ContractForm({ contractType }: ContractFormProps) {
       <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-slate-900">Plain-English summary</h3>
         <p className="mt-1 text-sm text-slate-700">
-          Summaries appear above the legal text so anyone can understand the clause instantly.
+          Summaries appear above the legal text so landlords, tenants, and co-signers can understand the clause instantly.
         </p>
         <div className="mt-4 space-y-4">
           <label className="block text-sm font-medium text-slate-900">
             Relationship summary
-            {helper("Describe how the parties plan to work together.")}
-            <Textarea rows={3} placeholder="Example: Maker Studio will design and implement a new brand system for Atlas Homes." {...register("relationshipSummary")} />
+            {helper("Describe how the landlord and tenant plan to use the property.")}
+            <Textarea rows={3} placeholder="Example: Landlord rents 214 Oakview Dr. to Tenant for a 12-month term at $2,150 per month with one pet addendum attached." {...register("relationshipSummary")} />
             <FieldError message={errors.relationshipSummary?.message} />
           </label>
           <label className="block text-sm font-medium text-slate-900">
             Plain-English intro (optional)
-            {helper("Add a headline summary that appears at the top of the agreement.")}
-            <Textarea rows={2} placeholder="In plain English: We are outlining scope, IP ownership, and payment expectations for this project." {...register("plainSummaryIntro")} />
+            {helper("Add a headline summary that appears at the top of the rental form.")}
+            <Textarea rows={2} placeholder="In plain English: This lease covers rent, utilities, quiet hours, and deposit rules for 214 Oakview Dr." {...register("plainSummaryIntro")} />
             <FieldError message={errors.plainSummaryIntro?.message} />
           </label>
         </div>
       </div>
 
       <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 className="text-lg font-semibold text-slate-900">Scope & deliverables</h3>
+        <h3 className="text-lg font-semibold text-slate-900">Property details & house rules</h3>
         <p className="mt-1 text-sm text-slate-700">
-          Capture what is being provided so the contract mirrors the actual work.
+          Capture how the property will be used so the rental form mirrors reality.
         </p>
         <div className="mt-4 grid gap-6 md:grid-cols-2">
           <label className="block text-sm font-medium text-slate-900">
-            Scope of work
-            <Textarea rows={4} placeholder="Outline responsibilities, services, or engagement scope." {...register("scopeOfWork")} />
+            Property description & inclusions
+            <Textarea rows={4} placeholder="Describe the property, unit number, furnishings, parking, appliances, or amenities that are included." {...register("scopeOfWork")} />
             <FieldError message={errors.scopeOfWork?.message} />
           </label>
           <label className="block text-sm font-medium text-slate-900">
-            Deliverables
-            <Textarea rows={4} placeholder="List key deliverables, documents, or assets that will be handed off." {...register("deliverables")} />
+            Tenant responsibilities & restrictions
+            <Textarea rows={4} placeholder="List cleaning expectations, trash rules, amenity usage, guest limits, or HOA requirements." {...register("deliverables")} />
             <FieldError message={errors.deliverables?.message} />
           </label>
         </div>
         <div className="mt-4 grid gap-6 md:grid-cols-2">
           <label className="block text-sm font-medium text-slate-900">
-            Milestones & timeline
-            <Textarea rows={3} placeholder="Milestone schedule, demo dates, checkpoints." {...register("milestones")} />
+            Move-in timeline & inspections
+            <Textarea rows={3} placeholder="Move-in date, key exchange details, inspection walkthroughs, or renewal checkpoints." {...register("milestones")} />
             <FieldError message={errors.milestones?.message} />
           </label>
           <label className="block text-sm font-medium text-slate-900">
-            Revision policy
-            <Textarea rows={3} placeholder="Number of revisions, turnaround expectations, change order process." {...register("revisions")} />
+            Change requests or addendums
+            <Textarea rows={3} placeholder="How to request pet approval, add roommates, or adjust lease terms." {...register("revisions")} />
             <FieldError message={errors.revisions?.message} />
           </label>
         </div>
         <div className="mt-4">
           <label className="block text-sm font-medium text-slate-900">
-            Service guarantees
-            <Textarea rows={3} placeholder="Any uptime commitments, response times, satisfaction guarantees." {...register("serviceGuarantees")} />
+            Maintenance response & guarantees
+            <Textarea rows={3} placeholder="Any promised response times, service levels, landscaping duties, or seasonal maintenance." {...register("serviceGuarantees")} />
             <FieldError message={errors.serviceGuarantees?.message} />
           </label>
         </div>
       </div>
 
       <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 className="text-lg font-semibold text-slate-900">Payment & financial terms</h3>
+        <h3 className="text-lg font-semibold text-slate-900">Rent & financial terms</h3>
         <p className="mt-1 text-sm text-slate-700">
-          Record fees, billing cadence, and any collateral or penalties.
+          Record rent, billing cadence, escalations, and any collateral or penalties.
         </p>
         <div className="mt-4 grid gap-6 md:grid-cols-2">
           <label className="block text-sm font-medium text-slate-900">
-            Payment summary
-            <Textarea rows={3} placeholder="Example: $8,000 retainer due upfront, remaining balance Net 15." {...register("paymentDetails")} />
+            Rent summary
+            <Textarea rows={3} placeholder="Example: $2,150 monthly rent due on the 1st with $75 pet rent and utilities paid by tenant." {...register("paymentDetails")} />
             <FieldError message={errors.paymentDetails?.message} />
           </label>
           <label className="block text-sm font-medium text-slate-900">
-            Additional terms
-            <Textarea rows={3} placeholder="Escrow details, reimbursable expenses, or proration rules." {...register("paymentTerms")} />
+            Billing & adjustments
+            <Textarea rows={3} placeholder="Escrow details, proration rules, utilities, or rent increase cadence." {...register("paymentTerms")} />
             <FieldError message={errors.paymentTerms?.message} />
           </label>
         </div>
         <div className="mt-4 grid gap-6 md:grid-cols-2">
           <label className="block text-sm font-medium text-slate-900">
-            Interest rate
-            <Input placeholder="Example: 6% APR" {...register("interestRate")} />
+            Rent escalations or interest
+            <Input placeholder="Example: 3% increase after 12 months" {...register("interestRate")} />
             <FieldError message={errors.interestRate?.message} />
           </label>
           <label className="block text-sm font-medium text-slate-900">
-            Repayment schedule
-            <Input placeholder="Example: Monthly installments for 12 months" {...register("repaymentSchedule")} />
+            Payment schedule
+            <Input placeholder="Example: Monthly installments with prorated first month" {...register("repaymentSchedule")} />
             <FieldError message={errors.repaymentSchedule?.message} />
           </label>
         </div>
         <div className="mt-4 grid gap-6 md:grid-cols-2">
           <label className="block text-sm font-medium text-slate-900">
-            Collateral
-            <Input placeholder="Describe collateral or leave blank for unsecured." {...register("collateral")} />
+            Collateral or guaranty
+            <Input placeholder="Describe guarantors, co-signers, or collateral being pledged." {...register("collateral")} />
             <FieldError message={errors.collateral?.message} />
           </label>
           <label className="block text-sm font-medium text-slate-900">
             Late fees & penalties
-            <Input placeholder="Example: 1.5% per month after 15 days" {...register("lateFees")} />
+            <Input placeholder="Example: $75 late fee after the 5th or 5% of outstanding balance." {...register("lateFees")} />
             <FieldError message={errors.lateFees?.message} />
           </label>
         </div>
         <div className="mt-4">
           <label className="block text-sm font-medium text-slate-900">
-            Finance penalties or acceleration language
-            <Textarea rows={3} placeholder="Detail late payment penalties, acceleration triggers, or default remedies." {...register("financePenalties")} />
+            Remedies for unpaid rent
+            <Textarea rows={3} placeholder="Detail cure periods, acceleration triggers, or eviction language." {...register("financePenalties")} />
             <FieldError message={errors.financePenalties?.message} />
           </label>
         </div>
@@ -356,7 +356,7 @@ export function ContractForm({ contractType }: ContractFormProps) {
       <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-slate-900">Property or asset details</h3>
         <p className="mt-1 text-sm text-slate-700">
-          Use these fields for leases, purchases, or asset transfers.
+          Use these fields for leases, move-ins, or short-term stays.
         </p>
         <div className="mt-4 grid gap-6 md:grid-cols-2">
           <label className="block text-sm font-medium text-slate-900">
@@ -377,8 +377,8 @@ export function ContractForm({ contractType }: ContractFormProps) {
             <FieldError message={errors.depositAmount?.message} />
           </label>
           <label className="block text-sm font-medium text-slate-900">
-            Ownership or IP rights
-            <Textarea rows={3} placeholder="Specify who owns final work product or licenses granted." {...register("ownershipDetails")} />
+            Ownership or listing rights
+            <Textarea rows={3} placeholder="Clarify who owns the property, photos, furnishings, or any creative assets used in listings." {...register("ownershipDetails")} />
             <FieldError message={errors.ownershipDetails?.message} />
           </label>
         </div>
@@ -387,7 +387,7 @@ export function ContractForm({ contractType }: ContractFormProps) {
       <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-slate-900">Protective clauses</h3>
         <p className="mt-1 text-sm text-slate-700">
-          Toggle the clauses you want the engine to include. They are enabled by default.
+          Toggle the clauses you want the rental engine to include. They are enabled by default.
         </p>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           {clauseOptions.map(({ label, helper: copy, name }) => (
@@ -414,7 +414,7 @@ export function ContractForm({ contractType }: ContractFormProps) {
           <div>
             <h3 className="text-lg font-semibold text-slate-900">Custom clauses</h3>
             <p className="text-sm text-slate-700">
-              Add bespoke language that should appear as its own clause.
+              Add bespoke rental language that should appear as its own clause.
             </p>
           </div>
           <Button
@@ -451,7 +451,7 @@ export function ContractForm({ contractType }: ContractFormProps) {
           </div>
         ) : (
           <p className="mt-4 text-sm text-slate-600">
-            No custom clauses yet. Add one if you need something highly specific.
+            No custom clauses yet. Add one if you need something highly specific for your rental.
           </p>
         )}
       </div>
@@ -459,9 +459,9 @@ export function ContractForm({ contractType }: ContractFormProps) {
       <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-slate-900">Final notes</h3>
         <p className="mt-1 text-sm text-slate-700">
-          Anything else the contract should call out? Add it here and it will appear as an additional clause.
+          Anything else the rental form should call out? Add it here and it will appear as an additional clause.
         </p>
-        <Textarea rows={4} placeholder="Example: Add a reminder to attach Statement of Work #3." {...register("customNotes")} />
+        <Textarea rows={4} placeholder="Example: Note that the move-in checklist is attached and pet photos are on file." {...register("customNotes")} />
         <FieldError message={errors.customNotes?.message} />
       </div>
 
@@ -473,10 +473,10 @@ export function ContractForm({ contractType }: ContractFormProps) {
 
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <p className="text-sm text-slate-600">
-          By generating this contract, you confirm you have authority to sign on behalf of the listed parties.
+          By generating this rental form, you confirm you have authority to sign on behalf of the listed parties.
         </p>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Preparing your contract..." : "Generate contract"}
+          {isSubmitting ? "Preparing your rental form..." : "Generate lease"}
         </Button>
       </div>
     </form>

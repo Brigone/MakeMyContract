@@ -20,50 +20,50 @@ interface ContractTemplate {
 
 const CATEGORY_CHECKLISTS: Record<TemplateCategory, string[]> = {
   service: [
-    "List of services or deliverables",
-    "Payment schedule or retainer",
-    "Who owns finished work",
+    "Property address and unit",
+    "Tenant or guest names",
+    "Move-in or move-out date",
   ],
   finance: [
-    "Principal amount",
-    "Interest rate and repayment schedule",
-    "Collateral or security, if any",
+    "Monthly rent or deposit amount",
+    "Due dates and payment method",
+    "Landlord banking details",
   ],
   policy: [
-    "Company legal name",
-    "Business address and contact email",
-    "Governing state or jurisdiction",
+    "Tenant name and property address",
+    "Policy effective date",
+    "Penalties or fees to disclose",
   ],
   "real-estate": [
-    "Property address and description",
-    "Purchase price or rent",
-    "Deposit and inspection details",
+    "Landlord and tenant legal names",
+    "Lease term start and end dates",
+    "Monthly rent, deposits, and utilities",
   ],
   employment: [
-    "Role title and responsibilities",
-    "Compensation and equity, if any",
-    "Start date and contingencies",
+    "Applicant full name and contact info",
+    "Identification or SSN if required",
+    "Consent to screening requirements",
   ],
   transaction: [
-    "Item or asset description",
-    "Purchase price",
-    "Closing or transfer date",
+    "Notice type and effective date",
+    "Forwarding address or property info",
+    "Signature and delivery method",
   ],
   intellectual: [
-    "IP being licensed or transferred",
-    "Usage or exclusivity scope",
-    "Compensation or royalties",
+    "House rules being enforced",
+    "Areas of the property they cover",
+    "Enforcement or penalty details",
   ],
 };
 
 const CATEGORY_LABELS: Record<TemplateCategory, string> = {
-  service: "Services",
-  finance: "Finance & Funding",
-  policy: "Policies & Compliance",
-  "real-estate": "Real Estate",
-  employment: "Employment",
-  transaction: "Sales & Transactions",
-  intellectual: "Intellectual Property",
+  service: "Turnover Checklists",
+  finance: "Deposits & Guarantees",
+  policy: "Notices & Addendums",
+  "real-estate": "Core Rental Agreements",
+  employment: "Tenant Screening",
+  transaction: "Move Logistics",
+  intellectual: "Property Policies",
 };
 
 const template = (
@@ -84,154 +84,173 @@ const template = (
 export const CONTRACT_LIBRARY: Record<ContractType, ContractTemplate> = {
   "residential-lease": template(
     "Residential Lease Agreement",
-    "Detailed residential lease covering rent, repairs, and move-out terms.",
-    "real-estate"
+    "Full-term lease covering rent, maintenance, renewals, and local disclosures for any single-family or multifamily unit.",
+    "real-estate",
+    [
+      "Landlord entity name and contact",
+      "Tenant names and occupants",
+      "Lease term, rent, deposit, and utilities",
+    ]
   ),
-  "rental-residential": template(
-    "Residential Rental Agreement",
-    "Month-to-month or fixed-term rental tailored for homes and apartments.",
-    "real-estate"
+  "month-to-month-lease": template(
+    "Month-to-Month Lease",
+    "Rolling tenancy agreement with configurable notice periods and automatic renewals for flexible rentals.",
+    "real-estate",
+    [
+      "Property address and description",
+      "Initial rent amount and due date",
+      "Notice period for both parties",
+    ]
   ),
-  "rental-commercial": template(
-    "Commercial Lease Agreement",
-    "Office, retail, or warehouse lease with business-class protections.",
-    "real-estate"
+  "short-term-rental": template(
+    "Short-Term Rental (Airbnb)",
+    "Host-ready contract for vacation rentals, Airbnb, and furnished stays with guest rules and fee schedules.",
+    "real-estate",
+    [
+      "Host and guest information",
+      "Check-in/check-out dates",
+      "Security deposit and house rules",
+    ]
   ),
-  nda: template(
-    "Mutual NDA",
-    "Two-way confidentiality for hiring, fundraising, or partnerships.",
-    "policy"
+  "room-rental": template(
+    "Room Rental Agreement",
+    "Roommate-friendly lease for renting a bedroom inside a shared home or accessory dwelling.",
+    "real-estate",
+    [
+      "Primary leaseholder and roommate info",
+      "Area being rented and shared spaces",
+      "Utilities and house rules",
+    ]
   ),
-  "team-nda": template(
-    "Team NDA",
-    "Multi-party NDA for agencies, investors, and joint ventures.",
-    "policy"
+  sublease: template(
+    "Sublease Agreement",
+    "Allows a tenant to sublet part or all of a unit while keeping the primary lease compliant.",
+    "real-estate",
+    [
+      "Original lease details",
+      "Subtenant contact and term dates",
+      "Rent pass-through and approvals",
+    ]
   ),
-  "non-compete": template(
-    "Non-Compete Agreement",
-    "Protects against unfair competition or solicitation for a defined period.",
-    "employment"
+  "pet-addendum": template(
+    "Pet Addendum",
+    "Adds approved pets, fees, and damage expectations to an existing lease.",
+    "policy",
+    [
+      "Tenant and pet details",
+      "Pet rent or deposits",
+      "Rules for breeds, noise, and cleaning",
+    ]
   ),
-  "investor-safe": template(
-    "Investor SAFE Agreement",
-    "Y Combinator SAFE for early investment rounds.",
+  "smoking-addendum": template(
+    "Smoking Addendum",
+    "Clarifies smoke-free zones, penalties, and enforcement for your property.",
+    "policy",
+    [
+      "Property address",
+      "Areas where smoking is restricted",
+      "Fees for violating the policy",
+    ]
+  ),
+  "move-in-checklist": template(
+    "Move-In Checklist",
+    "Room-by-room checklist for documenting property condition on day one.",
+    "service",
+    [
+      "Property and unit numbers",
+      "Tenant or guest names",
+      "Inspection date and photos",
+    ]
+  ),
+  "move-out-checklist": template(
+    "Move-Out Checklist",
+    "Structured inspection list to log damages, cleaning tasks, and deposit deductions.",
+    "service",
+    [
+      "Forwarding address",
+      "Final inspection date",
+      "Areas to evaluate",
+    ]
+  ),
+  "eviction-notice": template(
+    "Eviction Notice",
+    "State-aware delivery of cure-or-quit instructions, rent owed, and key deadlines.",
+    "policy",
+    [
+      "Tenant legal name and unit",
+      "Reason for eviction",
+      "Compliance or vacate deadline",
+    ]
+  ),
+  "rent-increase-notice": template(
+    "Rent Increase Notice",
+    "Notifies tenants of upcoming rent adjustments while honoring statutory timelines.",
+    "policy",
+    [
+      "Current and new rent amounts",
+      "Effective increase date",
+      "Notice period per state law",
+    ]
+  ),
+  "lease-renewal": template(
+    "Lease Renewal",
+    "Extends an existing lease with updated pricing, term, or incentives.",
+    "real-estate",
+    [
+      "Original lease reference",
+      "New term and rent",
+      "Any concessions or addendums",
+    ]
+  ),
+  "intent-to-vacate": template(
+    "Intent to Vacate",
+    "Tenant notice confirming when they plan to surrender possession and where to mail deposits.",
+    "transaction",
+    [
+      "Move-out date",
+      "Forwarding address",
+      "Reason for vacating",
+    ]
+  ),
+  "rental-application": template(
+    "Rental Application Form",
+    "Comprehensive intake for prospective tenants covering employment, income, and rental history.",
+    "employment",
+    [
+      "Applicant identity and contact info",
+      "Income/employer details",
+      "Prior landlord references",
+    ]
+  ),
+  "background-check-authorization": template(
+    "Background Check Authorization",
+    "Collects written consent to run credit, eviction, or criminal history reports.",
+    "employment",
+    [
+      "Applicant full name and SSN/ID",
+      "Screening services being used",
+      "Signature granting permission",
+    ]
+  ),
+  "co-signer-agreement": template(
+    "Co-Signer Agreement",
+    "Adds guarantors who agree to pay rent, fees, and damages if tenants default.",
     "finance",
-    ["Company valuation cap or discount", "Investor name", "Funding amount"]
+    [
+      "Primary tenant and co-signer info",
+      "Financial responsibility scope",
+      "Release or review periods",
+    ]
   ),
-  "purchase-order": template(
-    "Purchase Order",
-    "Binding confirmation of goods, pricing, and delivery expectations.",
-    "transaction"
-  ),
-  "master-service": template(
-    "Master Service Agreement",
-    "Umbrella contract governing multiple statements of work.",
-    "service"
-  ),
-  "consulting-simple": template(
-    "Consulting Agreement (Simple)",
-    "Lightweight consultant engagement for quick projects.",
-    "service"
-  ),
-  "consulting-extended": template(
-    "Consulting Agreement (Extended)",
-    "Full SOW-based consulting contract with milestone tracking.",
-    "service"
-  ),
-  "social-media-influencer": template(
-    "Social Media Influencer Agreement",
-    "Partnership deal for creators, influencers, and sponsors.",
-    "service"
-  ),
-  "contractor-1099": template(
-    "Contractor / 1099 Agreement",
-    "Independent contractor agreement with tax-safe language.",
-    "service"
-  ),
-  freelance: template(
-    "Freelance Services Agreement",
-    "Scope-driven services contract covering deliverables and ownership.",
-    "service"
-  ),
-  "employment-offer": template(
-    "Employment Offer Letter",
-    "At-will offer letter for new hires.",
-    "employment"
-  ),
-  "employment-offer-extended": template(
-    "Executive Offer Letter",
-    "Extended offer letter with bonuses, equity, and covenants.",
-    "employment"
-  ),
-  "general-service": template(
-    "Professional Services Agreement",
-    "Standard services engagement covering scope, IP, and payments.",
-    "service"
-  ),
-  "partnership-llc": template(
-    "LLC Partnership Agreement",
-    "Operating agreement for co-founders or investors.",
-    "transaction"
-  ),
-  "website-tos": template(
-    "Website Terms of Service",
-    "Public-facing TOS for SaaS and e-commerce.",
-    "policy"
-  ),
-  "privacy-policy": template(
-    "Privacy Policy",
-    "GDPR + U.S. compliant privacy notice.",
-    "policy"
-  ),
-  "refund-policy": template(
-    "Refund & Return Policy",
-    "Clear refunds approach for DTC brands.",
-    "policy"
-  ),
-  "creator-copyright-transfer": template(
-    "Creator Copyright Transfer",
-    "Transfers ownership of creative work.",
-    "intellectual"
-  ),
-  "software-license": template(
-    "Software License Agreement",
-    "SaaS or downloadable software license with usage limits.",
-    "intellectual"
-  ),
-  subcontractor: template(
-    "Subcontractor Agreement",
-    "Agreement between a primary vendor and subcontractor.",
-    "service"
-  ),
-  "maintenance-support": template(
-    "Maintenance & Support Agreement",
-    "Post-launch support contract with SLAs and response times.",
-    "service"
-  ),
-  "real-estate-purchase": template(
-    "Real Estate Purchase Agreement",
-    "Purchase contract covering property details, deposits, and closing.",
-    "real-estate"
-  ),
-  "bill-of-sale": template(
-    "Bill of Sale",
-    "Sale of goods contract with title transfer.",
-    "transaction"
-  ),
-  "vehicle-sale-extended": template(
-    "Vehicle Sale Agreement",
-    "Detailed vehicle sale with disclosures and lien statements.",
-    "transaction"
-  ),
-  "promissory-note": template(
-    "Promissory Note",
-    "Debt acknowledgment outlining principal, interest, and remedies.",
-    "finance"
-  ),
-  "loan-agreement": template(
-    "Loan Agreement",
-    "Personal or business loan agreement with collateral and repayment.",
-    "finance"
+  "security-deposit-agreement": template(
+    "Security Deposit Agreement",
+    "Documents deposit amounts, holding rules, allowable deductions, and refund timelines.",
+    "finance",
+    [
+      "Deposit amount and due date",
+      "Bank or escrow location",
+      "Conditions for withholding funds",
+    ]
   ),
 };
 

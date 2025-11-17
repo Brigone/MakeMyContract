@@ -21,7 +21,7 @@ export function PaywallGuard({ plan, children }: PaywallGuardProps) {
     <div className="rounded-3xl border border-slate-200 bg-white p-10 text-center text-slate-700 shadow-lg">
       <h3 className="text-2xl font-semibold text-slate-900">Subscription Required</h3>
       <p className="mt-2 text-sm text-slate-800">
-        An active Make My Contract subscription is required to access this workspace.
+        An active Make My Rental subscription is required to access this workspace.
       </p>
       <div className="mt-6 flex justify-center">
         <Button asChild>

@@ -7,26 +7,25 @@ import { Footer } from "@/components/layout/footer";
 import { GA_TRACKING_ID } from "@/lib/analytics";
 import { GA4Tracker } from "@/components/analytics/ga-tracker";
 
-const SITE_URL = "https://makemycontract.com";
+const SITE_URL = "https://makemyrental.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    template: "%s | Make My Contract",
-    default:
-      "Make My Contract — Professional U.S. contracts without the law firm",
+    template: "%s | Make My Rental",
+    default: "MakeMyRental – Create Rental Agreements Online",
   },
   description:
-    "Make My Contract helps founders, operators, and teams create attorney-level U.S. contracts online in minutes.",
+    "Landlord forms, leases, notices and addendums. Fully editable rental documents in minutes.",
   keywords: [
-    "create contract online",
-    "legal contract generator",
-    "online contract builder",
-    "PDF contract creator",
-    "NDA generator",
-    "lease agreement generator",
-    "Make My Contract",
-    "U.S. contract templates",
+    "rental agreement generator",
+    "landlord forms online",
+    "rental templates",
+    "lease builder",
+    "rental notice generator",
+    "Make My Rental",
+    "MakeMyRental",
+    "property management paperwork",
   ],
   alternates: {
     canonical: SITE_URL,
@@ -43,28 +42,26 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Make My Contract — Create legally binding contracts online",
-    description:
-      "Guided intake, attorney-style templates, and signature-ready PDFs for modern U.S. businesses.",
+    title: "MakeMyRental – Create rental agreements online",
+    description: "Landlord forms, leases, notices, and addendums available for download in minutes.",
     url: SITE_URL,
-    siteName: "Make My Contract",
+    siteName: "Make My Rental",
     type: "website",
     images: [
       {
         url: `${SITE_URL}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "Make My Contract dashboard preview",
+        alt: "Make My Rental dashboard preview",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Make My Contract",
-    description:
-      "Generate professional U.S. contracts in minutes—no law firm retainer or confusing legal jargon.",
-    site: "@makemycontract",
-    creator: "@makemycontract",
+    title: "Make My Rental",
+    description: "Create professional rental agreements, notices, and addendums in under a minute.",
+    site: "@makemyrental",
+    creator: "@makemyrental",
     images: [`${SITE_URL}/og-image.png`],
   },
 };
@@ -73,10 +70,10 @@ const structuredData = [
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Make My Contract",
+    name: "Make My Rental",
     url: SITE_URL,
     description:
-      "SaaS platform for generating attorney-style U.S. contracts online in minutes.",
+      "SaaS platform for generating landlord and tenant documents in minutes.",
     potentialAction: {
       "@type": "SearchAction",
       target: `${SITE_URL}/search?q={search_term_string}`,
@@ -86,16 +83,16 @@ const structuredData = [
   {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: "Make My Contract Subscription",
+    name: "Make My Rental Subscription",
     description:
-      "Online contract builder offering unlimited attorney-style agreements, PDF exports, and contract storage.",
+      "Online rental form builder offering unlimited landlord templates, PDF exports, and tenant intake.",
     brand: {
       "@type": "Brand",
-      name: "Make My Contract",
+      name: "Make My Rental",
     },
     offers: {
       "@type": "OfferCatalog",
-      name: "Make My Contract Pricing",
+      name: "Make My Rental Pricing",
       itemListElement: [
         {
           "@type": "Offer",
@@ -124,23 +121,23 @@ const structuredData = [
   {
     "@context": "https://schema.org",
     "@type": "LegalService",
-    name: "Make My Contract Legal Document Automation",
+    name: "Make My Rental Landlord Paperwork Automation",
     url: SITE_URL,
     areaServed: "US",
     serviceType: [
-      "Contract drafting",
-      "Legal document automation",
-      "PDF contract generation",
+      "Rental agreement drafting",
+      "Tenant notice automation",
+      "PDF lease generation",
     ],
     provider: {
       "@type": "Organization",
-      name: "Make My Contract",
+      name: "Make My Rental",
     },
   },
   {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
-    name: "Make My Contract Pricing Catalog",
+    name: "Make My Rental Pricing Catalog",
     itemListElement: ["Weekly", "Monthly", "Annual"].map((tier) => ({
       "@type": "Offer",
       name: `Unlimited ${tier}`,
@@ -156,7 +153,7 @@ const structuredData = [
     hasPart: [
       { "@type": "WebPage", name: "Home", url: `${SITE_URL}/#hero` },
       { "@type": "WebPage", name: "Pricing", url: `${SITE_URL}/pricing` },
-      { "@type": "WebPage", name: "Contracts", url: `${SITE_URL}/contracts` },
+      { "@type": "WebPage", name: "Rental Forms", url: `${SITE_URL}/contracts` },
       { "@type": "WebPage", name: "Login", url: `${SITE_URL}/login` },
       { "@type": "WebPage", name: "Signup", url: `${SITE_URL}/signup` },
     ],

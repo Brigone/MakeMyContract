@@ -16,12 +16,12 @@ export const PLAN_CONFIG: PlanConfig[] = [
     label: "Unlimited Weekly",
     price: "$9",
     cadence: "per week",
-    description: "Ideal for deal-heavy weeks when you need nonstop contract access.",
+    description: "Ideal for turnover-heavy weeks when you need nonstop rental paperwork.",
     priceIdEnv: "NEXT_PUBLIC_STRIPE_PRICE_WEEKLY",
     perks: [
-      "Unlimited contracts for 7 days",
+      "Unlimited rental forms for 7 days",
       "Full dashboard history and PDFs",
-      "Perfect for short sprints or trials",
+      "Perfect for onboarding bursts or trials",
     ],
   },
   {
@@ -29,12 +29,12 @@ export const PLAN_CONFIG: PlanConfig[] = [
     label: "Unlimited Monthly",
     price: "$19",
     cadence: "per month",
-    description: "Perfect for founders who generate contracts every week.",
+    description: "Perfect for landlords and property managers who issue paperwork every week.",
     priceIdEnv: "NEXT_PUBLIC_STRIPE_PRICE_MONTHLY",
     perks: [
-      "Unlimited agreements every month",
+      "Unlimited rental agreements every month",
       "Dashboard storage and resend links",
-      "Priority support when you need edits",
+      "Priority support for complex clauses",
     ],
   },
   {
@@ -42,13 +42,13 @@ export const PLAN_CONFIG: PlanConfig[] = [
     label: "Unlimited Annual",
     price: "$99",
     cadence: "per year",
-    description: "Best value for teams and power users who live in contracts.",
+    description: "Best value for property teams and Airbnb hosts who live in rental paperwork.",
     priceIdEnv: "NEXT_PUBLIC_STRIPE_PRICE_YEARLY",
     perks: [
-      "Unlimited contracts all year long",
+      "Unlimited rental forms all year long",
       "Seat-friendly for collaborators",
       "Annual invoice and receipts",
-      "VIP access to new templates",
+      "VIP access to new rental templates",
     ],
   },
 ];

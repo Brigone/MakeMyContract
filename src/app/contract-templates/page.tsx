@@ -7,13 +7,13 @@ import { CONTRACT_LIBRARY } from "@/lib/contracts-engine";
 import type { ContractType } from "@/types/contracts";
 
 export const metadata: Metadata = {
-  title: "Contract Templates Catalog | Make My Contract",
+  title: "Rental Templates Catalog | Make My Rental",
   description:
-    "Browse every attorney-style contract template available inside Make My Contract. Explore real estate, finance, employment, and policy agreements before subscribing.",
+    "Browse every attorney-style rental template available inside Make My Rental. Explore leases, notices, addendums, and checklists before subscribing.",
   openGraph: {
-    title: "Contract Templates Catalog | Make My Contract",
+    title: "Rental Templates Catalog | Make My Rental",
     description:
-      "See every contract template Make My Contract includes—leases, NDAs, consulting agreements, policies, and more.",
+      "See every rental template Make My Rental includes—leases, notices, checklists, and more.",
   },
 };
 
@@ -68,14 +68,13 @@ export default function ContractsCatalogPage() {
     <main className="bg-slate-50 px-4 pb-20 pt-10 text-slate-800">
       <article className="mx-auto max-w-6xl space-y-12">
         <header className="rounded-[36px] border border-slate-200 bg-white p-10 shadow-2xl">
-          <Badge>Contract catalog</Badge>
+          <Badge>Rental template catalog</Badge>
           <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
-            Explore every contract template included with Make My Contract.
+            Explore every rental template included with Make My Rental.
           </h1>
           <p className="mt-4 text-lg text-slate-700">
-            Browse {totalTemplates} attorney-grade templates covering real estate, finance, employment, policy,
-            and intellectual property workflows. Each agreement mirrors U.S. counsel standards and becomes a PDF
-            inside your dashboard the moment you subscribe.
+            Browse {totalTemplates} attorney-grade templates covering leases, notices, checklists, and screening workflows.
+            Each rental form mirrors U.S. counsel standards and becomes a PDF inside your dashboard the moment you subscribe.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild size="lg">
@@ -85,7 +84,7 @@ export default function ContractsCatalogPage() {
               <Link href="/signup">Create your account</Link>
             </Button>
           </div>
-          <nav className="mt-8 flex flex-wrap gap-3 text-sm text-slate-600" aria-label="Template categories">
+          <nav className="mt-8 flex flex-wrap gap-3 text-sm text-slate-600" aria-label="Rental template categories">
             {templateSections.map((section) => (
               <Link
                 key={section.id}
@@ -117,7 +116,7 @@ export default function ContractsCatalogPage() {
               </div>
               <Button asChild variant="secondary">
                 <Link href="/pricing" className="text-sm font-semibold">
-                  Unlock all templates
+                  Unlock all rental templates
                 </Link>
               </Button>
             </div>
@@ -139,7 +138,7 @@ export default function ContractsCatalogPage() {
                       ))}
                     </ul>
                     <Button asChild>
-                      <Link href="/pricing">Get this template</Link>
+                      <Link href="/pricing">Get this rental template</Link>
                     </Button>
                   </div>
                 </Card>

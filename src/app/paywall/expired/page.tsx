@@ -12,10 +12,10 @@ export default async function ExpiredPaywallPage() {
       <div className="rounded-[32px] border border-slate-200 bg-white p-12 shadow-2xl">
         <p className="text-xs uppercase tracking-[0.3em] text-blue-700">Plan expired</p>
         <h1 className="mt-4 text-4xl font-semibold text-slate-900">
-          Your plan is paused. Renew to restart unlimited contracts.
+          Your plan is paused. Renew to restart unlimited rental forms.
         </h1>
         <p className="mt-3 text-sm text-slate-800">
-          Reactivate in seconds and pick up exactly where you left off—complete history, PDFs, and templates included.
+          Reactivate in seconds and pick up exactly where you left off—complete rental history, PDFs, and templates included.
         </p>
         <div className="mt-8 flex justify-center gap-4">
           <Button asChild size="lg">

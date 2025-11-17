@@ -2,16 +2,16 @@ import { Badge } from "@/components/ui/badge";
 
 const sampleContracts = [
   {
-    title: "Freelance Services Agreement",
+    title: "Residential Lease Agreement",
     date: "Apr 12, 2025 · Delaware",
     excerpt:
-      "Client engages Contractor to provide fractional GC support, including vendor diligence, policy updates, and contract negotiations.",
+      "Landlord rents 214 Oakview Dr., Wilmington, DE to Tenant for $2,150 per month with 12-month term and two optional renewals.",
   },
   {
-    title: "Residential Lease Agreement",
+    title: "Short-Term Rental (Airbnb)",
     date: "Apr 9, 2025 · California",
     excerpt:
-      "Landlord leases the property located at 81 Grand Ave., San Diego, CA for a 12-month term with automatic month-to-month renewal.",
+      "Host confirms 4-night stay at 81 Grand Ave., San Diego with $500 security deposit, quiet hours, and pet addendum attached.",
   },
 ];
 
@@ -22,10 +22,10 @@ export function DashboardHighlight() {
         <div>
           <Badge>Trusted workflow</Badge>
           <h2 className="mt-2 text-3xl font-semibold text-slate-900">
-            Your permanent record of every signed agreement
+            Your permanent record of every rental document
           </h2>
           <p className="text-sm text-slate-800">
-            Browse, filter, and resend contracts with full history, clean PDF previews, and instant downloads.
+            Browse, filter, and resend leases, notices, and checklists with full history, clean PDF previews, and instant downloads.
           </p>
         </div>
         <div className="rounded-3xl border border-slate-200 bg-white px-6 py-5 text-sm text-slate-800 shadow-sm">
