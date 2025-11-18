@@ -10,6 +10,7 @@ import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 
 import { getFirebaseAuth } from "@/lib/firebase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { getDraft } from "@/lib/draft-storage";
 
 const schema = z.object({
   email: z.string().email("Enter a valid email address."),
@@ -64,7 +65,8 @@ export function LoginForm() {
         const result = await signInWithEmailAndPassword(auth, values.email, values.password);
         const idToken = await result.user.getIdToken();
         await createSession(idToken);
-        router.push("/dashboard");
+        const pendingDraft = getDraft();
+        router.push(pendingDraft?.path ?? "/dashboard");
         router.refresh();
       } catch (error) {
         setError("email", {
@@ -83,7 +85,8 @@ export function LoginForm() {
         const result = await signInWithPopup(auth, provider);
         const idToken = await result.user.getIdToken();
         await createSession(idToken);
-        router.push("/dashboard");
+        const pendingDraft = getDraft();
+        router.push(pendingDraft?.path ?? "/dashboard");
         router.refresh();
       } catch (error) {
         setError("email", {

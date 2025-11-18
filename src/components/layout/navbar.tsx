@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 import { LogoutButton } from "@/components/auth/logout-button";
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Legal assurance", href: "/pricing#compliance" },
+  { label: "Dashboard", href: "/dashboard" },
+  { label: "Contracts", href: "/dashboard" },
+  { label: "Upgrade", href: "/signup" },
 ];
 
 const hasActivePlan = (plan?: string | null) =>
@@ -20,7 +20,7 @@ export async function Navbar() {
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 text-slate-700 sm:px-6 lg:px-8">
         <div className="flex items-center gap-10">
-          <Link href="/signup" className="text-lg font-semibold tracking-tight text-slate-900">
+          <Link href="/" className="text-lg font-semibold tracking-tight text-slate-900">
             Make My Contract
           </Link>
           <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
@@ -34,13 +34,12 @@ export async function Navbar() {
         <div className="flex items-center gap-3">
           {user ? (
             <>
-              {isSubscribed ? (
+              <Button asChild variant="ghost" size="sm">
+                <Link href="/dashboard">Dashboard</Link>
+              </Button>
+              {!isSubscribed && (
                 <Button asChild variant="ghost" size="sm">
-                  <Link href="/dashboard">Dashboard</Link>
-                </Button>
-              ) : (
-                <Button asChild variant="ghost" size="sm">
-                  <Link href="/pricing">View pricing</Link>
+                  <Link href="/signup">Upgrade now</Link>
                 </Button>
               )}
               <LogoutButton variant="secondary" size="sm" />
@@ -51,7 +50,7 @@ export async function Navbar() {
                 <Link href="/login">Login</Link>
               </Button>
               <Button asChild size="sm">
-                <Link href="/signup">Create Now</Link>
+                <Link href="/signup">Upgrade</Link>
               </Button>
             </>
           )}

@@ -5,6 +5,7 @@ import { PricingSection } from "@/components/pricing-section";
 import { Button } from "@/components/ui/button";
 import { PLAN_CONFIG } from "@/lib/plans";
 import { Badge } from "@/components/ui/badge";
+import { DraftResumeWatcher } from "@/components/draft-resume-watcher";
 
 export const metadata: Metadata = {
   title: "Make My Contract Pricing - Unlimited Rental Paperwork Plans",
@@ -29,6 +30,9 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
+
+const hasActivePlan = (plan?: string | null) =>
+  plan === "weekly" || plan === "monthly" || plan === "annual";
 
 const benefitHighlights = [
   {
@@ -70,29 +74,12 @@ const pricingFaq = [
   },
 ];
 
-const planScenarios = [
-  {
-    label: "Weekly access",
-    highlight: "$1 welcome week",
-    detail: "Perfect for testing the platform, onboarding a burst of tenants, or handling a fast due-diligence sprint.",
-  },
-  {
-    label: "Monthly access",
-    highlight: "Most popular",
-    detail: "Ideal for active landlords and operators who create rental paperwork every month and want predictable billing.",
-  },
-  {
-    label: "Annual access",
-    highlight: "Best long-term value",
-    detail: "Lock in the lowest price when your team lives in contracts year-round and needs unlimited seats ready to go.",
-  },
-];
-
 export default async function PricingPage() {
   const user = await getCurrentUser();
   const isAuthenticated = Boolean(user);
   const activePlan = user?.plan ?? null;
   const readablePlan = activePlan ? activePlan.replace(/^[a-z]/, (char) => char.toUpperCase()) : null;
+  const canResumeDraft = Boolean(user && hasActivePlan(user.plan));
 
   const offerSchema = {
     "@context": "https://schema.org",
@@ -121,6 +108,7 @@ export default async function PricingPage() {
 
   return (
     <main className="bg-slate-50 px-4 pb-20 pt-8 text-slate-800">
+      <DraftResumeWatcher shouldResume={canResumeDraft} />
       <div className="mx-auto max-w-5xl space-y-16 lg:space-y-20">
         <header className="rounded-[32px] border border-slate-200 bg-white p-10 text-center shadow-2xl">
           <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.2em] text-blue-700">
@@ -142,10 +130,6 @@ export default async function PricingPage() {
           <h1 className="mt-4 text-4xl font-semibold text-slate-900">
             Simple pricing for unlimited rental paperwork.
           </h1>
-          <p className="mt-4 text-base text-slate-700">
-            Pick the subscription that matches your workload—weekly for $1, predictable monthly access, or the best-value
-            annual pass. Every option unlocks identical features, unlimited templates, and dashboard history.
-          </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg">
               <Link href="/signup">Create your account</Link>
@@ -154,27 +138,7 @@ export default async function PricingPage() {
               <Link href="/#contract-library">Browse contract templates</Link>
             </Button>
           </div>
-          <p className="mt-4 text-sm text-blue-800">
-            Premium Welcome Offer: Enter coupon <span className="font-semibold text-blue-900">WELCOME</span> at
-            checkout on the Unlimited Weekly plan to lock in a $1 first week—full feature access, minimal risk, and a
-            limited invitation to experience Make My Contract before paying standard rates.
-          </p>
         </header>
-        <section className="rounded-[32px] border border-slate-200 bg-white p-8 shadow-xl mt-10">
-          <h2 className="text-2xl font-semibold text-slate-900 text-center">Which option is right for you?</h2>
-          <p className="mt-2 text-center text-sm text-slate-600">
-            Use these quick cues to decide where to start. You can upgrade, downgrade, or switch cadences anytime.
-          </p>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {planScenarios.map((scenario) => (
-              <article key={scenario.label} className="rounded-2xl border border-slate-100 bg-slate-50 p-5 text-left">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-700">{scenario.highlight}</p>
-                <h3 className="mt-2 text-lg font-semibold text-slate-900">{scenario.label}</h3>
-                <p className="mt-2 text-sm text-slate-700">{scenario.detail}</p>
-              </article>
-            ))}
-          </div>
-        </section>
 
         <section aria-labelledby="pricing-table" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
           <h2 id="pricing-table" className="text-3xl font-semibold text-slate-900">

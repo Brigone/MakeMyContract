@@ -37,6 +37,7 @@ Key vars from `.env.example`:
 - `NEXT_PUBLIC_STRIPE_PRICE_*` – Checkout price IDs for Weekly/Monthly/Annual subscriptions.
 - `NEXT_PUBLIC_APP_URL` – used for Stripe return URLs in server routes.
 - `NEXT_PUBLIC_CLARITY_ID` – Microsoft Clarity site ID (optional, omit to disable tracking).
+- Enable the Google Sign-In provider inside Firebase Auth if you want to support “Continue with Google”.
 
 Example:
 ```bash

@@ -9,25 +9,21 @@ import { getCurrentUser } from "@/lib/auth";
 import { CONTRACT_LIBRARY } from "@/lib/contracts-engine";
 
 export const metadata: Metadata = {
-  title: "Create Contracts in Minutes | Make My Contract",
+  title: "Make My Contract – Create Contracts in Minutes",
   description:
-    "Use our attorney-built templates to assemble leases, NDAs, notices, and more in under a minute. Guided intake, instant PDFs, and $1 welcome week.",
+    "Use our attorney-built templates to assemble leases, NDAs, notices, and business agreements in under a minute. Guided intake, instant PDFs, and unlimited history.",
   keywords: [
+    "contract templates",
     "create contract online",
-    "legal contract generator",
-    "online contract builder",
-    "PDF contract creator",
-    "lease agreement generator",
+    "lease builder",
     "NDA generator",
-    "independent contractor agreement template",
+    "rental agreement software",
+    "business contract generator",
   ],
-  alternates: {
-    canonical: "https://makemycontract.com/",
-  },
+  alternates: { canonical: "https://makemycontract.com/" },
   openGraph: {
-    title: "Create Legally-Safe Contracts Online | Make My Contract",
-    description:
-      "Guided intake, attorney-style templates, and signature-ready PDFs trusted by U.S. teams.",
+    title: "Make My Contract – Create contracts in 60 seconds",
+    description: "Attorney-grade templates, guided intake, and instant PDFs for teams that need paperwork now.",
     url: "https://makemycontract.com/",
   },
 };
@@ -35,63 +31,80 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const contractSpotlight = [
+const HERO_STATS = [
+  { value: "312,000+", label: "Contracts generated" },
+  { value: "58 sec", label: "Avg. build time" },
+  { value: "96%", label: "Renewal rate" },
+];
+
+const HERO_TRUST = ["Stripe Verified", "Built on Firebase", "SOC2-ready"];
+
+const targetAudience = [
+  { label: "Founders", href: "/contracts" },
+  { label: "Landlords", href: "/contracts" },
+  { label: "Consultants", href: "/contracts" },
+  { label: "Service teams", href: "/contracts" },
+  { label: "HR & People", href: "/contracts" },
+  { label: "Startup ops", href: "/contracts" },
+];
+
+const VALUE_PILLARS = [
   {
-    id: "contract-nda",
-    title: "Mutual NDA Generator",
-    summary:
-      "Lock down confidential conversations for hiring, fundraising, and vendor onboarding with clauses that mirror U.S. counsel standards.",
-    bullets: [
-      "Plain-English summary plus attorney-style clauses",
-      "Optional investor-specific confidentiality language",
-      "Automatic governing-law clause for all 50 states",
-    ],
+    title: "State-specific, zero guesswork",
+    detail:
+      "Pick the state, toggle disclosures, and drop compliant clauses for leases, NDAs, subleases, and notices without manual research.",
   },
   {
-    id: "contract-lease",
-    title: "Residential Lease Agreement",
-    summary:
-      "Customize rent schedules, inspections, deposits, and move-out rules while keeping statutory language intact.",
-    bullets: [
-      "Fill in property details, rent escalations, and deposits",
-      "Built-in warranty of habitability + maintenance duties",
-      "Ready for tenants to sign digitally",
-    ],
+    title: "Unlimited documents & history",
+    detail:
+      "Duplicate prior agreements, reuse facts, and keep every PDF synced to your dashboard with no per-document upsells.",
   },
   {
-    id: "contract-contractor",
-    title: "Independent Contractor Agreement",
-    summary:
-      "Protect IP, payment schedules, and non-solicitation promises for freelancers or agencies running U.S. projects.",
-    bullets: [
-      "Scope, deliverable, and milestone tracking",
-      "Automatic confidentiality and indemnity toggles",
-      "IRS 1099-compliant work-made-for-hire clause",
-    ],
-  },
-  {
-    id: "contract-safe",
-    title: "Investor SAFE Template",
-    summary:
-      "Generate YC-style SAFEs with valuation caps, discount rates, and Delaware or California governing law.",
-    bullets: [
-      "Pre-seed and seed-ready format",
-      "Cap tables stay clean with deterministic text",
-      "Shareable PDF for signature stacks",
-    ],
+    title: "Upgrade only when you’re ready",
+    detail:
+      "Edit every template publicly, then subscribe to unlock PDF generation, history, and unlimited usage for $1 to start.",
   },
 ];
 
-const PUBLIC_CONTRACTS_PATH = "/contract-templates";
+const OBJECTION_HANDLERS = [
+  {
+    question: "Is this enforceable in my state?",
+    answer:
+      "Yes. Templates include jurisdiction-aware governing law, move-in disclosures, and optional clauses for all 50 states.",
+  },
+  {
+    question: "What happens when I upgrade?",
+    answer:
+      "Your draft continues exactly where you left off and every PDF, history entry, and template stays unlocked as long as you subscribe.",
+  },
+  {
+    question: "Do I need an attorney after this?",
+    answer:
+      "Most customers run everything inside Make My Contract. Export any PDF if counsel wants to review and track edits inline.",
+  },
+  {
+    question: "Can I edit clauses before downloading?",
+    answer:
+      "Every section includes plain-English summaries plus editable legal clauses, optional addendums, and custom notes before download.",
+  },
+  {
+    question: "Does it work for short-term rentals and business deals?",
+    answer:
+      "Yes. Airbnb stays, room rentals, service agreements, NDAs, employment offers, and more live in the same library.",
+  },
+];
 
-const MoreContractsLink = ({ className }: { className?: string }) => (
+const CTA = {
+  primary: { label: "Try it now – create your first contract in seconds", href: "/dashboard" },
+  upgrade: { label: "Upgrade now – unlock unlimited contracts", href: "/signup" },
+};
+
+const ExploreLink = ({ className }: { className?: string }) => (
   <Link
-    href={PUBLIC_CONTRACTS_PATH}
-    aria-label="See more contract templates"
+    href="/dashboard"
     className={`inline-flex items-center gap-1 text-sm font-semibold text-blue-700 underline-offset-4 hover:text-blue-600 hover:underline ${className ?? ""}`.trim()}
   >
-    See more
-    <span aria-hidden="true">→</span>
+    View it in the live editor <span aria-hidden="true">→</span>
   </Link>
 );
 
@@ -120,14 +133,7 @@ const platformMetrics = [
   },
 ];
 
-const targetAudience = [
-  { label: "Founders", href: "/signup" },
-  { label: "Landlords", href: "/signup" },
-  { label: "Consultants", href: "/signup" },
-  { label: "Service providers", href: "/signup" },
-  { label: "Startup teams", href: "/signup" },
-  { label: "HR + People", href: "/signup" },
-];
+const targetFeaturesHeading = "Why high-value operators upgrade after trying the editor";
 
 const conversionHighlights = [
   {
@@ -148,17 +154,17 @@ const conversionHighlights = [
 
 const activationSteps = [
   {
-    title: "Claim the $1 welcome access",
-    detail: "Use coupon WELCOME on the Weekly plan to unlock a full week of unlimited contracts for one dollar.",
+    title: "Open the editor",
+    detail: "Load any template publicly, edit clauses, and preview PDFs before you ever create an account.",
   },
   {
-    title: "Answer the guided intake once",
-    detail: "Enter parties, assets, payment terms, and optional protections. We apply the right attorney-reviewed clauses instantly.",
+    title: "Answer the guided intake",
+    detail: "Enter parties, assets, payment terms, and protections. We apply the right attorney-reviewed clauses instantly.",
   },
   {
-    title: "Download & reuse",
+    title: "Upgrade when you’re ready",
     detail:
-      "Export signature-ready PDFs, duplicate prior contracts, and keep every version in a dashboard that your team can access anytime.",
+      "Click Upgrade Now when you’re ready to generate. We’ll save your draft, route you through signup, then restore your work automatically.",
   },
 ];
 
@@ -168,12 +174,12 @@ const reassurancePoints = [
     detail: "Firebase Auth, encrypted history, and Stripe subscriptions keep sensitive deal data locked down.",
   },
   {
-    title: "Zero-risk welcome week",
-    detail: "Start for $1, unlock every feature, and cancel before the week ends if Make My Contract isn’t a fit.",
+    title: "Drafts preserved across devices",
+    detail: "We store in-progress contracts locally and restore them after signup so you never lose work.",
   },
   {
     title: "Human support on standby",
-    detail: "Chat with our contract specialists for onboarding help, clause recommendations, or Stripe billing adjustments.",
+    detail: "Chat with our specialists for onboarding help, clause recommendations, or billing questions.",
   },
 ];
 
@@ -185,7 +191,8 @@ const testimonialQuotes = [
     role: "Fractional COO, RevOps Collective",
   },
   {
-    quote: "The $1 welcome week paid for itself by day two—we closed a tenant with a compliant lease before the competitor even replied.",
+    quote:
+      "We issued a compliant short-term rental agreement before the competitor replied. The editor sealed the deal in under an hour.",
     author: "Eric Lopez",
     role: "Principal, Sunbelt Property Group",
   },
@@ -242,7 +249,7 @@ const faqItems = [
   {
     question: "Does Make My Contract store my agreements?",
     answer:
-      "Every contract is saved to your encrypted dashboard. You can resend, regenerate with new facts, or download the PDF anytime. Paid accounts keep unlimited history tied to your subscription.",
+      "Every contract is saved to your encrypted dashboard once you’re subscribed. You can resend, regenerate with new facts, or download the PDF anytime.",
   },
   {
     question: "Is Make My Contract a law firm?",
@@ -252,18 +259,17 @@ const faqItems = [
   {
     question: "Which industries use Make My Contract?",
     answer:
-      "Founders, real estate investors, HR leaders, consultants, and creative agencies rely on Make My Contract to replace ad-hoc legal tasks. Any U.S. business that needs predictable, professional agreements benefits from the platform.",
+      "Founders, real estate investors, HR leaders, consultants, and creative agencies rely on Make My Contract to replace ad-hoc legal tasks.",
   },
   {
     question: "How much does the contract generator cost?",
     answer:
-      "Choose Unlimited Weekly ($9), Unlimited Monthly ($19), or Unlimited Annual ($99). Use coupon WELCOME to make your first Weekly plan just $1, then continue with whichever cadence matches your pipeline. Every option unlocks unlimited agreements, dashboard history, and PDF downloads.",
+      "Choose Unlimited Weekly ($9), Unlimited Monthly ($19), or Unlimited Annual ($99). Every option unlocks unlimited agreements, dashboard history, and PDF downloads once you subscribe.",
   },
 ];
 
 export default async function Home() {
   const user = await getCurrentUser();
-  const isAuthenticated = Boolean(user);
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -281,125 +287,70 @@ export default async function Home() {
   return (
     <main className="bg-slate-50 px-4 pb-20 pt-8 text-slate-800">
       <article className="mx-auto max-w-6xl space-y-16">
-        <header id="hero" className="rounded-[36px] border border-slate-200 bg-white p-10 shadow-2xl">
-          <Badge className="w-fit bg-blue-600/10 text-blue-800">Attorney-grade in 60 seconds</Badge>
+        <header
+          id="hero"
+          className="rounded-[36px] border border-slate-200 bg-white p-10 shadow-2xl text-center md:text-left"
+        >
+          <Badge className="mx-auto w-fit bg-blue-600/10 text-blue-800 md:mx-0">Attorney-grade in 60 seconds</Badge>
           <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 md:text-6xl">
             Use ready-made templates to create airtight contracts in minutes.
           </h1>
           <p className="mt-4 text-lg text-slate-700">
-            Make My Contract gives founders, landlords, and operators guided intake plus attorney-written templates so
-            NDAs, leases, offers, and notices are ready to sign before the momentum fades.
+            Make My Contract lets teams edit our attorney-written templates inside the live builder so NDAs, leases, offers,
+            and notices are ready to sign before the momentum fades.
           </p>
-         <ul className="mt-4 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.4em] text-blue-700">
+          <ul className="mt-4 flex flex-wrap justify-center gap-2 text-xs font-semibold uppercase tracking-[0.4em] text-blue-700 md:justify-start">
             {targetAudience.map((persona) => (
-              <li
-                key={persona.label}
-                className="rounded-full border border-blue-200 px-3 py-1 text-blue-800"
-              >
+              <li key={persona.label} className="rounded-full border border-blue-200 px-3 py-1 text-blue-800">
                 <Link href={persona.href} className="transition hover:text-blue-900">
                   {persona.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button asChild size="lg" aria-label="Start drafting contracts for $1">
-              <Link href="/signup">Start for $1</Link>
+          <div className="mt-6 flex flex-wrap justify-center gap-3 md:justify-start">
+            <Button asChild size="lg" aria-label="Try the builder now">
+              <Link href={CTA.primary.href}>{CTA.primary.label}</Link>
             </Button>
-            <Button
-              asChild
-              variant="secondary"
-              size="lg"
-              aria-label={isAuthenticated ? "Open dashboard" : "See contract templates"}
-            >
-              <Link href={isAuthenticated ? "/dashboard" : PUBLIC_CONTRACTS_PATH}>
-                {isAuthenticated ? "Open dashboard" : "Browse templates"}
-              </Link>
+            <Button asChild variant="secondary" size="lg" aria-label="Start your subscription">
+              <Link href={CTA.upgrade.href}>{CTA.upgrade.label}</Link>
             </Button>
           </div>
-          <p className="mt-3 text-sm text-blue-900">
-            Limited Welcome Offer: Use coupon <span className="font-semibold">WELCOME</span> on the Weekly plan to unlock
-            every feature for $1 during your first 7 days. Experience the full platform, cancel anytime, and keep every
-            contract you generate.
-          </p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {platformMetrics.slice(0, 3).map((metric) => (
-              <div key={metric.label} className="rounded-2xl border border-slate-200 p-4">
-                <p className="text-2xl font-semibold text-slate-900">{metric.value}</p>
-                <p className="text-sm font-semibold text-slate-600">{metric.label}</p>
-                <p className="mt-1 text-xs text-slate-500">{metric.detail}</p>
+            {HERO_STATS.map((stat) => (
+              <div key={stat.label} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+                <p className="text-3xl font-semibold text-slate-900">{stat.value}</p>
+                <p className="text-sm text-slate-600">{stat.label}</p>
               </div>
             ))}
           </div>
-          <p className="mt-6 text-sm text-slate-600">
-            Trusted by operators who need legal-grade paperwork without slowing down acquisitions, tenant onboarding, or
-            client work.
-          </p>
+          <div className="mt-6 flex flex-wrap gap-3 text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">
+            {HERO_TRUST.map((item) => (
+              <span key={item} className="rounded-full border border-slate-200 px-3 py-1">
+                {item}
+              </span>
+            ))}
+          </div>
         </header>
 
-        <section
-          aria-labelledby="conversion-highlights"
-          className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl"
-        >
+        <section aria-labelledby="conversion-highlights" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <h2 id="conversion-highlights" className="text-3xl font-semibold text-slate-900">
-              Why high-value operators upgrade on their first visit
+              {targetFeaturesHeading}
             </h2>
-            <MoreContractsLink />
+            <ExploreLink />
           </div>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
-            {conversionHighlights.map((highlight) => (
-              <article key={highlight.title} className="rounded-3xl border border-slate-100 bg-slate-50 p-6">
-                <h3 className="text-lg font-semibold text-slate-900">{highlight.title}</h3>
-                <p className="mt-2 text-sm text-slate-700">{highlight.detail}</p>
+            {VALUE_PILLARS.map((pillar) => (
+              <article key={pillar.title} className="rounded-3xl border border-slate-100 bg-slate-50 p-6">
+                <h3 className="text-lg font-semibold text-slate-900">{pillar.title}</h3>
+                <p className="mt-2 text-sm text-slate-700">{pillar.detail}</p>
               </article>
             ))}
           </div>
         </section>
-        {/* <section
-          aria-labelledby="proof"
-          className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl"
-        >
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div>
-              <h2 id="proof" className="text-3xl font-semibold text-slate-900">
-                Proof that Make My Contract keeps revenue moving
-              </h2>
-              <p className="mt-2 text-slate-700">
-                Subscriber metrics and renewals show exactly how much friction disappears once paperwork is automated.
-              </p>
-            </div>
-            <Button asChild variant="secondary">
-              <Link href="/signup">Join the next cohort</Link>
-            </Button>
-          </div>
-          <div className="mt-8 grid gap-10 md:grid-cols-2">
-            <ul className="space-y-4">
-              {platformMetrics.map((metric) => (
-                <li key={metric.label} className="rounded-2xl border border-slate-100 bg-slate-50 p-5">
-                  <p className="text-2xl font-semibold text-slate-900">{metric.value}</p>
-                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-700">{metric.label}</p>
-                  <p className="mt-1 text-sm text-slate-600">{metric.detail}</p>
-                </li>
-              ))}
-            </ul>
-            <div className="space-y-6">
-              {testimonialQuotes.map((testimonial) => (
-                <figure key={testimonial.author} className="rounded-3xl border border-blue-100 bg-blue-50 p-6">
-                  <blockquote className="text-base text-slate-900">“{testimonial.quote}”</blockquote>
-                  <figcaption className="mt-4 text-sm font-semibold text-blue-900">
-                    {testimonial.author} <span className="font-normal text-slate-600">— {testimonial.role}</span>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </div>
-        </section> */}
 
-        <section
-          aria-labelledby="how-it-works"
-          className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl"
-        >
+        <section aria-labelledby="how-it-works" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 id="how-it-works" className="text-3xl font-semibold text-slate-900">
@@ -410,7 +361,7 @@ export default async function Home() {
               </p>
             </div>
             <Button asChild>
-              <Link href="/signup">Create Now</Link>
+              <Link href="/dashboard">Open the builder</Link>
             </Button>
           </div>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
@@ -429,30 +380,21 @@ export default async function Home() {
             <h2 id="features" className="text-3xl font-semibold text-slate-900">
               Everything you need to remove contract friction
             </h2>
-            <MoreContractsLink />
+            <ExploreLink />
           </div>
           <p className="mt-2 text-slate-700">
             Clause controls, compliance-ready exports, and real-time storage are included in every plan so nothing stands
             between you and a signed deal.
           </p>
           <FeaturesGrid />
-        </section>
-
-        <section aria-labelledby="dashboard" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <div>
-              <h2 id="dashboard" className="text-3xl font-semibold text-slate-900">
-                Monitor every agreement from a single source of truth
-              </h2>
-              <p className="mt-2 text-slate-700">
-                Smart filters, resend links, and PDF history keep finance, legal, and operations fully aligned.
-              </p>
-            </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Button asChild>
+              <Link href="/dashboard">Explore the product</Link>
+            </Button>
             <Button asChild variant="secondary">
-              <Link href="/signup">Unlock the dashboard</Link>
+              <Link href={CTA.upgrade.href}>{CTA.upgrade.label}</Link>
             </Button>
           </div>
-          <DashboardHighlight />
         </section>
 
         <section id="contract-library" aria-labelledby="template-gallery" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
@@ -466,48 +408,41 @@ export default async function Home() {
                 policies, and more. Every plan unlocks {totalContractTemplates}+ templates plus unlimited revisions.
               </p>
               <p className="mt-3 text-sm text-slate-600">
-                Looking for another agreement?{" "}
-                <Link
-                  href={PUBLIC_CONTRACTS_PATH}
-                  className="font-semibold text-blue-700 underline-offset-4 hover:text-blue-600 hover:underline"
-                >
-                  Open the full directory
-                </Link>{" "}
-                to see every contract that’s included.
+                Want to see them in action? <Link href="/dashboard" className="font-semibold text-blue-700 underline-offset-4 hover:underline">Open the live builder</Link> and load any template right now.
               </p>
             </div>
             <Button asChild size="lg">
-              <Link href="/signup">Claim the $1 welcome week</Link>
+              <Link href="/contracts">Try the library</Link>
             </Button>
           </div>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
-            {contractSpotlight.map((contract) => (
-              <article
-                key={contract.id}
-                id={contract.id}
-                className="flex flex-col gap-4 rounded-3xl border border-slate-200 bg-slate-50 p-6"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-blue-600" />
-                  <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-700">Template highlight</p>
-                </div>
-                <h3 className="text-2xl font-semibold text-slate-900">{contract.title}</h3>
-                <p className="text-sm text-slate-700">{contract.summary}</p>
-                <ul className="space-y-2 text-sm text-slate-800">
-                  {contract.bullets.map((bullet) => (
-                    <li key={bullet} className="flex items-start gap-2">
-                      <span className="mt-1 h-2 w-2 rounded-full bg-blue-600" />
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button asChild aria-label={`View pricing to unlock the ${contract.title}`}>
-                  <Link href="/signup">Unlock this template</Link>
-                </Button>
-              </article>
-            ))}
+            {Object.entries(CONTRACT_LIBRARY)
+              .slice(0, 4)
+              .map(([key, template]) => (
+                <article key={key} className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-blue-600" />
+                    <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-700">Template highlight</p>
+                  </div>
+                  <h3 className="text-2xl font-semibold text-slate-900">{template.label}</h3>
+                  <p className="text-sm text-slate-700">{template.description}</p>
+                  <ul className="mt-4 space-y-2 text-sm text-slate-800">
+                    {template.checklist.slice(0, 3).map((bullet) => (
+                      <li key={bullet} className="flex items-start gap-2">
+                        <span className="mt-1 h-2 w-2 rounded-full bg-blue-600" />
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button asChild className="mt-4" aria-label="Open this template">
+                    <Link href="/contracts">Open in builder</Link>
+                  </Button>
+                </article>
+              ))}
           </div>
         </section>
+
+        <DashboardHighlight />
 
         <section aria-labelledby="reassurance" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
           <h2 id="reassurance" className="text-3xl font-semibold text-slate-900">
@@ -527,9 +462,7 @@ export default async function Home() {
           <h2 id="comparison" className="text-3xl font-semibold text-slate-900">
             The fastest ROI compared to law firms or template shops
           </h2>
-          <p className="mt-2 text-slate-700">
-            Share this table with investors, CFOs, or compliance teams when they ask why Make My Contract wins.
-          </p>
+          <p className="mt-2 text-slate-700">Share this table with stakeholders when they ask why Make My Contract wins.</p>
           <div className="mt-6 overflow-x-auto">
             <table className="min-w-full border-collapse rounded-3xl border border-slate-200 text-left text-sm">
               <thead>
@@ -564,10 +497,10 @@ export default async function Home() {
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild>
-              <Link href="/signup">Secure unlimited access</Link>
+              <Link href="/contracts">Explore the editor</Link>
             </Button>
             <Button asChild variant="secondary">
-              <Link href="/pricing">Share with stakeholders</Link>
+              <Link href="/signup">{CTA.upgrade.label}</Link>
             </Button>
           </div>
         </section>
@@ -577,10 +510,10 @@ export default async function Home() {
             Upgrade in minutes, keep every contract forever
           </h2>
           <p className="mt-2 text-slate-700">
-            Weekly, monthly, and annual plans include unlimited documents, dashboard history, and PDF exports. Use coupon
-            WELCOME to test the Weekly plan for $1, then scale to the cadence that matches your pipeline.
+            Weekly, monthly, and annual plans include unlimited documents, dashboard history, and PDF exports. Upgrade the
+            moment you’re ready to generate and we’ll restore your drafts automatically.
           </p>
-          <PricingSection isAuthenticated={isAuthenticated} />
+          <PricingSection isAuthenticated={Boolean(user)} />
         </section>
 
         <section id="faq" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl" aria-labelledby="faq-heading">
@@ -588,7 +521,7 @@ export default async function Home() {
             <h2 id="faq-heading" className="text-3xl font-semibold text-slate-900">
               FAQ: everything decision makers ask before subscribing
             </h2>
-            <MoreContractsLink />
+            <ExploreLink />
           </div>
           <p className="mt-2 text-slate-700">
             Share these answers with co-founders, CFOs, and attorneys to keep the approval loop tight.
@@ -603,10 +536,10 @@ export default async function Home() {
           </dl>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild>
-              <Link href="/signup">Create your account</Link>
+              <Link href="/signup">{CTA.upgrade.label}</Link>
             </Button>
             <Button asChild variant="secondary">
-              <Link href="/login">Already subscribed? Sign in</Link>
+              <Link href="/login">Returning user? Login</Link>
             </Button>
           </div>
         </section>

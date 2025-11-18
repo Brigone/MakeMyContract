@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   useFieldArray,
@@ -18,9 +19,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { clearDraft, getDraft, saveDraft } from "@/lib/draft-storage";
 
 interface ContractFormProps {
   contractType: ContractType;
+  isAuthenticated: boolean;
+  hasActiveSubscription: boolean;
 }
 
 const helper = (text: string) => (
@@ -30,7 +34,7 @@ const helper = (text: string) => (
 const FieldError = ({ message }: { message?: string }) =>
   message ? <p className="text-xs text-red-600">{message}</p> : null;
 
-export function ContractForm({ contractType }: ContractFormProps) {
+export function ContractForm({ contractType, isAuthenticated, hasActiveSubscription }: ContractFormProps) {
   const template = CONTRACT_LIBRARY[contractType];
   const router = useRouter();
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -74,6 +78,8 @@ export function ContractForm({ contractType }: ContractFormProps) {
     handleSubmit,
     formState: { errors, isSubmitting },
     watch,
+    getValues,
+    reset,
   } = useForm<ContractFormValues>({
     resolver: zodResolver(contractFormSchema) as Resolver<ContractFormValues>,
     mode: "onBlur",
@@ -127,6 +133,18 @@ export function ContractForm({ contractType }: ContractFormProps) {
 
   const optionalClauses = watch("optionalClauses");
 
+  useEffect(() => {
+    const draft = getDraft();
+    if (!draft) return;
+    if (draft.contractType !== contractType) return;
+    if (typeof window === "undefined") return;
+    const currentPath = window.location.pathname + window.location.search;
+    if (draft.path !== currentPath) return;
+    reset({ ...draft.values, contractType });
+  }, [contractType, reset]);
+
+  const requiresUpgrade = !(isAuthenticated && hasActiveSubscription);
+
   const onSubmit = async (values: ContractFormValues) => {
     setSubmitError(null);
     try {
@@ -140,11 +158,25 @@ export function ContractForm({ contractType }: ContractFormProps) {
         throw new Error(errorBody?.error ?? "Unable to generate the contract right now.");
       }
       const data = await response.json();
+      clearDraft();
       router.push(`/contracts/${data.contractId}`);
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : "Unexpected error. Please try again.");
     }
   };
+
+  const handleUpgradeRedirect = useCallback(() => {
+    const values = getValues();
+    if (typeof window !== "undefined") {
+      saveDraft({
+        path: window.location.pathname + window.location.search,
+        contractType,
+        values,
+        savedAt: Date.now(),
+      });
+    }
+    router.push(isAuthenticated ? "/pricing" : "/signup");
+  }, [contractType, getValues, isAuthenticated, router]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
@@ -465,6 +497,19 @@ export function ContractForm({ contractType }: ContractFormProps) {
         <FieldError message={errors.customNotes?.message} />
       </div>
 
+       {requiresUpgrade && (
+        <div className="rounded-3xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900 shadow-sm">
+          <p className="font-semibold text-blue-900">Upgrade required to generate</p>
+          <p className="mt-1">
+            You’re editing this template in the public builder. Create your account and upgrade to generate PDFs, store history,
+            and continue where you left off.
+          </p>
+          <Link href="/signup" className="mt-3 inline-flex font-semibold text-blue-800 underline-offset-4 hover:underline">
+            Upgrade now
+          </Link>
+        </div>
+      )}
+
       {submitError && (
         <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
           {submitError}
@@ -475,9 +520,15 @@ export function ContractForm({ contractType }: ContractFormProps) {
         <p className="text-sm text-slate-600">
           By generating this contract, you confirm you have authority to sign on behalf of the listed parties.
         </p>
-        <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Preparing your contract..." : "Generate contract"}
-        </Button>
+        {requiresUpgrade ? (
+          <Button type="button" onClick={handleUpgradeRedirect}>
+            Upgrade now
+          </Button>
+        ) : (
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Preparing your contract..." : "Generate contract"}
+          </Button>
+        )}
       </div>
     </form>
   );

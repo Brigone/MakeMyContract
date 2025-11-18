@@ -10,6 +10,7 @@ import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithPopup } f
 import { getFirebaseAuth } from "@/lib/firebase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { getDraft } from "@/lib/draft-storage";
 
 const schema = z
   .object({
@@ -68,7 +69,8 @@ export function SignupForm() {
         const result = await createUserWithEmailAndPassword(auth, values.email, values.password);
         const idToken = await result.user.getIdToken();
         await createSession(idToken);
-        router.push("/pricing");
+        const pendingDraft = getDraft();
+        router.push(pendingDraft?.path ?? "/pricing");
         router.refresh();
       } catch (error) {
         setError("email", {
@@ -87,7 +89,8 @@ export function SignupForm() {
         const result = await signInWithPopup(auth, provider);
         const idToken = await result.user.getIdToken();
         await createSession(idToken);
-        router.push("/pricing");
+        const pendingDraft = getDraft();
+        router.push(pendingDraft?.path ?? "/pricing");
         router.refresh();
       } catch (error) {
         setError("email", {
