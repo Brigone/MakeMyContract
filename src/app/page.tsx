@@ -37,8 +37,6 @@ const HERO_STATS = [
   { value: "96%", label: "Renewal rate" },
 ];
 
-const HERO_TRUST = ["Stripe Verified", "Built on Firebase", "SOC2-ready"];
-
 const targetAudience = [
   { label: "Founders", href: "/contracts" },
   { label: "Landlords", href: "/contracts" },
@@ -95,13 +93,13 @@ const OBJECTION_HANDLERS = [
 ];
 
 const CTA = {
-  primary: { label: "Try it now – create your first contract in seconds", href: "/dashboard" },
+  primary: { label: "Try it now – create your first contract in seconds", href: "/contracts" },
   upgrade: { label: "Upgrade now – unlock unlimited contracts", href: "/signup" },
 };
 
 const ExploreLink = ({ className }: { className?: string }) => (
   <Link
-    href="/dashboard"
+    href="/contracts"
     className={`inline-flex items-center gap-1 text-sm font-semibold text-blue-700 underline-offset-4 hover:text-blue-600 hover:underline ${className ?? ""}`.trim()}
   >
     View it in the live editor <span aria-hidden="true">→</span>
@@ -171,7 +169,7 @@ const activationSteps = [
 const reassurancePoints = [
   {
     title: "Security + audit readiness",
-    detail: "Firebase Auth, encrypted history, and Stripe subscriptions keep sensitive deal data locked down.",
+    detail: "Secure authentication, encrypted history, and trusted billing keep sensitive deal data locked down.",
   },
   {
     title: "Drafts preserved across devices",
@@ -324,13 +322,6 @@ export default async function Home() {
               </div>
             ))}
           </div>
-          <div className="mt-6 flex flex-wrap gap-3 text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">
-            {HERO_TRUST.map((item) => (
-              <span key={item} className="rounded-full border border-slate-200 px-3 py-1">
-                {item}
-              </span>
-            ))}
-          </div>
         </header>
 
         <section aria-labelledby="conversion-highlights" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
@@ -361,7 +352,7 @@ export default async function Home() {
               </p>
             </div>
             <Button asChild>
-              <Link href="/dashboard">Open the builder</Link>
+              <Link href="/contracts">Open the builder</Link>
             </Button>
           </div>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
@@ -389,7 +380,7 @@ export default async function Home() {
           <FeaturesGrid />
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild>
-              <Link href="/dashboard">Explore the product</Link>
+              <Link href="/contracts">Explore the product</Link>
             </Button>
             <Button asChild variant="secondary">
               <Link href={CTA.upgrade.href}>{CTA.upgrade.label}</Link>
@@ -411,9 +402,9 @@ export default async function Home() {
                 Want to see them in action? <Link href="/dashboard" className="font-semibold text-blue-700 underline-offset-4 hover:underline">Open the live builder</Link> and load any template right now.
               </p>
             </div>
-            <Button asChild size="lg">
-              <Link href="/contracts">Try the library</Link>
-            </Button>
+            {/* <Button asChild size="lg">
+              <Link href="/contracts">Try Now</Link>
+            </Button> */}
           </div>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             {Object.entries(CONTRACT_LIBRARY)

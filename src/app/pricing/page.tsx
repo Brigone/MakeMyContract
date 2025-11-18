@@ -46,8 +46,7 @@ const benefitHighlights = [
   },
   {
     title: "Security & compliance baked in",
-    detail:
-      "Server-side rendering, Firebase Auth, and Stripe subscriptions keep client data private and auditable.",
+    detail: "Enterprise-grade authentication, encrypted storage, and trusted billing keep client data private and auditable.",
   },
 ];
 
@@ -65,7 +64,7 @@ const pricingFaq = [
   {
     question: "Can I switch between plans?",
     answer:
-      "Yes. Use your dashboard to upgrade or downgrade after any billing period. Stripe proration applies automatically.",
+      "Yes. Use your dashboard to upgrade or downgrade after any billing period. Billing adjusts automatically and you never lose history.",
   },
   {
     question: "Is there a free plan?",
@@ -126,30 +125,19 @@ export default async function PricingPage() {
               </li>
             </ol>
           </nav>
-          <Badge className="mx-auto mt-4 w-fit">Pricing & plans</Badge>
+          {/* <Badge className="mx-auto mt-4 w-fit">Pricing & plans</Badge>
           <h1 className="mt-4 text-4xl font-semibold text-slate-900">
             Simple pricing for unlimited rental paperwork.
           </h1>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Button asChild size="lg">
-              <Link href="/signup">Create your account</Link>
-            </Button>
-            <Button asChild variant="secondary" size="lg">
-              <Link href="/#contract-library">Browse contract templates</Link>
-            </Button>
-          </div>
-        </header>
-
-        <section aria-labelledby="pricing-table" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
-          <h2 id="pricing-table" className="text-3xl font-semibold text-slate-900">
-            Choose the subscription that fits your workflow
-          </h2>
+          <p className="mt-4 text-base text-slate-700">
+            Pick the subscription that matches your workload—weekly for $1, predictable monthly access, or the best-value
+            annual pass. Every option unlocks identical features, unlimited templates, and dashboard history.
+          </p>
           <p className="mt-2 text-slate-700">
             Every tier unlocks the same contract generator, PDF rendering, and dashboard storage. Pick the cadence that
             matches your deal flow, then switch anytime from your dashboard.
-          </p>
+          </p> */}
           <PricingSection isAuthenticated={isAuthenticated} />
-        </section>
 
         <section aria-labelledby="benefits" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
           <h2 id="benefits" className="text-3xl font-semibold text-slate-900">
@@ -184,14 +172,38 @@ export default async function PricingPage() {
             <Button asChild variant="secondary">
               <Link href="/login">Already subscribed? Sign in</Link>
             </Button>
+            
           </div>
         </section>
+
+          {/* <p className="mt-4 text-sm text-blue-800">
+            Premium Welcome Offer: Enter coupon <span className="font-semibold text-blue-900">WELCOME</span> at
+            checkout on the Unlimited Weekly plan to lock in a $1 first week—full feature access, minimal risk, and a
+            limited invitation to experience Make My Contract before paying standard rates.
+          </p> */}
+        </header>
+        {/* <section className="rounded-[32px] border border-slate-200 bg-white p-8 shadow-xl mt-10">
+          <h2 className="text-2xl font-semibold text-slate-900 text-center">Which option is right for you?</h2>
+          <p className="mt-2 text-center text-sm text-slate-600">
+            Use these quick cues to decide where to start. You can upgrade, downgrade, or switch cadences anytime.
+          </p>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {planScenarios.map((scenario) => (
+              <article key={scenario.label} className="rounded-2xl border border-slate-100 bg-slate-50 p-5 text-left">
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-700">{scenario.highlight}</p>
+                <h3 className="mt-2 text-lg font-semibold text-slate-900">{scenario.label}</h3>
+                <p className="mt-2 text-sm text-slate-700">{scenario.detail}</p>
+              </article>
+            ))}
+          </div>
+        </section> */}
+
 
         <section id="compliance" className="rounded-[32px] border border-slate-200 bg-white p-8  mt-10 shadow-xl">
           <h2 className="text-2xl font-semibold text-slate-900">Compliance commitments</h2>
           <p className="mt-2 text-sm text-slate-700">
-            Make My Contract isn’t a law firm, but every template mirrors U.S. attorney structure. Your data stays in
-            Firebase + Stripe, and every contract is ready for outside counsel review.
+            Make My Contract isn’t a law firm, but every template mirrors U.S. attorney structure. Your data stays encrypted
+            and access-controlled, and every contract is ready for outside counsel review.
           </p>
         </section>
 
@@ -228,7 +240,7 @@ export default async function PricingPage() {
                     <Link href="#pricing-table">See pricing options</Link>
                   </Button>
                 </div>
-              )}
+              )}Eu
             </div>
           ) : (
             <div className="text-center">

@@ -139,7 +139,7 @@ export default function ContractsCatalogPage() {
                       ))}
                     </ul>
                     <Button asChild>
-                      <Link href="/dashboard">Get this template</Link>
+                      <Link href="/contracts">Get this template</Link>
                     </Button>
                   </div>
                 </Card>

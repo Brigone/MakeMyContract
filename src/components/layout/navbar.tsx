@@ -5,8 +5,8 @@ import { LogoutButton } from "@/components/auth/logout-button";
 
 const navLinks = [
   { label: "Dashboard", href: "/dashboard" },
-  { label: "Contracts", href: "/dashboard" },
-  { label: "Upgrade", href: "/signup" },
+  { label: "Contracts", href: "/contracts" },
+  { label: "Upgrade", href: "/pricing" },
 ];
 
 const hasActivePlan = (plan?: string | null) =>

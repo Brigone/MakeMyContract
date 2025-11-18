@@ -89,7 +89,7 @@ export function PricingSection({ isAuthenticated }: PricingSectionProps) {
                 {loadingPlan === plan.priceIdEnv
                   ? "Redirecting..."
                   : isAuthenticated
-                  ? "Upgrade now"
+                  ? "Purchase Plan"
                   : "Login to purchase"}
               </Button>
             </div>
