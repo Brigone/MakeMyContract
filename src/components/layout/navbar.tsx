@@ -5,7 +5,7 @@ import { LogoutButton } from "@/components/auth/logout-button";
 
 const navLinks = [
   { label: "How it works", href: "/" },
-  { label: "Plans", href: "/pricing" },
+  { label: "Pricing", href: "/pricing" },
   { label: "Legal assurance", href: "/pricing#compliance" },
 ];
 
@@ -40,7 +40,7 @@ export async function Navbar() {
                 </Button>
               ) : (
                 <Button asChild variant="ghost" size="sm">
-                  <Link href="/pricing">Activate plan</Link>
+                  <Link href="/pricing">View pricing</Link>
                 </Button>
               )}
               <LogoutButton variant="secondary" size="sm" />

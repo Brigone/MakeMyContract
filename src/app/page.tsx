@@ -293,7 +293,7 @@ export default async function Home() {
           </ul>
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild size="lg" aria-label="Start drafting contracts for $1">
-              <Link href="/signup">Start drafting for $1</Link>
+              <Link href="/signup">Start Now</Link>
             </Button>
             <Button
               asChild

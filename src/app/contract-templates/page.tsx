@@ -79,7 +79,7 @@ export default function ContractsCatalogPage() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild size="lg">
-              <Link href="/pricing">Compare plans</Link>
+              <Link href="/pricing">View pricing</Link>
             </Button>
             <Button asChild variant="secondary" size="lg">
               <Link href="/signup">Create your account</Link>

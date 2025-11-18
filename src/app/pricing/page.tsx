@@ -7,22 +7,22 @@ import { PLAN_CONFIG } from "@/lib/plans";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Make My Contract Pricing | Unlimited Online Contract Generator Plans",
+  title: "Make My Contract Pricing - Unlimited Rental Paperwork Plans",
   description:
-    "Choose Unlimited Weekly, Unlimited Monthly, or Unlimited Annual access to create contracts online, download PDFs, and track history with Make My Contract.",
+    "See simple weekly, monthly, and annual pricing for Make My Contract. Every plan unlocks unlimited templates, PDFs, and dashboard history.",
   keywords: [
     "contract generator pricing",
     "online contract builder cost",
     "legal contract subscription",
-    "Make My Contract plans",
+    "Make My Contract pricing",
   ],
   alternates: {
     canonical: "https://makemycontract.com/pricing",
   },
   openGraph: {
-    title: "Transparent pricing for online contract generation",
+    title: "Simple pricing for online contract generation",
     description:
-      "Make My Contract offers predictable weekly, monthly, and annual plans for unlimited attorney-style contracts.",
+      "Predictable weekly, monthly, and annual subscriptions for unlimited attorney-style contracts.",
     url: "https://makemycontract.com/pricing",
   },
 };
@@ -67,6 +67,24 @@ const pricingFaq = [
     question: "Is there a free plan?",
     answer:
       "Make My Contract is a paid-only SaaS. Requiring an active subscription keeps legal content behind a secure paywall and protects customer data.",
+  },
+];
+
+const planScenarios = [
+  {
+    label: "Weekly access",
+    highlight: "$1 welcome week",
+    detail: "Perfect for testing the platform, onboarding a burst of tenants, or handling a fast due-diligence sprint.",
+  },
+  {
+    label: "Monthly access",
+    highlight: "Most popular",
+    detail: "Ideal for active landlords and operators who create rental paperwork every month and want predictable billing.",
+  },
+  {
+    label: "Annual access",
+    highlight: "Best long-term value",
+    detail: "Lock in the lowest price when your team lives in contracts year-round and needs unlimited seats ready to go.",
   },
 ];
 
@@ -120,17 +138,17 @@ export default async function PricingPage() {
               </li>
             </ol>
           </nav>
-          <Badge className="mx-auto mt-4 w-fit">Transparent legal pricing</Badge>
+          <Badge className="mx-auto mt-4 w-fit">Pricing & plans</Badge>
           <h1 className="mt-4 text-4xl font-semibold text-slate-900">
-            Pick the plan that keeps every contract compliant and on time.
+            Simple pricing for unlimited rental paperwork.
           </h1>
-          <p className="mt-4 text-base">
-            No retainers. No per-document surprises. Just unlimited access to the fastest online contract generator
-            available for U.S. companies.
+          <p className="mt-4 text-base text-slate-700">
+            Pick the subscription that matches your workload—weekly for $1, predictable monthly access, or the best-value
+            annual pass. Every option unlocks identical features, unlimited templates, and dashboard history.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg">
-              <Link href="/signup">Start Now</Link>
+              <Link href="/signup">Create your account</Link>
             </Button>
             <Button asChild variant="secondary" size="lg">
               <Link href="/#contract-library">Browse contract templates</Link>
@@ -142,14 +160,29 @@ export default async function PricingPage() {
             limited invitation to experience Make My Contract before paying standard rates.
           </p>
         </header>
+        <section className="rounded-[32px] border border-slate-200 bg-white p-8 shadow-xl mt-10">
+          <h2 className="text-2xl font-semibold text-slate-900 text-center">Which option is right for you?</h2>
+          <p className="mt-2 text-center text-sm text-slate-600">
+            Use these quick cues to decide where to start. You can upgrade, downgrade, or switch cadences anytime.
+          </p>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {planScenarios.map((scenario) => (
+              <article key={scenario.label} className="rounded-2xl border border-slate-100 bg-slate-50 p-5 text-left">
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-700">{scenario.highlight}</p>
+                <h3 className="mt-2 text-lg font-semibold text-slate-900">{scenario.label}</h3>
+                <p className="mt-2 text-sm text-slate-700">{scenario.detail}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
         <section aria-labelledby="pricing-table" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
           <h2 id="pricing-table" className="text-3xl font-semibold text-slate-900">
-            Weekly, monthly, and annual plans for serious operators
+            Choose the subscription that fits your workflow
           </h2>
           <p className="mt-2 text-slate-700">
-            Every tier unlocks the same contract generator, PDF rendering, and dashboard storage. Choose the billing
-            cadence that matches your deal flow, then upgrade or downgrade whenever you need.
+            Every tier unlocks the same contract generator, PDF rendering, and dashboard storage. Pick the cadence that
+            matches your deal flow, then switch anytime from your dashboard.
           </p>
           <PricingSection isAuthenticated={isAuthenticated} />
         </section>
@@ -228,7 +261,7 @@ export default async function PricingPage() {
               {!activePlan && (
                 <div className="mt-4 flex justify-center gap-3">
                   <Button asChild>
-                    <Link href="/pricing">View plans</Link>
+                    <Link href="#pricing-table">See pricing options</Link>
                   </Button>
                 </div>
               )}

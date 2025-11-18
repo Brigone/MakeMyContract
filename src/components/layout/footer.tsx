@@ -5,7 +5,7 @@ export function Footer() {
         <p className="text-slate-700">© {new Date().getFullYear()} Make My Contract. Trusted contracts for modern operators.</p>
         <div className="flex flex-wrap gap-4">
           <a href="/pricing" className="text-slate-700 hover:text-slate-900">
-            View plans
+            View pricing
           </a>
           <a href="/login" className="text-slate-700 hover:text-slate-900">
             Client login
