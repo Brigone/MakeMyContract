@@ -9,9 +9,9 @@ import { getCurrentUser } from "@/lib/auth";
 import { CONTRACT_LIBRARY } from "@/lib/contracts-engine";
 
 export const metadata: Metadata = {
-  title: "Create Legally-Safe Contracts Online in Minutes | Make My Contract",
+  title: "Create Contracts in Minutes | Make My Contract",
   description:
-    "Make My Contract is the premium online contract builder for founders, landlords, HR teams, and agencies who need attorney-level U.S. contracts, PDFs, and history in under a minute.",
+    "Use our attorney-built templates to assemble leases, NDAs, notices, and more in under a minute. Guided intake, instant PDFs, and $1 welcome week.",
   keywords: [
     "create contract online",
     "legal contract generator",
@@ -120,7 +120,14 @@ const platformMetrics = [
   },
 ];
 
-const targetAudience = ["Founders", "Landlords", "Consultants", "Service providers", "Startup teams", "HR + People"];
+const targetAudience = [
+  { label: "Founders", href: "/signup" },
+  { label: "Landlords", href: "/signup" },
+  { label: "Consultants", href: "/signup" },
+  { label: "Service providers", href: "/signup" },
+  { label: "Startup teams", href: "/signup" },
+  { label: "HR + People", href: "/signup" },
+];
 
 const conversionHighlights = [
   {
@@ -277,23 +284,27 @@ export default async function Home() {
         <header id="hero" className="rounded-[36px] border border-slate-200 bg-white p-10 shadow-2xl">
           <Badge className="w-fit bg-blue-600/10 text-blue-800">Attorney-grade in 60 seconds</Badge>
           <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 md:text-6xl">
-            Generate enforceable U.S. contracts the moment your deal is ready.
+            Use ready-made templates to create airtight contracts in minutes.
           </h1>
           <p className="mt-4 text-lg text-slate-700">
-            Make My Contract lets founders, landlords, consultants, and service providers spin up attorney-level NDAs,
-            leases, contractor agreements, and SAFEs before a prospect cools off. No waiting on outside counsel, no
-            Frankenstein templates—just instant, defensible paperwork.
+            Make My Contract gives founders, landlords, and operators guided intake plus attorney-written templates so
+            NDAs, leases, offers, and notices are ready to sign before the momentum fades.
           </p>
-          <ul className="mt-4 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.4em] text-blue-700">
+         <ul className="mt-4 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.4em] text-blue-700">
             {targetAudience.map((persona) => (
-              <li key={persona} className="rounded-full border border-blue-200 px-3 py-1 text-blue-800">
-                {persona}
+              <li
+                key={persona.label}
+                className="rounded-full border border-blue-200 px-3 py-1 text-blue-800"
+              >
+                <Link href={persona.href} className="transition hover:text-blue-900">
+                  {persona.label}
+                </Link>
               </li>
             ))}
           </ul>
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild size="lg" aria-label="Start drafting contracts for $1">
-              <Link href="/signup">Start Now</Link>
+              <Link href="/signup">Start for $1</Link>
             </Button>
             <Button
               asChild
@@ -345,7 +356,7 @@ export default async function Home() {
             ))}
           </div>
         </section>
-        <section
+        {/* <section
           aria-labelledby="proof"
           className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl"
         >
@@ -383,7 +394,7 @@ export default async function Home() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section
           aria-labelledby="how-it-works"
@@ -399,7 +410,7 @@ export default async function Home() {
               </p>
             </div>
             <Button asChild>
-              <Link href="/signup">Start now</Link>
+              <Link href="/signup">Create Now</Link>
             </Button>
           </div>
           <div className="mt-6 grid gap-6 md:grid-cols-3">

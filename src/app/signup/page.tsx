@@ -14,10 +14,10 @@ export default async function SignupPage() {
     <div className="mx-auto flex max-w-4xl flex-col gap-10 px-4 py-16 text-slate-700 sm:px-8 lg:flex-row">
       <div className="flex-1 rounded-[32px] border border-slate-200 bg-white p-10 shadow-xl">
         <Badge>Get started</Badge>
-        <h1 className="mt-4 text-4xl font-semibold text-slate-900">Create your account.</h1>
+        <h1 className="mt-4 text-4xl font-semibold text-slate-900">Create your account to make a contract.</h1>
         <p className="mt-3 text-sm text-slate-900">
-          Set up your Make My Contract account, personalize your templates, and start generating attorney-style contracts
-          today.
+          Create your Make My Contract account, tailor the templates to your properties, and start issuing compliant rental
+          agreements in minutes.
         </p>
       </div>
       <div className="flex-1 rounded-[32px] border border-slate-200 bg-white p-8 shadow-xl">

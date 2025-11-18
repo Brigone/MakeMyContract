@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { LogoutButton } from "@/components/auth/logout-button";
 
 const navLinks = [
-  { label: "How it works", href: "/" },
+  { label: "Home", href: "/" },
   { label: "Pricing", href: "/pricing" },
   { label: "Legal assurance", href: "/pricing#compliance" },
 ];
@@ -20,7 +20,7 @@ export async function Navbar() {
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 text-slate-700 sm:px-6 lg:px-8">
         <div className="flex items-center gap-10">
-          <Link href="/" className="text-lg font-semibold tracking-tight text-slate-900">
+          <Link href="/signup" className="text-lg font-semibold tracking-tight text-slate-900">
             Make My Contract
           </Link>
           <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
@@ -51,7 +51,7 @@ export async function Navbar() {
                 <Link href="/login">Login</Link>
               </Button>
               <Button asChild size="sm">
-                <Link href="/signup">Start Now</Link>
+                <Link href="/signup">Create Now</Link>
               </Button>
             </>
           )}

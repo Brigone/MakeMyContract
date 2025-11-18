@@ -8,7 +8,7 @@ export function Footer() {
             View pricing
           </a>
           <a href="/login" className="text-slate-700 hover:text-slate-900">
-            Client login
+            Login
           </a>
           <a href="/signup" className="text-slate-700 hover:text-slate-900">
             Create account
