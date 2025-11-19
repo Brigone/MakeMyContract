@@ -71,33 +71,35 @@ export function PricingSection({ isAuthenticated }: PricingSectionProps) {
   };
 
   return (
-    <section id="pricing" className="mx-auto max-w-6xl py-10 sm:py-16">
-      <div className="text-center space-y-3">
-        <Badge className="mx-auto w-fit">Plans built to convert</Badge>
-        <h2 className="text-3xl font-semibold text-slate-900 sm:text-4xl">
+    <section id="pricing" className="mx-auto max-w-6xl py-6 max-[430px]:max-w-sm max-[430px]:py-5 sm:py-10">
+      <div className="space-y-3 text-center max-[430px]:space-y-2.5">
+        <Badge className="mx-auto w-fit px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.3em] max-[430px]:text-[0.55rem]">
+          Plans built to convert
+        </Badge>
+        <h2 className="text-xl font-semibold leading-tight text-slate-900 max-[430px]:text-lg sm:text-4xl">
           Choose the access that matches your deal flow
         </h2>
-        <p className="text-base text-slate-800">
+        <p className="text-sm text-slate-800 max-[430px]:text-[0.9rem] sm:text-base">
           Run unlimited contracts for a week, stay covered month-to-month, or lock annual access for the best value. Your draft
           pauses are saved and resume the second checkout completes.
         </p>
       </div>
-      <div className="mt-10 grid items-stretch gap-6 md:grid-cols-3 lg:gap-8">
+      <div className="mt-8 grid items-stretch gap-4 max-[430px]:gap-3 sm:gap-6 md:grid-cols-3 lg:gap-8">
         {PLAN_CONFIG.map((plan) => (
           <div
             key={plan.id}
-            className={`flex h-full flex-col rounded-3xl border border-slate-200 bg-white/95 p-6 shadow-md backdrop-blur ${
+            className={`flex h-full flex-col rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-md backdrop-blur max-[430px]:p-4 sm:rounded-3xl sm:p-6 ${
               plan.id === "monthly" ? "border-blue-200 ring-2 ring-blue-100 shadow-xl" : ""
             }`}
           >
             <div>
-              <p className="text-3xl font-semibold text-slate-900">{plan.price}</p>
+              <p className="text-2xl font-semibold text-slate-900 max-[430px]:text-xl sm:text-3xl">{plan.price}</p>
               <span className="text-sm text-slate-500">{plan.cadence}</span>
             </div>
-            <h3 className="mt-3 text-xl font-semibold text-slate-900">{plan.label}</h3>
-            <p className="text-sm text-slate-800">{plan.description}</p>
+            <h3 className="mt-2 text-lg font-semibold text-slate-900 max-[430px]:text-base sm:text-xl">{plan.label}</h3>
+            <p className="text-sm text-slate-800 max-[430px]:text-[0.9rem]">{plan.description}</p>
             {planMeta[plan.id]?.badge && (
-              <span className="mt-3 inline-flex items-center gap-1 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-700">
+              <span className="mt-3 inline-flex items-center gap-1 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-700 max-[430px]:px-2.5 max-[430px]:text-[0.65rem]">
                 {planMeta[plan.id]?.badge}
               </span>
             )}
@@ -112,7 +114,7 @@ export function PricingSection({ isAuthenticated }: PricingSectionProps) {
                 </li>
               ))}
             </ul>
-            <div className="mt-6">
+            <div className="mt-5">
               <Button
                 className="w-full"
                 type="button"
@@ -125,15 +127,15 @@ export function PricingSection({ isAuthenticated }: PricingSectionProps) {
           </div>
         ))}
       </div>
-      <div className="mt-8 rounded-3xl border border-blue-100 bg-blue-50/80 p-5 text-sm text-slate-800 shadow-inner">
-        <p className="font-semibold text-slate-900">Need help choosing?</p>
-        <p className="mt-1">
+      <div className="mt-6 rounded-2xl border border-blue-100 bg-blue-50/80 p-4 text-sm text-slate-800 shadow-inner max-[430px]:p-3 sm:mt-8 sm:rounded-3xl sm:p-5">
+        <p className="text-sm font-semibold text-slate-900 max-[430px]:text-[0.9rem]">Need help choosing?</p>
+        <p className="mt-1 text-sm max-[430px]:text-[0.9rem]">
           Start on the weekly plan if you&apos;re testing the builder—upgrade to monthly or annual anytime without losing drafts.
         </p>
       </div>
-      <div className="mt-6 md:hidden">
-        <div className="sticky bottom-4 rounded-3xl border border-blue-200 bg-white/95 p-4 shadow-2xl backdrop-blur">
-          <p className="text-sm font-semibold text-slate-900">On mobile? Tap once and finish checkout later.</p>
+      <div className="mt-4 md:hidden">
+        <div className="sticky bottom-4 rounded-2xl border border-blue-200 bg-white/95 p-4 shadow-2xl backdrop-blur max-[430px]:p-3">
+          <p className="text-sm font-semibold text-slate-900 max-[430px]:text-[0.9rem]">On mobile? Tap once and finish checkout later.</p>
           <Button
             type="button"
             className="mt-3 w-full"

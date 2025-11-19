@@ -123,7 +123,7 @@ export default async function PricingPage() {
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Button asChild>
-              <Link href="/signup">Start free</Link>
+              <Link href="/dashboard">Start free</Link>
             </Button>
             <Button asChild variant="secondary">
               <Link href={isAuthenticated ? "/dashboard" : "/login"}>
@@ -178,7 +178,7 @@ export default async function PricingPage() {
           </dl>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild>
-              <Link href="/signup">Start free</Link>
+              <Link href="/dashboard">Start free</Link>
             </Button>
             <Button asChild variant="secondary">
               <Link href="/dashboard">Go to dashboard</Link>
@@ -240,7 +240,7 @@ export default async function PricingPage() {
                   <Link href="/login">Sign in to continue</Link>
                 </Button>
                 <Button asChild variant="secondary">
-                  <Link href="/signup">Start free</Link>
+                  <Link href="/dashboard">Start free</Link>
                 </Button>
               </div>
             </div>

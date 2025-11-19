@@ -98,27 +98,37 @@ export function LoginForm() {
 
   return (
     <div className="space-y-4">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-[430px]:space-y-3.5 sm:space-y-5">
         <div>
           <label className="text-sm font-medium text-slate-600">Email</label>
-          <Input type="email" placeholder="you@company.com" className="mt-2" {...register("email")} />
+          <Input type="email" placeholder="you@company.com" className="mt-1.5 max-[430px]:mt-1" {...register("email")} />
           {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
         </div>
         <div>
           <label className="text-sm font-medium text-slate-600">Password</label>
-          <Input type="password" placeholder="••••••••" className="mt-2" {...register("password")} />
+          <Input type="password" placeholder="••••••••" className="mt-1.5" {...register("password")} />
           {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>}
         </div>
-        <Button type="submit" className="w-full" disabled={isPending}>
+        <Button
+          type="submit"
+          className="w-full py-5 text-sm font-semibold max-[430px]:py-4 max-[430px]:text-[0.95rem] sm:py-6 sm:text-base"
+          disabled={isPending}
+        >
           {isPending ? "Signing in..." : "Sign in"}
         </Button>
       </form>
-      <div className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-slate-400">
+      <div className="flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.3em] text-slate-400 sm:text-xs">
         <span className="h-px flex-1 bg-slate-200" aria-hidden="true" />
         or
         <span className="h-px flex-1 bg-slate-200" aria-hidden="true" />
       </div>
-      <Button type="button" variant="secondary" className="w-full" disabled={isPending} onClick={handleGoogleSignIn}>
+      <Button
+        type="button"
+        variant="secondary"
+        className="w-full py-5 text-sm font-semibold max-[430px]:py-4 max-[430px]:text-[0.95rem] sm:py-6 sm:text-base"
+        disabled={isPending}
+        onClick={handleGoogleSignIn}
+      >
         Continue with Google
       </Button>
     </div>

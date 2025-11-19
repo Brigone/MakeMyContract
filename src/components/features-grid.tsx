@@ -36,27 +36,29 @@ const features = [
 
 export function FeaturesGrid() {
   return (
-    <section className="mx-auto max-w-6xl py-16">
-      <Badge>Why teams switch</Badge>
-      <h2 className="mt-3 text-3xl font-semibold text-slate-900">
+    <section className="mx-auto max-w-6xl py-6 max-[430px]:max-w-sm max-[430px]:py-5 sm:py-10">
+      <Badge className="inline-flex items-center px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.3em] max-[430px]:text-[0.55rem]">
+        Why teams switch
+      </Badge>
+      <h2 className="mt-3 text-xl font-semibold leading-tight text-slate-900 max-[430px]:text-lg sm:text-3xl">
         Tools that feel like your own legal department
       </h2>
-      <p className="mt-2 max-w-3xl text-base text-slate-800">
+      <p className="mt-2 max-w-3xl text-sm text-slate-800 max-[430px]:text-[0.9rem] sm:text-base">
         Make My Contract blends attorney-grade structure with the speed and polish of a modern SaaS platform. Every feature keeps you focused on running your business—not juggling paperwork.
       </p>
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
+      <div className="mt-8 grid gap-4 max-[430px]:gap-3 sm:mt-10 sm:gap-6 md:grid-cols-2">
         {features.map(({ icon: Icon, title, description }) => (
           <div
             key={title}
-            className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md"
+            className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md max-[430px]:p-3 sm:p-5"
           >
-            <div className="flex items-center gap-3">
-              <span className="rounded-2xl bg-blue-50 p-3 text-blue-700">
+            <div className="flex items-center gap-3 max-[430px]:gap-2">
+              <span className="rounded-2xl bg-blue-50 p-2.5 text-blue-700">
                 <Icon size={20} />
               </span>
-              <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
+              <h3 className="text-base font-semibold text-slate-900 max-[430px]:text-sm sm:text-lg">{title}</h3>
             </div>
-            <p className="mt-3 text-sm text-slate-800">{description}</p>
+            <p className="mt-3 text-sm text-slate-800 max-[430px]:text-[0.9rem]">{description}</p>
           </div>
         ))}
       </div>

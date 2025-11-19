@@ -33,11 +33,11 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
               Keep every agreement in one secure, organized place with instant downloads and quick filters.
             </p>
           </div>
-          <div className="flex gap-3">
-            <Button asChild variant="secondary">
+          <div className="flex flex-col gap-2 sm:flex-row sm:gap-3">
+            <Button asChild variant="secondary" className="w-full sm:w-auto">
               <Link href="/contracts">Create my contract</Link>
             </Button>
-            <Button asChild>
+            <Button asChild className="w-full sm:w-auto">
               <Link href="/pricing">Update my plan</Link>
             </Button>
           </div>
@@ -93,7 +93,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Button asChild>
-                <Link href="/signup">Start free</Link>
+                <Link href="/dashboard">Start free</Link>
               </Button>
               <Button asChild variant="secondary">
                 <Link href="/pricing">View plans</Link>

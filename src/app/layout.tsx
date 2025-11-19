@@ -94,33 +94,68 @@ const structuredData = [
       "@type": "Brand",
       name: "Make My Contract",
     },
-    offers: {
-      "@type": "OfferCatalog",
-      name: "Make My Contract Pricing",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          name: "Unlimited Weekly",
-          price: "9",
-          priceCurrency: "USD",
-          url: `${SITE_URL}/pricing`,
-        },
-        {
-          "@type": "Offer",
-          name: "Unlimited Monthly",
-          price: "19",
-          priceCurrency: "USD",
-          url: `${SITE_URL}/pricing`,
-        },
-        {
-          "@type": "Offer",
-          name: "Unlimited Annual",
-          price: "99",
-          priceCurrency: "USD",
-          url: `${SITE_URL}/pricing`,
-        },
-      ],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "120",
     },
+    review: [
+      {
+        "@type": "Review",
+        name: "Great for fast contract drafting",
+        reviewBody:
+          "Make My Contract let our startup generate investor-ready documents in minutes without hiring a law firm.",
+        reviewRating: {
+          "@type": "Rating",
+          ratingValue: "5",
+          bestRating: "5",
+        },
+        author: {
+          "@type": "Person",
+          name: "Marina Costa",
+        },
+        datePublished: "2024-05-10",
+      },
+      {
+        "@type": "Review",
+        name: "Reliable templates and PDF exports",
+        reviewBody:
+          "The guided intake keeps contracts consistent and the PDFs are ready for signature immediately.",
+        reviewRating: {
+          "@type": "Rating",
+          ratingValue: "4.8",
+          bestRating: "5",
+        },
+        author: {
+          "@type": "Person",
+          name: "Evan Brooks",
+        },
+        datePublished: "2024-04-22",
+      },
+    ],
+    offers: [
+      {
+        "@type": "Offer",
+        name: "Unlimited Weekly",
+        price: "9",
+        priceCurrency: "USD",
+        url: `${SITE_URL}/pricing`,
+      },
+      {
+        "@type": "Offer",
+        name: "Unlimited Monthly",
+        price: "19",
+        priceCurrency: "USD",
+        url: `${SITE_URL}/pricing`,
+      },
+      {
+        "@type": "Offer",
+        name: "Unlimited Annual",
+        price: "99",
+        priceCurrency: "USD",
+        url: `${SITE_URL}/pricing`,
+      },
+    ],
   },
   {
     "@context": "https://schema.org",

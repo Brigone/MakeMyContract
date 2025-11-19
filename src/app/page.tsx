@@ -93,7 +93,7 @@ const OBJECTION_HANDLERS = [
 ];
 
 const CTA = {
-  start: { label: "Start free", href: "/signup" },
+  start: { label: "Start free", href: "/dashboard" },
   dashboard: { label: "Go to dashboard", href: "/dashboard" },
   builder: { label: "Create my contract", href: "/contracts" },
   upgrade: { label: "Start monthly access", href: "/pricing" },
@@ -285,35 +285,46 @@ export default async function Home() {
   };
 
   return (
-    <main className="bg-slate-50 px-4 pb-20 pt-8 text-slate-800">
-      <article className="mx-auto max-w-6xl space-y-16">
+    <main className="bg-slate-50 px-3 pb-14 pt-6 text-slate-800 max-[430px]:px-2 max-[430px]:pb-10 max-[430px]:pt-5 sm:px-4 md:pb-20 md:pt-8">
+      <article className="mx-auto max-w-6xl space-y-7 max-[430px]:max-w-sm max-[430px]:space-y-5 sm:space-y-12 lg:space-y-16">
         <header
           id="hero"
-          className="rounded-[36px] border border-slate-200 bg-white p-8 shadow-2xl md:p-12"
+          className="rounded-2xl border border-slate-200 bg-white p-4 shadow-2xl max-[430px]:p-3 sm:rounded-[32px] sm:p-6 md:p-10"
         >
-          <div className="flex flex-col gap-4 text-center md:text-left">
-            <Badge className="mx-auto w-fit bg-blue-600/10 text-blue-800 md:mx-0">Contracts ready in 60 seconds</Badge>
-            <h1 className="text-4xl font-bold tracking-tight text-slate-900 md:text-6xl">
+          <div className="flex flex-col gap-3 text-center md:text-left max-[430px]:gap-2.5">
+            <Badge className="mx-auto w-fit bg-blue-600/10 px-3 py-[0.35rem] text-[0.6rem] font-semibold uppercase tracking-[0.3em] text-blue-800 max-[430px]:text-[0.55rem] md:mx-0">
+              Contracts ready in 60 seconds
+            </Badge>
+            <h1 className="text-[1.7rem] font-bold leading-[1.1] tracking-tight text-slate-900 max-[430px]:text-[1.5rem] sm:text-4xl md:text-5xl">
               Create a signature-ready contract in minutes before the deal goes cold.
             </h1>
-            <p className="text-lg text-slate-700 md:max-w-3xl">
+            <p className="text-sm leading-relaxed text-slate-700 max-[430px]:text-[0.9rem] sm:text-base md:max-w-3xl">
               Answer plain-language prompts, see every clause update in real time, and tap once to download a PDF. We auto-save
               each draft locally so you can sign up later without losing a single field.
             </p>
-            <ul className="flex flex-wrap justify-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-blue-700 md:justify-start">
+            <ul className="flex flex-wrap justify-center gap-1 text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-blue-700 max-[430px]:gap-0.5 sm:gap-2 sm:text-xs md:justify-start">
               {targetAudience.map((persona) => (
-                <li key={persona.label} className="rounded-full border border-blue-200 px-3 py-1 text-blue-800">
+                <li key={persona.label} className="rounded-full border border-blue-200 px-2.5 py-1 text-blue-800">
                   <Link href={persona.href} className="transition hover:text-blue-900">
                     {persona.label}
                   </Link>
                 </li>
               ))}
             </ul>
-            <div className="flex flex-col gap-3 sm:flex-row sm:justify-start">
-              <Button asChild size="lg">
+            <div className="flex flex-col gap-2 sm:flex-row sm:justify-start max-[430px]:gap-1.5">
+              <Button
+                asChild
+                size="lg"
+                className="h-11 w-full text-sm max-[430px]:h-10 max-[430px]:text-[0.9rem] sm:h-12 sm:w-auto sm:text-base"
+              >
                 <Link href={CTA.start.href}>{CTA.start.label}</Link>
               </Button>
-              <Button asChild variant="secondary" size="lg">
+              <Button
+                asChild
+                variant="secondary"
+                size="lg"
+                className="h-11 w-full text-sm max-[430px]:h-10 max-[430px]:text-[0.9rem] sm:h-12 sm:w-auto sm:text-base"
+              >
                 <Link href={CTA.dashboard.href}>{CTA.dashboard.label}</Link>
               </Button>
             </div>
@@ -325,91 +336,94 @@ export default async function Home() {
               without logging in.
             </p>
           </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <div className="mt-5 grid grid-cols-2 gap-3 max-[430px]:gap-2 sm:mt-8 sm:grid-cols-3">
             {HERO_STATS.map((stat) => (
-              <div key={stat.label} className="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-center md:text-left">
-                <p className="text-3xl font-semibold text-slate-900">{stat.value}</p>
-                <p className="text-sm text-slate-600">{stat.label}</p>
+              <div
+                key={stat.label}
+                className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-center max-[430px]:p-2.5 md:text-left"
+              >
+                <p className="text-xl font-semibold text-slate-900 max-[430px]:text-lg sm:text-3xl">{stat.value}</p>
+                <p className="text-[0.7rem] text-slate-600 max-[430px]:text-[0.65rem] sm:text-sm">{stat.label}</p>
               </div>
             ))}
           </div>
         </header>
 
-        <section aria-labelledby="conversion-highlights" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <h2 id="conversion-highlights" className="text-3xl font-semibold text-slate-900">
+        <section aria-labelledby="conversion-highlights" className="mt-6 rounded-3xl border border-slate-200 bg-white p-4 shadow-xl max-[430px]:p-3 sm:mt-8 sm:rounded-[32px] sm:p-6 md:p-8 lg:p-10">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between max-[430px]:gap-1.5">
+            <h2 id="conversion-highlights" className="text-xl font-semibold leading-tight text-slate-900 sm:text-3xl">
               {targetFeaturesHeading}
             </h2>
             <ExploreLink />
           </div>
-          <div className="mt-6 grid gap-6 md:grid-cols-3">
+          <div className="mt-4 grid gap-4 max-[430px]:gap-3 sm:mt-6 md:grid-cols-3">
             {VALUE_PILLARS.map((pillar) => (
-              <article key={pillar.title} className="rounded-3xl border border-slate-100 bg-slate-50 p-6">
-                <h3 className="text-lg font-semibold text-slate-900">{pillar.title}</h3>
+              <article key={pillar.title} className="rounded-2xl border border-slate-100 bg-slate-50 p-4 sm:rounded-3xl sm:p-6">
+                <h3 className="text-base font-semibold leading-snug text-slate-900 sm:text-lg">{pillar.title}</h3>
                 <p className="mt-2 text-sm text-slate-700">{pillar.detail}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section aria-labelledby="how-it-works" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <section aria-labelledby="how-it-works" className="mt-6 rounded-3xl border border-slate-200 bg-white p-4 shadow-xl max-[430px]:p-3 sm:mt-8 sm:rounded-[32px] sm:p-6 md:p-8 lg:p-10">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between max-[430px]:gap-1.5">
             <div>
-              <h2 id="how-it-works" className="text-3xl font-semibold text-slate-900">
+              <h2 id="how-it-works" className="text-xl font-semibold leading-tight text-slate-900 sm:text-3xl">
                 From idea to signed contract in three steps
               </h2>
-              <p className="mt-2 text-slate-700">
+              <p className="mt-2 text-sm leading-normal text-slate-700 sm:text-base">
                 Each intake is deterministic, so you can trust the PDF without looping in counsel every time.
               </p>
             </div>
-            <Button asChild>
+            <Button asChild className="w-full sm:w-auto">
               <Link href={CTA.builder.href}>{CTA.builder.label}</Link>
             </Button>
           </div>
-          <div className="mt-6 grid gap-6 md:grid-cols-3">
+          <div className="mt-4 grid gap-4 max-[430px]:gap-3 sm:mt-6 md:grid-cols-3">
             {activationSteps.map((step, index) => (
-              <article key={step.title} className="flex flex-col gap-3 rounded-3xl border border-slate-100 bg-slate-50 p-6">
-                <span className="text-4xl font-semibold text-blue-200">{String(index + 1).padStart(2, "0")}</span>
-                <h3 className="text-xl font-semibold text-slate-900">{step.title}</h3>
+              <article key={step.title} className="flex flex-col gap-2.5 rounded-2xl border border-slate-100 bg-slate-50 p-4 sm:rounded-3xl sm:p-6">
+                <span className="text-2xl font-semibold text-blue-200 sm:text-4xl">{String(index + 1).padStart(2, "0")}</span>
+                <h3 className="text-base font-semibold leading-snug text-slate-900 sm:text-xl">{step.title}</h3>
                 <p className="text-sm text-slate-700">{step.detail}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section aria-labelledby="features" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <h2 id="features" className="text-3xl font-semibold text-slate-900">
+        <section aria-labelledby="features" className="mt-6 rounded-3xl border border-slate-200 bg-white p-4 shadow-xl max-[430px]:p-3 sm:mt-8 sm:rounded-[32px] sm:p-6 md:p-8 lg:p-10">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between max-[430px]:gap-1.5">
+            <h2 id="features" className="text-xl font-semibold leading-tight text-slate-900 sm:text-3xl">
               Everything you need to remove contract friction
             </h2>
             <ExploreLink />
           </div>
-          <p className="mt-2 text-slate-700">
+          <p className="mt-2 text-sm leading-relaxed text-slate-700 sm:text-base">
             Clause controls, compliance-ready exports, and real-time storage are included in every plan so nothing stands
             between you and a signed deal.
           </p>
           <FeaturesGrid />
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button asChild>
+          <div className="mt-4 flex flex-col gap-3 sm:mt-6 sm:flex-row sm:flex-wrap">
+            <Button asChild className="w-full sm:w-auto">
               <Link href={CTA.builder.href}>{CTA.builder.label}</Link>
             </Button>
-            <Button asChild variant="secondary">
+            <Button asChild variant="secondary" className="w-full sm:w-auto">
               <Link href={CTA.upgrade.href}>{CTA.upgrade.label}</Link>
             </Button>
           </div>
         </section>
 
-        <section id="contract-library" aria-labelledby="template-gallery" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <section id="contract-library" aria-labelledby="template-gallery" className="mt-6 rounded-3xl border border-slate-200 bg-white p-4 shadow-xl max-[430px]:p-3 sm:mt-8 sm:rounded-[32px] sm:p-6 md:p-8 lg:p-10">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between max-[430px]:gap-3">
             <div>
-              <h2 id="template-gallery" className="text-3xl font-semibold text-slate-900">
+              <h2 id="template-gallery" className="text-xl font-semibold leading-tight text-slate-900 sm:text-3xl">
                 Template library built for urgent U.S. deals
               </h2>
-              <p className="text-slate-700">
+              <p className="text-sm leading-normal text-slate-700 sm:text-base">
                 Launch instantly with attorney-structured NDAs, leases, contractor agreements, SAFEs, employment offers,
                 policies, and more. Every plan unlocks {totalContractTemplates}+ templates plus unlimited revisions.
               </p>
-              <p className="mt-3 text-sm text-slate-600">
+              <p className="mt-3 text-xs text-slate-600 sm:text-sm">
                 Want to see them in action?{" "}
                 <Link
                   href={CTA.builder.href}
@@ -424,16 +438,16 @@ export default async function Home() {
               <Link href="/contracts">Try Now</Link>
             </Button> */}
           </div>
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <div className="mt-5 grid gap-4 sm:mt-8 md:grid-cols-2">
             {Object.entries(CONTRACT_LIBRARY)
               .slice(0, 4)
               .map(([key, template]) => (
-                <article key={key} className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                <article key={key} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:rounded-3xl sm:p-6">
                   <div className="flex items-center gap-2">
                     <span className="h-2 w-2 rounded-full bg-blue-600" />
                     <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-700">Template highlight</p>
                   </div>
-                  <h3 className="text-2xl font-semibold text-slate-900">{template.label}</h3>
+                  <h3 className="text-lg font-semibold leading-snug text-slate-900 sm:text-2xl">{template.label}</h3>
                   <p className="text-sm text-slate-700">{template.description}</p>
                   <ul className="mt-4 space-y-2 text-sm text-slate-800">
                     {template.checklist.slice(0, 3).map((bullet) => (
@@ -443,8 +457,8 @@ export default async function Home() {
                       </li>
                     ))}
                   </ul>
-                  <Button asChild className="mt-4" aria-label="Start with this template">
-                    <Link href={CTA.builder.href}>Start with this template</Link>
+                  <Button asChild className="mt-4 w-full sm:w-auto" aria-label={`Start with the ${template.label} template`}>
+                    <Link href={`/contracts/create/${key}`}>Start with this template</Link>
                   </Button>
                 </article>
               ))}
@@ -453,26 +467,26 @@ export default async function Home() {
 
         <DashboardHighlight />
 
-        <section aria-labelledby="reassurance" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
-          <h2 id="reassurance" className="text-3xl font-semibold text-slate-900">
+        <section aria-labelledby="reassurance" className="mt-6 rounded-3xl border border-slate-200 bg-white p-4 shadow-xl max-[430px]:p-3 sm:mt-8 sm:rounded-[32px] sm:p-6 md:p-8 lg:p-10">
+          <h2 id="reassurance" className="text-xl font-semibold leading-tight text-slate-900 sm:text-3xl">
             Confidence boosters baked into every subscription
           </h2>
-          <div className="mt-6 grid gap-6 md:grid-cols-3">
+          <div className="mt-4 grid gap-4 sm:mt-6 md:grid-cols-3">
             {reassurancePoints.map((point) => (
-              <article key={point.title} className="rounded-3xl border border-slate-100 bg-slate-50 p-6">
-                <h3 className="text-lg font-semibold text-slate-900">{point.title}</h3>
+              <article key={point.title} className="rounded-2xl border border-slate-100 bg-slate-50 p-4 sm:rounded-3xl sm:p-6">
+                <h3 className="text-base font-semibold leading-snug text-slate-900 sm:text-lg">{point.title}</h3>
                 <p className="mt-2 text-sm text-slate-700">{point.detail}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section aria-labelledby="comparison" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
-          <h2 id="comparison" className="text-3xl font-semibold text-slate-900">
+        <section aria-labelledby="comparison" className="mt-6 rounded-3xl border border-slate-200 bg-white p-4 shadow-xl max-[430px]:p-3 sm:mt-8 sm:rounded-[32px] sm:p-6 md:p-8 lg:p-10">
+          <h2 id="comparison" className="text-xl font-semibold leading-tight text-slate-900 sm:text-3xl">
             The fastest ROI compared to law firms or template shops
           </h2>
-          <p className="mt-2 text-slate-700">Share this table with stakeholders when they ask why Make My Contract wins.</p>
-          <div className="mt-6 overflow-x-auto">
+          <p className="mt-2 text-sm leading-normal text-slate-700 sm:text-base">Share this table with stakeholders when they ask why Make My Contract wins.</p>
+          <div className="mt-4 overflow-x-auto sm:mt-6">
             <table className="min-w-full border-collapse rounded-3xl border border-slate-200 text-left text-sm">
               <thead>
                 <tr className="bg-blue-50 text-xs font-semibold uppercase tracking-wide text-blue-700">
@@ -504,50 +518,50 @@ export default async function Home() {
               </tbody>
             </table>
           </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild>
+          <div className="mt-5 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
+            <Button asChild className="w-full sm:w-auto">
               <Link href={CTA.builder.href}>{CTA.builder.label}</Link>
             </Button>
-            <Button asChild variant="secondary">
+            <Button asChild variant="secondary" className="w-full sm:w-auto">
               <Link href={CTA.upgrade.href}>{CTA.upgrade.label}</Link>
             </Button>
           </div>
         </section>
 
-        <section aria-labelledby="pricing" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
-          <h2 id="pricing" className="text-3xl font-semibold text-slate-900">
+        <section aria-labelledby="pricing" className="mt-6 rounded-3xl border border-slate-200 bg-white p-4 shadow-xl max-[430px]:p-3 sm:mt-8 sm:rounded-[32px] sm:p-6 md:p-8 lg:p-10">
+          <h2 id="pricing" className="text-xl font-semibold leading-tight text-slate-900 sm:text-3xl">
             Upgrade in minutes, keep every contract forever
           </h2>
-          <p className="mt-2 text-slate-700">
+          <p className="mt-2 text-sm text-slate-700 sm:text-base">
             Weekly, monthly, and annual plans include unlimited documents, dashboard history, and PDF exports. Upgrade the
             moment you’re ready to generate and we’ll restore your drafts automatically.
           </p>
           <PricingSection isAuthenticated={Boolean(user)} />
         </section>
 
-        <section id="faq" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl" aria-labelledby="faq-heading">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <h2 id="faq-heading" className="text-3xl font-semibold text-slate-900">
+        <section id="faq" className="mt-6 rounded-3xl border border-slate-200 bg-white p-4 shadow-xl max-[430px]:p-3 sm:mt-8 sm:rounded-[32px] sm:p-6 md:p-8 lg:p-10" aria-labelledby="faq-heading">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <h2 id="faq-heading" className="text-xl font-semibold leading-tight text-slate-900 sm:text-3xl">
               FAQ: everything decision makers ask before subscribing
             </h2>
             <ExploreLink />
           </div>
-          <p className="mt-2 text-slate-700">
+          <p className="mt-2 text-sm text-slate-700 sm:text-base">
             Share these answers with co-founders, CFOs, and attorneys to keep the approval loop tight.
           </p>
-          <dl className="mt-8 space-y-6">
+          <dl className="mt-6 space-y-4 sm:mt-8 sm:space-y-6">
             {faqItems.map((item) => (
               <div key={item.question}>
-                <dt className="text-lg font-semibold text-slate-900">{item.question}</dt>
+                <dt className="text-base font-semibold leading-snug text-slate-900 sm:text-lg">{item.question}</dt>
                 <dd className="mt-2 text-slate-700">{item.answer}</dd>
               </div>
             ))}
           </dl>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild>
+          <div className="mt-5 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
+            <Button asChild className="w-full sm:w-auto">
               <Link href={CTA.start.href}>{CTA.start.label}</Link>
             </Button>
-            <Button asChild variant="secondary">
+            <Button asChild variant="secondary" className="w-full sm:w-auto">
               <Link href="/login">Sign in to keep editing</Link>
             </Button>
           </div>

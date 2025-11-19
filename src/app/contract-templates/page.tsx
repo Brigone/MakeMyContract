@@ -125,7 +125,7 @@ export default function ContractsCatalogPage() {
               {section.templates.map((template) => (
                 <Link
                   key={template.id}
-                  href="/contracts"
+                  href={`/contracts/create/${template.id}`}
                   className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-4"
                   aria-label={`Start with the ${template.label} template`}
                 >

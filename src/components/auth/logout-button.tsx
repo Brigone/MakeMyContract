@@ -9,9 +9,10 @@ import { Button } from "@/components/ui/button";
 interface LogoutButtonProps {
   variant?: "primary" | "secondary" | "ghost";
   size?: "sm" | "md" | "lg";
+  className?: string;
 }
 
-export function LogoutButton({ variant = "ghost", size = "md" }: LogoutButtonProps) {
+export function LogoutButton({ variant = "ghost", size = "md", className }: LogoutButtonProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -45,6 +46,7 @@ export function LogoutButton({ variant = "ghost", size = "md" }: LogoutButtonPro
       type="button"
       variant={variant}
       size={size}
+      className={className}
       onClick={handleLogout}
       disabled={isPending}
     >

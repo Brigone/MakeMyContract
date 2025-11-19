@@ -6,7 +6,7 @@ import { LogoutButton } from "@/components/auth/logout-button";
 const navLinks = [
   { label: "Dashboard", href: "/dashboard" },
   { label: "Contracts", href: "/contracts" },
-  { label: "Upgrade", href: "/pricing" },
+  { label: "Start Now", href: "/dashboard" },
 ];
 
 const hasActivePlan = (plan?: string | null) =>
@@ -18,9 +18,12 @@ export async function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 text-slate-700 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-10">
-          <Link href="/" className="text-lg font-semibold tracking-tight text-slate-900">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-3 py-2.5 text-slate-700 max-[430px]:max-w-sm max-[430px]:px-2 max-[430px]:py-2 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-3 sm:gap-6 max-[430px]:gap-2">
+          <Link
+            href="/"
+            className="text-[0.95rem] font-semibold tracking-tight text-slate-900 max-[430px]:text-[0.85rem] sm:text-lg"
+          >
             Make My Contract
           </Link>
           <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
@@ -31,26 +34,38 @@ export async function Navbar() {
             ))}
           </nav>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-shrink-0 items-center gap-2 text-xs font-semibold sm:gap-3 sm:text-sm max-[430px]:gap-1.5 max-[430px]:text-[0.65rem]">
           {user ? (
             <>
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/dashboard">Dashboard</Link>
-              </Button>
+              <Link href="/dashboard" className="text-slate-600 transition hover:text-slate-900">
+                Dashboard
+              </Link>
               {!isSubscribed && (
-                <Button asChild variant="ghost" size="sm">
-                  <Link href="/signup">Upgrade now</Link>
+                <Button
+                  asChild
+                  size="sm"
+                  className="h-8 rounded-full px-3 text-xs font-semibold sm:text-sm max-[430px]:h-7 max-[430px]:px-2.5"
+                >
+                  <Link href="/dashboard">Start Now</Link>
                 </Button>
               )}
-              <LogoutButton variant="secondary" size="sm" />
+              <LogoutButton
+                variant="secondary"
+                size="sm"
+                className="h-8 px-3 text-xs sm:text-sm max-[430px]:h-7 max-[430px]:px-2.5"
+              />
             </>
           ) : (
             <>
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/login">Login</Link>
-              </Button>
-              <Button asChild size="sm">
-                <Link href="/signup">Upgrade</Link>
+              <Link href="/login" className="text-slate-600 transition hover:text-slate-900">
+                Login
+              </Link>
+              <Button
+                asChild
+                size="sm"
+                className="h-8 rounded-full px-3 text-xs font-semibold sm:text-sm max-[430px]:h-7 max-[430px]:px-2.5"
+              >
+                <Link href="/dashboard">Start Now</Link>
               </Button>
             </>
           )}
