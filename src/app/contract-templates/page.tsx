@@ -123,26 +123,37 @@ export default function ContractsCatalogPage() {
             </div>
             <div className="mt-8 grid gap-6 md:grid-cols-2">
               {section.templates.map((template) => (
-                <Card key={template.id} aria-label={template.seoTitle}>
-                  <div className="flex flex-col gap-4">
+                <Link
+                  key={template.id}
+                  href="/contracts"
+                  className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-4"
+                  aria-label={`Start with the ${template.label} template`}
+                >
+                  <Card className="h-full space-y-4 transition duration-150 group-hover:-translate-y-1 group-hover:shadow-xl">
                     <header>
                       <p className="text-xs uppercase tracking-[0.2em] text-blue-700">{section.label}</p>
                       <h3 className="mt-2 text-2xl font-semibold text-slate-900">{template.label}</h3>
                       <p className="mt-2 text-sm text-slate-600">{template.description}</p>
                     </header>
+                    <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
+                      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">Preview</p>
+                      <p className="mt-2 line-clamp-3">
+                        {template.checklist.slice(0, 2).join(" · ")}
+                      </p>
+                    </div>
                     <ul className="space-y-2 text-sm">
-                      {template.checklist.map((item) => (
+                      {template.checklist.slice(0, 4).map((item) => (
                         <li key={item} className="flex items-start gap-2 text-slate-700">
                           <span className="mt-1 h-1.5 w-1.5 rounded-full bg-blue-600" aria-hidden="true" />
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
-                    <Button asChild>
-                      <Link href="/contracts">Get this template</Link>
-                    </Button>
-                  </div>
-                </Card>
+                    <div className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700">
+                      Start with this template <span aria-hidden="true">→</span>
+                    </div>
+                  </Card>
+                </Link>
               ))}
             </div>
           </section>

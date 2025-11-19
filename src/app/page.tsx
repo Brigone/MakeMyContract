@@ -93,16 +93,18 @@ const OBJECTION_HANDLERS = [
 ];
 
 const CTA = {
-  primary: { label: "Try it now – create your first contract in seconds", href: "/contracts" },
-  upgrade: { label: "Upgrade now – unlock unlimited contracts", href: "/signup" },
+  start: { label: "Start free", href: "/signup" },
+  dashboard: { label: "Go to dashboard", href: "/dashboard" },
+  builder: { label: "Create my contract", href: "/contracts" },
+  upgrade: { label: "Start monthly access", href: "/pricing" },
 };
 
 const ExploreLink = ({ className }: { className?: string }) => (
   <Link
-    href="/contracts"
+    href={CTA.builder.href}
     className={`inline-flex items-center gap-1 text-sm font-semibold text-blue-700 underline-offset-4 hover:text-blue-600 hover:underline ${className ?? ""}`.trim()}
   >
-    View it in the live editor <span aria-hidden="true">→</span>
+    {CTA.builder.label} <span aria-hidden="true">→</span>
   </Link>
 );
 
@@ -287,36 +289,45 @@ export default async function Home() {
       <article className="mx-auto max-w-6xl space-y-16">
         <header
           id="hero"
-          className="rounded-[36px] border border-slate-200 bg-white p-10 shadow-2xl text-center md:text-left"
+          className="rounded-[36px] border border-slate-200 bg-white p-8 shadow-2xl md:p-12"
         >
-          <Badge className="mx-auto w-fit bg-blue-600/10 text-blue-800 md:mx-0">Attorney-grade in 60 seconds</Badge>
-          <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 md:text-6xl">
-            Use ready-made templates to create airtight contracts in minutes.
-          </h1>
-          <p className="mt-4 text-lg text-slate-700">
-            Make My Contract lets teams edit our attorney-written templates inside the live builder so NDAs, leases, offers,
-            and notices are ready to sign before the momentum fades.
-          </p>
-          <ul className="mt-4 flex flex-wrap justify-center gap-2 text-xs font-semibold uppercase tracking-[0.4em] text-blue-700 md:justify-start">
-            {targetAudience.map((persona) => (
-              <li key={persona.label} className="rounded-full border border-blue-200 px-3 py-1 text-blue-800">
-                <Link href={persona.href} className="transition hover:text-blue-900">
-                  {persona.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-6 flex flex-wrap justify-center gap-3 md:justify-start">
-            <Button asChild size="lg" aria-label="Try the builder now">
-              <Link href={CTA.primary.href}>{CTA.primary.label}</Link>
-            </Button>
-            <Button asChild variant="secondary" size="lg" aria-label="Start your subscription">
-              <Link href={CTA.upgrade.href}>{CTA.upgrade.label}</Link>
-            </Button>
+          <div className="flex flex-col gap-4 text-center md:text-left">
+            <Badge className="mx-auto w-fit bg-blue-600/10 text-blue-800 md:mx-0">Contracts ready in 60 seconds</Badge>
+            <h1 className="text-4xl font-bold tracking-tight text-slate-900 md:text-6xl">
+              Create a signature-ready contract in minutes before the deal goes cold.
+            </h1>
+            <p className="text-lg text-slate-700 md:max-w-3xl">
+              Answer plain-language prompts, see every clause update in real time, and tap once to download a PDF. We auto-save
+              each draft locally so you can sign up later without losing a single field.
+            </p>
+            <ul className="flex flex-wrap justify-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-blue-700 md:justify-start">
+              {targetAudience.map((persona) => (
+                <li key={persona.label} className="rounded-full border border-blue-200 px-3 py-1 text-blue-800">
+                  <Link href={persona.href} className="transition hover:text-blue-900">
+                    {persona.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-col gap-3 sm:flex-row sm:justify-start">
+              <Button asChild size="lg">
+                <Link href={CTA.start.href}>{CTA.start.label}</Link>
+              </Button>
+              <Button asChild variant="secondary" size="lg">
+                <Link href={CTA.dashboard.href}>{CTA.dashboard.label}</Link>
+              </Button>
+            </div>
+            <p className="text-sm text-slate-600">
+              Want to try it first?{" "}
+              <Link href={CTA.builder.href} className="font-semibold text-blue-600 underline-offset-4 hover:underline">
+                {CTA.builder.label}
+              </Link>{" "}
+              without logging in.
+            </p>
           </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
             {HERO_STATS.map((stat) => (
-              <div key={stat.label} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+              <div key={stat.label} className="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-center md:text-left">
                 <p className="text-3xl font-semibold text-slate-900">{stat.value}</p>
                 <p className="text-sm text-slate-600">{stat.label}</p>
               </div>
@@ -352,7 +363,7 @@ export default async function Home() {
               </p>
             </div>
             <Button asChild>
-              <Link href="/contracts">Open the builder</Link>
+              <Link href={CTA.builder.href}>{CTA.builder.label}</Link>
             </Button>
           </div>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
@@ -380,7 +391,7 @@ export default async function Home() {
           <FeaturesGrid />
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild>
-              <Link href="/contracts">Explore the product</Link>
+              <Link href={CTA.builder.href}>{CTA.builder.label}</Link>
             </Button>
             <Button asChild variant="secondary">
               <Link href={CTA.upgrade.href}>{CTA.upgrade.label}</Link>
@@ -399,7 +410,14 @@ export default async function Home() {
                 policies, and more. Every plan unlocks {totalContractTemplates}+ templates plus unlimited revisions.
               </p>
               <p className="mt-3 text-sm text-slate-600">
-                Want to see them in action? <Link href="/dashboard" className="font-semibold text-blue-700 underline-offset-4 hover:underline">Open the live builder</Link> and load any template right now.
+                Want to see them in action?{" "}
+                <Link
+                  href={CTA.builder.href}
+                  className="font-semibold text-blue-700 underline-offset-4 hover:underline"
+                >
+                  {CTA.builder.label}
+                </Link>{" "}
+                and load any template right now.
               </p>
             </div>
             {/* <Button asChild size="lg">
@@ -425,8 +443,8 @@ export default async function Home() {
                       </li>
                     ))}
                   </ul>
-                  <Button asChild className="mt-4" aria-label="Open this template">
-                    <Link href="/contracts">Open in builder</Link>
+                  <Button asChild className="mt-4" aria-label="Start with this template">
+                    <Link href={CTA.builder.href}>Start with this template</Link>
                   </Button>
                 </article>
               ))}
@@ -488,10 +506,10 @@ export default async function Home() {
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild>
-              <Link href="/contracts">Explore the editor</Link>
+              <Link href={CTA.builder.href}>{CTA.builder.label}</Link>
             </Button>
             <Button asChild variant="secondary">
-              <Link href="/signup">{CTA.upgrade.label}</Link>
+              <Link href={CTA.upgrade.href}>{CTA.upgrade.label}</Link>
             </Button>
           </div>
         </section>
@@ -527,10 +545,10 @@ export default async function Home() {
           </dl>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild>
-              <Link href="/signup">{CTA.upgrade.label}</Link>
+              <Link href={CTA.start.href}>{CTA.start.label}</Link>
             </Button>
             <Button asChild variant="secondary">
-              <Link href="/login">Returning user? Login</Link>
+              <Link href="/login">Sign in to keep editing</Link>
             </Button>
           </div>
         </section>

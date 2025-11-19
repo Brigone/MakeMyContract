@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import type { ReactNode } from "react";
 import {
   useFieldArray,
   useForm,
@@ -27,17 +27,28 @@ interface ContractFormProps {
   hasActiveSubscription: boolean;
 }
 
-const helper = (text: string) => (
-  <p className="text-xs text-slate-500">{text}</p>
+const helper = (text: string) => <p className="text-xs text-slate-500">{text}</p>;
+
+const FieldLabel = ({ children, className }: { children: ReactNode; className?: string }) => (
+  <label
+    className={`group block text-sm font-semibold text-slate-900 transition focus-within:text-blue-900 ${className ?? ""}`.trim()}
+  >
+    {children}
+  </label>
 );
 
 const FieldError = ({ message }: { message?: string }) =>
-  message ? <p className="text-xs text-red-600">{message}</p> : null;
+  message ? (
+    <p className="text-xs text-red-600" role="alert" aria-live="polite">
+      {message}
+    </p>
+  ) : null;
 
 export function ContractForm({ contractType, isAuthenticated, hasActiveSubscription }: ContractFormProps) {
   const template = CONTRACT_LIBRARY[contractType];
   const router = useRouter();
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const autoSaveTimeout = useRef<number | null>(null);
 
   const clauseOptions = [
     {
@@ -82,7 +93,9 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
     reset,
   } = useForm<ContractFormValues>({
     resolver: zodResolver(contractFormSchema) as Resolver<ContractFormValues>,
-    mode: "onBlur",
+    mode: "onChange",
+    reValidateMode: "onChange",
+    shouldFocusError: true,
     defaultValues: {
       contractType,
       partyOneName: "",
@@ -143,7 +156,43 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
     reset({ ...draft.values, contractType });
   }, [contractType, reset]);
 
+  useEffect(() => {
+    const subscription = watch((values) => {
+      if (typeof window === "undefined") {
+        return;
+      }
+      if (autoSaveTimeout.current) {
+        window.clearTimeout(autoSaveTimeout.current);
+      }
+      autoSaveTimeout.current = window.setTimeout(() => {
+        saveDraft({
+          path: window.location.pathname + window.location.search,
+          contractType,
+          values: values as ContractFormValues,
+          savedAt: Date.now(),
+        });
+      }, 400);
+    });
+    return () => {
+      subscription.unsubscribe();
+      if (autoSaveTimeout.current) {
+        window.clearTimeout(autoSaveTimeout.current);
+      }
+    };
+  }, [contractType, watch]);
+
   const requiresUpgrade = !(isAuthenticated && hasActiveSubscription);
+
+  const persistDraft = useCallback(() => {
+    if (typeof window === "undefined") return;
+    const values = getValues();
+    saveDraft({
+      path: window.location.pathname + window.location.search,
+      contractType,
+      values,
+      savedAt: Date.now(),
+    });
+  }, [contractType, getValues]);
 
   const onSubmit = async (values: ContractFormValues) => {
     setSubmitError(null);
@@ -166,17 +215,9 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
   };
 
   const handleUpgradeRedirect = useCallback(() => {
-    const values = getValues();
-    if (typeof window !== "undefined") {
-      saveDraft({
-        path: window.location.pathname + window.location.search,
-        contractType,
-        values,
-        savedAt: Date.now(),
-      });
-    }
+    persistDraft();
     router.push(isAuthenticated ? "/pricing" : "/signup");
-  }, [contractType, getValues, isAuthenticated, router]);
+  }, [isAuthenticated, persistDraft, router]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
@@ -211,30 +252,30 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
             Identify who is signing and where notices should be delivered.
           </p>
           <div className="mt-4 space-y-4">
-            <label className="block text-sm font-medium text-slate-900">
+            <FieldLabel>
               Party A legal name
               {helper("Typically your company or the service provider.")}
-              <Input placeholder="Acme Studios LLC" {...register("partyOneName")} />
+              <Input placeholder="Acme Studios LLC" {...register("partyOneName")} aria-invalid={Boolean(errors.partyOneName)} />
               <FieldError message={errors.partyOneName?.message} />
-            </label>
-            <label className="block text-sm font-medium text-slate-900">
+            </FieldLabel>
+            <FieldLabel>
               Party A address
               {helper("Street, city, state, and ZIP for formal notices.")}
-              <Input placeholder="123 Market St, San Francisco, CA" {...register("partyOneAddress")} />
+              <Input placeholder="123 Market St, San Francisco, CA" {...register("partyOneAddress")} aria-invalid={Boolean(errors.partyOneAddress)} />
               <FieldError message={errors.partyOneAddress?.message} />
-            </label>
-            <label className="block text-sm font-medium text-slate-900">
+            </FieldLabel>
+            <FieldLabel>
               Party B legal name
               {helper("Client, counterparty, or recipient of the services.")}
-              <Input placeholder="Northwind Ventures Inc." {...register("partyTwoName")} />
+              <Input placeholder="Northwind Ventures Inc." {...register("partyTwoName")} aria-invalid={Boolean(errors.partyTwoName)} />
               <FieldError message={errors.partyTwoName?.message} />
-            </label>
-            <label className="block text-sm font-medium text-slate-900">
+            </FieldLabel>
+            <FieldLabel>
               Party B address
               {helper("Use the official mailing address for notices.")}
-              <Input placeholder="200 Liberty St, New York, NY" {...register("partyTwoAddress")} />
+              <Input placeholder="200 Liberty St, New York, NY" {...register("partyTwoAddress")} aria-invalid={Boolean(errors.partyTwoAddress)} />
               <FieldError message={errors.partyTwoAddress?.message} />
-            </label>
+            </FieldLabel>
           </div>
         </div>
 
@@ -244,26 +285,26 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
             Lock in the effective date, term, and the state that will govern disputes.
           </p>
           <div className="mt-4 space-y-4">
-            <label className="block text-sm font-medium text-slate-900">
+            <FieldLabel>
               Effective date
-              <Input type="date" {...register("effectiveDate")} />
+              <Input type="date" {...register("effectiveDate")} aria-invalid={Boolean(errors.effectiveDate)} />
               <FieldError message={errors.effectiveDate?.message} />
-            </label>
+            </FieldLabel>
             <div className="grid gap-4 md:grid-cols-2">
-              <label className="block text-sm font-medium text-slate-900">
+              <FieldLabel>
                 Term start
-                <Input type="date" {...register("termStart")} />
+                <Input type="date" {...register("termStart")} aria-invalid={Boolean(errors.termStart)} />
                 <FieldError message={errors.termStart?.message} />
-              </label>
-              <label className="block text-sm font-medium text-slate-900">
+              </FieldLabel>
+              <FieldLabel>
                 Term end
-                <Input type="date" {...register("termEnd")} />
+                <Input type="date" {...register("termEnd")} aria-invalid={Boolean(errors.termEnd)} />
                 <FieldError message={errors.termEnd?.message} />
-              </label>
+              </FieldLabel>
             </div>
-            <label className="block text-sm font-medium text-slate-900">
+            <FieldLabel>
               Governing law (state)
-              <Select {...register("governingLaw")}>
+              <Select {...register("governingLaw")} aria-invalid={Boolean(errors.governingLaw)}>
                 {US_STATES.map((state) => (
                   <option key={state} value={state}>
                     {state}
@@ -271,7 +312,7 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
                 ))}
               </Select>
               <FieldError message={errors.governingLaw?.message} />
-            </label>
+            </FieldLabel>
           </div>
         </div>
       </div>
@@ -282,18 +323,18 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
           Summaries appear above the legal text so anyone can understand the clause instantly.
         </p>
         <div className="mt-4 space-y-4">
-          <label className="block text-sm font-medium text-slate-900">
+          <FieldLabel>
             Relationship summary
             {helper("Describe how the parties plan to work together.")}
-            <Textarea rows={3} placeholder="Example: Maker Studio will design and implement a new brand system for Atlas Homes." {...register("relationshipSummary")} />
+            <Textarea rows={3} placeholder="Example: Maker Studio will design and implement a new brand system for Atlas Homes." {...register("relationshipSummary")} aria-invalid={Boolean(errors.relationshipSummary)} />
             <FieldError message={errors.relationshipSummary?.message} />
-          </label>
-          <label className="block text-sm font-medium text-slate-900">
+          </FieldLabel>
+          <FieldLabel>
             Plain-English intro (optional)
             {helper("Add a headline summary that appears at the top of the agreement.")}
-            <Textarea rows={2} placeholder="In plain English: We are outlining scope, IP ownership, and payment expectations for this project." {...register("plainSummaryIntro")} />
+            <Textarea rows={2} placeholder="In plain English: We are outlining scope, IP ownership, and payment expectations for this project." {...register("plainSummaryIntro")} aria-invalid={Boolean(errors.plainSummaryIntro)} />
             <FieldError message={errors.plainSummaryIntro?.message} />
-          </label>
+          </FieldLabel>
         </div>
       </div>
 
@@ -303,35 +344,35 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
           Capture what is being provided so the contract mirrors the actual work.
         </p>
         <div className="mt-4 grid gap-6 md:grid-cols-2">
-          <label className="block text-sm font-medium text-slate-900">
+          <FieldLabel>
             Scope of work
-            <Textarea rows={4} placeholder="Outline responsibilities, services, or engagement scope." {...register("scopeOfWork")} />
+            <Textarea rows={4} placeholder="Outline responsibilities, services, or engagement scope." {...register("scopeOfWork")} aria-invalid={Boolean(errors.scopeOfWork)} />
             <FieldError message={errors.scopeOfWork?.message} />
-          </label>
-          <label className="block text-sm font-medium text-slate-900">
+          </FieldLabel>
+          <FieldLabel>
             Deliverables
-            <Textarea rows={4} placeholder="List key deliverables, documents, or assets that will be handed off." {...register("deliverables")} />
+            <Textarea rows={4} placeholder="List key deliverables, documents, or assets that will be handed off." {...register("deliverables")} aria-invalid={Boolean(errors.deliverables)} />
             <FieldError message={errors.deliverables?.message} />
-          </label>
+          </FieldLabel>
         </div>
         <div className="mt-4 grid gap-6 md:grid-cols-2">
-          <label className="block text-sm font-medium text-slate-900">
+          <FieldLabel>
             Milestones & timeline
-            <Textarea rows={3} placeholder="Milestone schedule, demo dates, checkpoints." {...register("milestones")} />
+            <Textarea rows={3} placeholder="Milestone schedule, demo dates, checkpoints." {...register("milestones")} aria-invalid={Boolean(errors.milestones)} />
             <FieldError message={errors.milestones?.message} />
-          </label>
-          <label className="block text-sm font-medium text-slate-900">
+          </FieldLabel>
+          <FieldLabel>
             Revision policy
-            <Textarea rows={3} placeholder="Number of revisions, turnaround expectations, change order process." {...register("revisions")} />
+            <Textarea rows={3} placeholder="Number of revisions, turnaround expectations, change order process." {...register("revisions")} aria-invalid={Boolean(errors.revisions)} />
             <FieldError message={errors.revisions?.message} />
-          </label>
+          </FieldLabel>
         </div>
         <div className="mt-4">
-          <label className="block text-sm font-medium text-slate-900">
+          <FieldLabel>
             Service guarantees
-            <Textarea rows={3} placeholder="Any uptime commitments, response times, satisfaction guarantees." {...register("serviceGuarantees")} />
+            <Textarea rows={3} placeholder="Any uptime commitments, response times, satisfaction guarantees." {...register("serviceGuarantees")} aria-invalid={Boolean(errors.serviceGuarantees)} />
             <FieldError message={errors.serviceGuarantees?.message} />
-          </label>
+          </FieldLabel>
         </div>
       </div>
 
@@ -341,47 +382,47 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
           Record fees, billing cadence, and any collateral or penalties.
         </p>
         <div className="mt-4 grid gap-6 md:grid-cols-2">
-          <label className="block text-sm font-medium text-slate-900">
+          <FieldLabel>
             Payment summary
-            <Textarea rows={3} placeholder="Example: $8,000 retainer due upfront, remaining balance Net 15." {...register("paymentDetails")} />
+            <Textarea rows={3} placeholder="Example: $8,000 retainer due upfront, remaining balance Net 15." {...register("paymentDetails")} aria-invalid={Boolean(errors.paymentDetails)} />
             <FieldError message={errors.paymentDetails?.message} />
-          </label>
-          <label className="block text-sm font-medium text-slate-900">
+          </FieldLabel>
+          <FieldLabel>
             Additional terms
-            <Textarea rows={3} placeholder="Escrow details, reimbursable expenses, or proration rules." {...register("paymentTerms")} />
+            <Textarea rows={3} placeholder="Escrow details, reimbursable expenses, or proration rules." {...register("paymentTerms")} aria-invalid={Boolean(errors.paymentTerms)} />
             <FieldError message={errors.paymentTerms?.message} />
-          </label>
+          </FieldLabel>
         </div>
         <div className="mt-4 grid gap-6 md:grid-cols-2">
-          <label className="block text-sm font-medium text-slate-900">
+          <FieldLabel>
             Interest rate
-            <Input placeholder="Example: 6% APR" {...register("interestRate")} />
+            <Input placeholder="Example: 6% APR" {...register("interestRate")} aria-invalid={Boolean(errors.interestRate)} />
             <FieldError message={errors.interestRate?.message} />
-          </label>
-          <label className="block text-sm font-medium text-slate-900">
+          </FieldLabel>
+          <FieldLabel>
             Repayment schedule
-            <Input placeholder="Example: Monthly installments for 12 months" {...register("repaymentSchedule")} />
+            <Input placeholder="Example: Monthly installments for 12 months" {...register("repaymentSchedule")} aria-invalid={Boolean(errors.repaymentSchedule)} />
             <FieldError message={errors.repaymentSchedule?.message} />
-          </label>
+          </FieldLabel>
         </div>
         <div className="mt-4 grid gap-6 md:grid-cols-2">
-          <label className="block text-sm font-medium text-slate-900">
+          <FieldLabel>
             Collateral
-            <Input placeholder="Describe collateral or leave blank for unsecured." {...register("collateral")} />
+            <Input placeholder="Describe collateral or leave blank for unsecured." {...register("collateral")} aria-invalid={Boolean(errors.collateral)} />
             <FieldError message={errors.collateral?.message} />
-          </label>
-          <label className="block text-sm font-medium text-slate-900">
+          </FieldLabel>
+          <FieldLabel>
             Late fees & penalties
-            <Input placeholder="Example: 1.5% per month after 15 days" {...register("lateFees")} />
+            <Input placeholder="Example: 1.5% per month after 15 days" {...register("lateFees")} aria-invalid={Boolean(errors.lateFees)} />
             <FieldError message={errors.lateFees?.message} />
-          </label>
+          </FieldLabel>
         </div>
         <div className="mt-4">
-          <label className="block text-sm font-medium text-slate-900">
+          <FieldLabel>
             Finance penalties or acceleration language
-            <Textarea rows={3} placeholder="Detail late payment penalties, acceleration triggers, or default remedies." {...register("financePenalties")} />
+            <Textarea rows={3} placeholder="Detail late payment penalties, acceleration triggers, or default remedies." {...register("financePenalties")} aria-invalid={Boolean(errors.financePenalties)} />
             <FieldError message={errors.financePenalties?.message} />
-          </label>
+          </FieldLabel>
         </div>
       </div>
 
@@ -391,28 +432,28 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
           Use these fields for leases, purchases, or asset transfers.
         </p>
         <div className="mt-4 grid gap-6 md:grid-cols-2">
-          <label className="block text-sm font-medium text-slate-900">
+          <FieldLabel>
             Property or asset address
-            <Input placeholder="123 Palm Ave, Austin, TX 78701" {...register("propertyAddress")} />
+            <Input placeholder="123 Palm Ave, Austin, TX 78701" {...register("propertyAddress")} aria-invalid={Boolean(errors.propertyAddress)} />
             <FieldError message={errors.propertyAddress?.message} />
-          </label>
-          <label className="block text-sm font-medium text-slate-900">
+          </FieldLabel>
+          <FieldLabel>
             Purchase price or rent
-            <Input placeholder="$2,850 per month / $850,000 purchase" {...register("purchasePrice")} />
+            <Input placeholder="$2,850 per month / $850,000 purchase" {...register("purchasePrice")} aria-invalid={Boolean(errors.purchasePrice)} />
             <FieldError message={errors.purchasePrice?.message} />
-          </label>
+          </FieldLabel>
         </div>
         <div className="mt-4 grid gap-6 md:grid-cols-2">
-          <label className="block text-sm font-medium text-slate-900">
+          <FieldLabel>
             Deposit or escrow
-            <Input placeholder="Example: $5,000 security deposit" {...register("depositAmount")} />
+            <Input placeholder="Example: $5,000 security deposit" {...register("depositAmount")} aria-invalid={Boolean(errors.depositAmount)} />
             <FieldError message={errors.depositAmount?.message} />
-          </label>
-          <label className="block text-sm font-medium text-slate-900">
+          </FieldLabel>
+          <FieldLabel>
             Ownership or IP rights
-            <Textarea rows={3} placeholder="Specify who owns final work product or licenses granted." {...register("ownershipDetails")} />
+            <Textarea rows={3} placeholder="Specify who owns final work product or licenses granted." {...register("ownershipDetails")} aria-invalid={Boolean(errors.ownershipDetails)} />
             <FieldError message={errors.ownershipDetails?.message} />
-          </label>
+          </FieldLabel>
         </div>
       </div>
 
@@ -493,20 +534,23 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
         <p className="mt-1 text-sm text-slate-700">
           Anything else the contract should call out? Add it here and it will appear as an additional clause.
         </p>
-        <Textarea rows={4} placeholder="Example: Add a reminder to attach Statement of Work #3." {...register("customNotes")} />
-        <FieldError message={errors.customNotes?.message} />
+        <FieldLabel className="mt-4">
+          Additional instruction
+          <Textarea rows={4} placeholder="Example: Add a reminder to attach Statement of Work #3." {...register("customNotes")} aria-invalid={Boolean(errors.customNotes)} />
+          <FieldError message={errors.customNotes?.message} />
+        </FieldLabel>
       </div>
 
-       {requiresUpgrade && (
+      {requiresUpgrade && (
         <div className="rounded-3xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900 shadow-sm">
-          <p className="font-semibold text-blue-900">Upgrade required to generate</p>
-          <p className="mt-1">
-            You’re editing this template in the public builder. Create your account and upgrade to generate PDFs, store history,
-            and continue where you left off.
+          <p className="font-semibold text-blue-900">Sign up to continue</p>
+          <p className="mt-1 text-blue-900/80">
+            You can edit every field for free. When you need the PDF, tap below—we save this draft to your device and bring you
+            right back here after signup and checkout.
           </p>
-          <Link href="/signup" className="mt-3 inline-flex font-semibold text-blue-800 underline-offset-4 hover:underline">
-            Upgrade now
-          </Link>
+          <Button type="button" className="mt-3 w-full md:w-auto" onClick={handleUpgradeRedirect}>
+            Sign up to continue
+          </Button>
         </div>
       )}
 
@@ -520,15 +564,20 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
         <p className="text-sm text-slate-600">
           By generating this contract, you confirm you have authority to sign on behalf of the listed parties.
         </p>
-        {requiresUpgrade ? (
-          <Button type="button" onClick={handleUpgradeRedirect}>
-            Upgrade now
-          </Button>
-        ) : (
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Preparing your contract..." : "Generate contract"}
-          </Button>
-        )}
+        <div className="flex flex-col gap-3 sm:flex-row">
+          {requiresUpgrade ? (
+            <Button type="button" onClick={handleUpgradeRedirect} className="w-full sm:w-auto">
+              Sign up to continue
+            </Button>
+          ) : (
+            <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
+              {isSubmitting ? "Preparing your contract..." : "Download contract"}
+            </Button>
+          )}
+          {/* <Button type="button" variant="secondary" className="w-full sm:w-auto" onClick={persistDraft}>
+            Save progress
+          </Button> */}
+        </div>
       </div>
     </form>
   );

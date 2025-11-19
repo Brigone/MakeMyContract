@@ -35,10 +35,10 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
           </div>
           <div className="flex gap-3">
             <Button asChild variant="secondary">
-              <Link href="/contracts">New contract</Link>
+              <Link href="/contracts">Create my contract</Link>
             </Button>
             <Button asChild>
-              <Link href="/pricing">Manage plan</Link>
+              <Link href="/pricing">Update my plan</Link>
             </Button>
           </div>
         </div>
@@ -52,7 +52,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                   Generate your first attorney-style agreement to unlock this space with organized history and quick actions.
                 </p>
                 <Button asChild className="mt-6">
-                  <Link href="/contracts">Create your first contract</Link>
+                  <Link href="/contracts">Create my contract</Link>
                 </Button>
               </div>
             )}
@@ -76,10 +76,10 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                 <p className="mt-3 line-clamp-4 text-sm text-slate-600">{contract.content}</p>
                 <div className="mt-4 flex flex-wrap gap-3">
                   <Button asChild>
-                    <Link href={`/api/contracts/pdf?contractId=${contract.id}`}>Download PDF</Link>
+                    <Link href={`/api/contracts/pdf?contractId=${contract.id}`}>Download contract</Link>
                   </Button>
                   <Button asChild variant="secondary">
-                    <Link href={`/contracts/${contract.id}`}>View details</Link>
+                    <Link href={`/contracts/${contract.id}`}>Review contract</Link>
                   </Button>
                 </div>
               </div>
@@ -93,10 +93,10 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Button asChild>
-                <Link href="/signup">Create account</Link>
+                <Link href="/signup">Start free</Link>
               </Button>
               <Button asChild variant="secondary">
-                <Link href="/pricing">View pricing</Link>
+                <Link href="/pricing">View plans</Link>
               </Button>
             </div>
           </div>

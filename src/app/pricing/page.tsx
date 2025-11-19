@@ -108,39 +108,46 @@ export default async function PricingPage() {
   return (
     <main className="bg-slate-50 px-4 pb-20 pt-8 text-slate-800">
       <DraftResumeWatcher shouldResume={canResumeDraft} />
-      <div className="mx-auto max-w-5xl space-y-16 lg:space-y-20">
+      <div className="mx-auto max-w-5xl space-y-12 lg:space-y-16">
         <header className="rounded-[32px] border border-slate-200 bg-white p-10 text-center shadow-2xl">
-          <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.2em] text-blue-700">
-            <ol className="flex flex-wrap justify-center gap-2">
-              <li>
-                <Link href="/#hero" className="hover:text-blue-700">
-                  Home
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/pricing" aria-current="page" className="font-semibold text-slate-900">
-                  Pricing
-                </Link>
-              </li>
-            </ol>
-          </nav>
-          {/* <Badge className="mx-auto mt-4 w-fit">Pricing & plans</Badge>
+          <Badge className="mx-auto w-fit">Pricing & plans</Badge>
           <h1 className="mt-4 text-4xl font-semibold text-slate-900">
-            Simple pricing for unlimited rental paperwork.
+            Pick a plan and resume your in-progress contract instantly.
           </h1>
           <p className="mt-4 text-base text-slate-700">
-            Pick the subscription that matches your workload—weekly for $1, predictable monthly access, or the best-value
-            annual pass. Every option unlocks identical features, unlimited templates, and dashboard history.
+            Upgrade only when you’re ready to download. Weekly, monthly, and annual passes unlock every template, PDF export,
+            and dashboard history with zero per-document fees.
           </p>
-          <p className="mt-2 text-slate-700">
-            Every tier unlocks the same contract generator, PDF rendering, and dashboard storage. Pick the cadence that
-            matches your deal flow, then switch anytime from your dashboard.
-          </p> */}
-          <PricingSection isAuthenticated={isAuthenticated} />
+          <p className="mt-2 text-sm text-slate-600">
+            We auto-save your draft locally. After signup or checkout, we send you right back to the builder so nothing is lost.
+          </p>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <Button asChild>
+              <Link href="/signup">Start free</Link>
+            </Button>
+            <Button asChild variant="secondary">
+              <Link href={isAuthenticated ? "/dashboard" : "/login"}>
+                {isAuthenticated ? "Go to dashboard" : "Sign in to continue"}
+              </Link>
+            </Button>
+          </div>
+          <p className="mt-4 text-sm text-slate-600">
+            Prefer to experiment first?{" "}
+            <Link href="/contracts" className="font-semibold text-blue-700 underline-offset-4 hover:underline">
+              Create my contract
+            </Link>{" "}
+            without logging in.
+          </p>
+        </header>
 
-        <section aria-labelledby="benefits" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
-          <h2 id="benefits" className="text-3xl font-semibold text-slate-900">
+        <PricingSection isAuthenticated={isAuthenticated} />
+
+        <section
+          id="benefits"
+          className="rounded-[32px] border border-slate-200 bg-white p-10 shadow-xl"
+          aria-labelledby="benefits-heading"
+        >
+          <h2 id="benefits-heading" className="text-3xl font-semibold text-slate-900">
             Why subscribers trust Make My Contract over hourly legal fees
           </h2>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
@@ -153,7 +160,11 @@ export default async function PricingPage() {
           </div>
         </section>
 
-        <section id="pricing-faq" aria-labelledby="pricing-faq-heading" className="rounded-[32px] border border-slate-200 bg-white p-10 mt-10 shadow-xl">
+        <section
+          id="pricing-faq"
+          aria-labelledby="pricing-faq-heading"
+          className="rounded-[32px] border border-slate-200 bg-white p-10 shadow-xl"
+        >
           <h2 id="pricing-faq-heading" className="text-3xl font-semibold text-slate-900">
             Pricing FAQ
           </h2>
@@ -167,39 +178,15 @@ export default async function PricingPage() {
           </dl>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild>
-              <Link href="/signup">Create your account</Link>
+              <Link href="/signup">Start free</Link>
             </Button>
             <Button asChild variant="secondary">
-              <Link href="/login">Already subscribed? Sign in</Link>
+              <Link href="/dashboard">Go to dashboard</Link>
             </Button>
-            
           </div>
         </section>
 
-          {/* <p className="mt-4 text-sm text-blue-800">
-            Premium Welcome Offer: Enter coupon <span className="font-semibold text-blue-900">WELCOME</span> at
-            checkout on the Unlimited Weekly plan to lock in a $1 first week—full feature access, minimal risk, and a
-            limited invitation to experience Make My Contract before paying standard rates.
-          </p> */}
-        </header>
-        {/* <section className="rounded-[32px] border border-slate-200 bg-white p-8 shadow-xl mt-10">
-          <h2 className="text-2xl font-semibold text-slate-900 text-center">Which option is right for you?</h2>
-          <p className="mt-2 text-center text-sm text-slate-600">
-            Use these quick cues to decide where to start. You can upgrade, downgrade, or switch cadences anytime.
-          </p>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {planScenarios.map((scenario) => (
-              <article key={scenario.label} className="rounded-2xl border border-slate-100 bg-slate-50 p-5 text-left">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-700">{scenario.highlight}</p>
-                <h3 className="mt-2 text-lg font-semibold text-slate-900">{scenario.label}</h3>
-                <p className="mt-2 text-sm text-slate-700">{scenario.detail}</p>
-              </article>
-            ))}
-          </div>
-        </section> */}
-
-
-        <section id="compliance" className="rounded-[32px] border border-slate-200 bg-white p-8  mt-10 shadow-xl">
+        <section id="compliance" className="rounded-[32px] border border-slate-200 bg-white p-8 shadow-xl">
           <h2 className="text-2xl font-semibold text-slate-900">Compliance commitments</h2>
           <p className="mt-2 text-sm text-slate-700">
             Make My Contract isn’t a law firm, but every template mirrors U.S. attorney structure. Your data stays encrypted
@@ -207,7 +194,7 @@ export default async function PricingPage() {
           </p>
         </section>
 
-        <section className="rounded-[32px] border border-slate-200 bg-white p-8  mt-10 shadow-xl">
+        <section className="rounded-[32px] border border-slate-200 bg-white p-8 shadow-xl">
           {user ? (
             <div className="text-center">
               <h2 className="text-2xl font-semibold text-slate-900">Your subscription</h2>
@@ -224,11 +211,11 @@ export default async function PricingPage() {
                   </div>
                   <div className="mt-4 flex flex-wrap justify-center gap-3">
                     <Button asChild>
-                      <Link href="/dashboard">Go to dashboard</Link>
+                      <Link href="/dashboard">Open my dashboard</Link>
                     </Button>
                     <Button asChild variant="secondary">
                       <Link href="https://billing.stripe.com/p/login/test-dashboard" target="_blank">
-                        Cancel subscription
+                        Manage billing
                       </Link>
                     </Button>
                   </div>
@@ -237,10 +224,10 @@ export default async function PricingPage() {
               {!activePlan && (
                 <div className="mt-4 flex justify-center gap-3">
                   <Button asChild>
-                    <Link href="#pricing-table">See pricing options</Link>
+                    <Link href="#pricing">See plan cards</Link>
                   </Button>
                 </div>
-              )}Eu
+              )}
             </div>
           ) : (
             <div className="text-center">
@@ -250,10 +237,10 @@ export default async function PricingPage() {
               </p>
               <div className="mt-4 flex justify-center gap-3">
                 <Button asChild>
-                  <Link href="/login">Sign in</Link>
+                  <Link href="/login">Sign in to continue</Link>
                 </Button>
                 <Button asChild variant="secondary">
-                  <Link href="/signup">Create account</Link>
+                  <Link href="/signup">Start free</Link>
                 </Button>
               </div>
             </div>

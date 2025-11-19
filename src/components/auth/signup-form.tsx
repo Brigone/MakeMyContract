@@ -81,6 +81,7 @@ export function SignupForm() {
   };
 
   const handleGoogleSignup = () => {
+    setShowRequirementsModal(false);
     startTransition(async () => {
       try {
         const auth = getFirebaseAuth();
@@ -138,7 +139,13 @@ export function SignupForm() {
         or
         <span className="h-px flex-1 bg-slate-200" aria-hidden="true" />
       </div>
-      <Button type="button" variant="secondary" className="mt-2 w-full" disabled={isPending} onClick={handleGoogleSignup}>
+      <Button
+        type="button"
+        variant="secondary"
+        className="mt-2 w-full"
+        disabled={isPending}
+        onClick={handleGoogleSignup}
+      >
         Continue with Google
       </Button>
       {showRequirementsModal ? (
@@ -149,14 +156,30 @@ export function SignupForm() {
               To create your Make My Contract account we need a valid email address, an 8+ character password, and the
               confirmation field filled out. Please complete every field before clicking &quot;Create account&quot;.
             </p>
-            <div className="mt-4 flex justify-end">
+            <div className="mt-6 space-y-4">
+              <div className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-slate-400">
+                <span className="h-px flex-1 bg-slate-200" aria-hidden="true" />
+                or
+                <span className="h-px flex-1 bg-slate-200" aria-hidden="true" />
+              </div>
               <Button
                 type="button"
                 variant="secondary"
-                onClick={() => setShowRequirementsModal(false)}
+                className="w-full"
+                disabled={isPending}
+                onClick={handleGoogleSignup}
               >
-                Got it
+                Continue with Google
               </Button>
+              <div className="flex justify-end">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => setShowRequirementsModal(false)}
+                >
+                  Got it
+                </Button>
+              </div>
             </div>
           </div>
         </div>

@@ -3,21 +3,21 @@ import { forwardRef } from "react";
 import { Slot } from "@radix-ui/react-slot";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-full text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-60",
+  "inline-flex min-h-[44px] items-center justify-center rounded-full text-base font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-60",
   {
     variants: {
       variant: {
         primary:
-          "bg-[#2563EB] !text-white shadow-sm hover:bg-[#1D4ED8] focus-visible:ring-[#2563EB]",
+          "bg-[#2563EB] !text-white shadow-lg shadow-blue-500/25 hover:bg-[#1D4ED8] focus-visible:ring-[#2563EB]",
         secondary:
           "bg-white text-slate-800 border border-slate-200 hover:bg-slate-50 focus-visible:ring-slate-300",
         ghost:
           "text-slate-700 hover:bg-slate-100 focus-visible:ring-slate-200",
       },
       size: {
-        sm: "px-4 py-1.5",
-        md: "px-5 py-2.5",
-        lg: "px-6 py-3 text-base",
+        sm: "px-4",
+        md: "px-5",
+        lg: "px-6 text-lg",
       },
     },
     defaultVariants: {
