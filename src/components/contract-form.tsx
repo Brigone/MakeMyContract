@@ -48,7 +48,9 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
   const template = CONTRACT_LIBRARY[contractType];
   const router = useRouter();
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [hasDraft, setHasDraft] = useState(false);
   const autoSaveTimeout = useRef<number | null>(null);
+  const skipAutoSaveRef = useRef(false);
 
   const clauseOptions = [
     {
@@ -148,11 +150,15 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
 
   useEffect(() => {
     const draft = getDraft();
-    if (!draft) return;
+    if (!draft) {
+      setHasDraft(false);
+      return;
+    }
     if (draft.contractType !== contractType) return;
     if (typeof window === "undefined") return;
     const currentPath = window.location.pathname + window.location.search;
     if (draft.path !== currentPath) return;
+    setHasDraft(true);
     reset({ ...draft.values, contractType });
   }, [contractType, reset]);
 
@@ -165,12 +171,17 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
         window.clearTimeout(autoSaveTimeout.current);
       }
       autoSaveTimeout.current = window.setTimeout(() => {
+        if (skipAutoSaveRef.current) {
+          skipAutoSaveRef.current = false;
+          return;
+        }
         saveDraft({
           path: window.location.pathname + window.location.search,
           contractType,
           values: values as ContractFormValues,
           savedAt: Date.now(),
         });
+        setHasDraft(true);
       }, 400);
     });
     return () => {
@@ -192,7 +203,15 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
       values,
       savedAt: Date.now(),
     });
+    setHasDraft(true);
   }, [contractType, getValues]);
+
+  const handleDiscardDraft = useCallback(() => {
+    skipAutoSaveRef.current = true;
+    clearDraft();
+    setHasDraft(false);
+    reset(undefined, { keepDefaultValues: true });
+  }, [reset]);
 
   const onSubmit = async (values: ContractFormValues) => {
     setSubmitError(null);
@@ -225,7 +244,7 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
 
       <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div>
+          <div className="flex flex-col gap-3">
             <Badge>{template.categoryLabel}</Badge>
             <h2 className="mt-3 text-2xl font-semibold text-slate-900">
               {template.label}
@@ -233,6 +252,17 @@ export function ContractForm({ contractType, isAuthenticated, hasActiveSubscript
             <p className="text-sm text-slate-700">
               {template.description}
             </p>
+            {hasDraft && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="w-full border border-slate-200 text-slate-600 hover:border-red-200 hover:text-red-600 sm:w-auto"
+                onClick={handleDiscardDraft}
+              >
+                Discard draft
+              </Button>
+            )}
           </div>
           <div className="rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-800 shadow-sm">
             <p className="font-semibold text-slate-900">What you&apos;ll need</p>

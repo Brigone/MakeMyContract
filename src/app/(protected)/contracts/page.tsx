@@ -45,7 +45,7 @@ export default function ContractTypeSelection() {
                 ))}
               </div>
               <Button asChild className="mt-6">
-                <Link href={`/contracts/create/${type}`}>Use template</Link>
+                <Link href={`/contracts/create/${type}`}>Create Now</Link>
               </Button>
             </div>
           ))}
