@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
 import { getContractsForUser } from "@/lib/firestore";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DraftResumeWatcher } from "@/components/draft-resume-watcher";
 
@@ -20,88 +19,98 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   const contracts = user ? await getContractsForUser(user.uid) : [];
   const hasCheckoutSession = typeof searchParams?.session_id === "string" && searchParams.session_id.length > 0;
   const canResumeDraft = Boolean(user && hasActivePlan(user.plan));
+  const isSubscribed = hasActivePlan(user?.plan);
+
+  const dashboardCta = isSubscribed
+    ? { label: "Create Contract", href: "/contracts" }
+    : { label: "Buy Now", href: "/pricing" };
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 text-slate-700">
+    <div className="mx-auto w-full max-w-4xl px-4 py-10 text-slate-900 sm:px-6 lg:px-0">
       <DraftResumeWatcher shouldResume={canResumeDraft} />
-      <div className="rounded-[32px] border border-slate-200 bg-white p-10 shadow-2xl">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <Badge>Dashboard</Badge>
-            <h1 className="mt-3 text-3xl font-semibold text-slate-900">Your contract command center</h1>
-            <p className="text-sm text-slate-800">
-              Keep every agreement in one secure, organized place with instant downloads and quick filters.
-            </p>
-          </div>
-          <div className="flex flex-col gap-2 sm:flex-row sm:gap-3">
-            <Button asChild variant="secondary" className="w-full sm:w-auto">
-              <Link href="/contracts">Create my contract</Link>
-            </Button>
-            <Button asChild className="w-full sm:w-auto">
-              <Link href="/pricing">Update my plan</Link>
-            </Button>
-          </div>
-        </div>
+      <section className="w-full rounded-[32px] border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">Next step</p>
+        <h1 className="mt-3 text-3xl font-semibold leading-tight sm:text-4xl">Pick up your contract exactly where you left.</h1>
+        <p className="mt-3 text-base text-slate-600">
+          Every draft stays saved. Use the button below to reopen the builder or finish checkout—no extra navigation required.
+        </p>
+        <Button
+          asChild
+          size="lg"
+          className="mt-6 w-full rounded-2xl py-5 text-base font-semibold sm:w-fit sm:px-10"
+        >
+          <Link href={dashboardCta.href}>{dashboardCta.label}</Link>
+        </Button>
+        <p className="mt-3 text-sm text-slate-500">Start in seconds. Drafts auto-resume after login or payment.</p>
+      </section>
 
-        {user ? (
-          <div className="mt-10 grid gap-4">
-            {contracts.length === 0 && (
-              <div className="rounded-3xl border border-dashed border-slate-200 bg-slate-50 p-10 text-center">
-                <h3 className="text-xl font-semibold text-slate-900">No contracts yet</h3>
-                <p className="mt-2 text-sm text-slate-800">
-                  Generate your first attorney-style agreement to unlock this space with organized history and quick actions.
-                </p>
-                <Button asChild className="mt-6">
-                  <Link href="/contracts">Create my contract</Link>
-                </Button>
-              </div>
+      {user ? (
+        <section className="mt-10 w-full space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-semibold text-slate-900">Your contracts</h2>
+            {contracts.length > 0 && (
+              <span className="text-sm text-slate-500">{contracts.length} saved</span>
             )}
-            {contracts.map((contract) => (
-              <div
-                key={contract.id}
-                className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-lg"
+          </div>
+          {contracts.length === 0 ? (
+            <article className="w-full rounded-[28px] border border-dashed border-slate-300 bg-slate-50 p-6 text-center sm:p-10">
+              <p className="text-xl font-semibold text-slate-900">No contracts yet</p>
+              <p className="mt-2 text-sm text-slate-600">Open the builder and generate your first PDF right now.</p>
+              <Button
+                asChild
+                size="lg"
+                className="mt-6 w-full rounded-2xl py-5 text-base font-semibold sm:mx-auto sm:w-fit sm:px-10"
               >
-                <div className="flex flex-wrap items-center gap-3">
-                  <p className="text-lg font-semibold text-slate-900">{contract.title}</p>
-                  <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-700">
-                    {contract.contractType}
-                  </span>
-                  <span className="text-xs text-slate-500">
-                    {new Date(contract.createdAt).toLocaleString("en-US", {
-                      dateStyle: "medium",
-                      timeStyle: "short",
-                    })}
+                <Link href="/contracts">Create Contract</Link>
+              </Button>
+            </article>
+          ) : (
+            contracts.map((contract) => (
+              <article
+                key={contract.id}
+                className="w-full rounded-[28px] border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
+              >
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <p className="text-lg font-semibold text-slate-900">{contract.title}</p>
+                    <p className="text-sm text-slate-500">{contract.contractType}</p>
+                  </div>
+                  <span className="text-xs uppercase tracking-[0.3em] text-slate-400">
+                    {new Date(contract.createdAt).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" })}
                   </span>
                 </div>
-                <p className="mt-3 line-clamp-4 text-sm text-slate-600">{contract.content}</p>
+                <p className="mt-3 line-clamp-3 text-sm text-slate-600">{contract.content}</p>
                 <div className="mt-4 flex flex-wrap gap-3">
-                  <Button asChild>
-                    <Link href={`/api/contracts/pdf?contractId=${contract.id}`}>Download contract</Link>
+                  <Button asChild size="sm" className="rounded-full px-6 text-sm font-semibold">
+                    <Link href={`/contracts/${contract.id}`}>Continue</Link>
                   </Button>
-                  <Button asChild variant="secondary">
-                    <Link href={`/contracts/${contract.id}`}>Review contract</Link>
-                  </Button>
+                  <Link
+                    href={`/api/contracts/pdf?contractId=${contract.id}`}
+                    className="text-sm font-semibold text-blue-700 underline-offset-4 hover:underline"
+                  >
+                    Instant download
+                  </Link>
                 </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="mt-10 rounded-3xl border border-dashed border-slate-200 bg-slate-50 p-10 text-center">
-            <h3 className="text-xl font-semibold text-slate-900">Save your contracts here</h3>
-            <p className="mt-2 text-sm text-slate-800">
-              Create a free account to keep every contract organized, then upgrade when you&apos;re ready to generate PDFs.
-            </p>
-            <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <Button asChild>
-                <Link href="/dashboard">Start free</Link>
-              </Button>
-              <Button asChild variant="secondary">
-                <Link href="/pricing">View plans</Link>
-              </Button>
-            </div>
-          </div>
-        )}
-      </div>
+              </article>
+            ))
+          )}
+        </section>
+      ) : (
+        <section className="mt-10 w-full rounded-[28px] border border-slate-200 bg-slate-50 p-6 text-center sm:p-10">
+          <h2 className="text-2xl font-semibold text-slate-900">Sign in to save everything</h2>
+          <p className="mt-2 text-sm text-slate-600">
+            Log in, upgrade when you’re ready, and keep every PDF organized automatically.
+          </p>
+          <Button
+            asChild
+            size="lg"
+            className="mt-6 w-full rounded-2xl py-5 text-base font-semibold sm:mx-auto sm:w-fit sm:px-10"
+          >
+            <Link href="/login">Continue</Link>
+          </Button>
+        </section>
+      )}
+
       {hasCheckoutSession && (
         <script
           dangerouslySetInnerHTML={{

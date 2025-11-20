@@ -205,8 +205,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased bg-background">
+    <html lang="en" className="h-full">
+      <body className="min-h-full bg-background overflow-x-hidden antialiased">
         {GA_TRACKING_ID ? (
           <>
             <Script
@@ -240,7 +240,7 @@ export default function RootLayout({
           />
         ))}
         <Navbar />
-        <main className="min-h-[calc(100vh-160px)]">{children}</main>
+        <main className="min-h-[calc(100vh-160px)] w-full overflow-x-hidden">{children}</main>
         <Footer />
         {CLARITY_ID ? (
           <Script
