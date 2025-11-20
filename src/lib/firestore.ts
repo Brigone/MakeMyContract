@@ -1,5 +1,6 @@
 import { getServerFirestore } from "@/lib/firebase/server";
 import type {
+  AiDraft,
   ContractFormPayload,
   ContractRecord,
   ContractType,
@@ -12,6 +13,7 @@ import { randomUUID } from "crypto";
 const COLLECTION_USERS = "users";
 const COLLECTION_CONTRACTS = "contracts";
 const COLLECTION_PAYMENTS = "payments";
+const COLLECTION_AI_DRAFTS = "aiDrafts";
 
 const nowISO = () => new Date().toISOString();
 
@@ -163,5 +165,40 @@ export const getContractsForUser = async (userId: string) => {
     .get();
   return snapshot.docs.map(
     (doc) => ({ id: doc.id, ...(doc.data() as Omit<ContractRecord, "id">) }) as ContractRecord
+  );
+};
+
+export const saveAiDraftRecord = async (params: {
+  userId: string;
+  prompt: string;
+  output: string;
+  source: "gemini";
+}) => {
+  const db = requireDb();
+  const id = randomUUID();
+  const timestamp = nowISO();
+  const record: AiDraft = {
+    id,
+    userId: params.userId,
+    prompt: params.prompt,
+    output: params.output,
+    source: params.source,
+    createdAt: timestamp,
+    updatedAt: timestamp,
+  };
+  await db.collection(COLLECTION_AI_DRAFTS).doc(id).set(record);
+  return record;
+};
+
+export const getAiDraftsForUser = async (userId: string) => {
+  const db = requireDb();
+  const snapshot = await db
+    .collection(COLLECTION_AI_DRAFTS)
+    .where("userId", "==", userId)
+    .orderBy("createdAt", "desc")
+    .limit(20)
+    .get();
+  return snapshot.docs.map(
+    (doc) => ({ id: doc.id, ...(doc.data() as Omit<AiDraft, "id">) }) as AiDraft
   );
 };

@@ -3,8 +3,12 @@ import { getCurrentUser } from "@/lib/auth";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { SmartLink } from "@/components/link/smart-link";
 
+const hasActivePlan = (plan?: string | null) =>
+  plan === "weekly" || plan === "monthly" || plan === "annual";
+
 export async function Navbar() {
   const user = await getCurrentUser();
+  const canUseAi = user ? hasActivePlan(user.plan) : false;
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
@@ -16,6 +20,11 @@ export async function Navbar() {
               <Link href="/dashboard" className="text-slate-500 transition hover:text-slate-900">
                 Dashboard
               </Link>
+              {canUseAi && (
+                <Link href="/ai-generator" className="text-slate-500 transition hover:text-slate-900">
+                  AI Generator
+                </Link>
+              )}
               <LogoutButton variant="ghost" size="sm" className="text-slate-500 hover:text-slate-900" />
             </>
           ) : (

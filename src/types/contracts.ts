@@ -86,6 +86,16 @@ export interface ContractRecord {
   createdAt: string;
 }
 
+export interface AiDraft {
+  id: string;
+  userId: string;
+  prompt: string;
+  output: string;
+  source: "gemini";
+  createdAt: string;
+  updatedAt: string;
+}
+
 export type SubscriptionPlan = "weekly" | "monthly" | "annual" | "expired" | null;
 export type PlanStatus = "active" | "past_due" | "canceled" | "trialing" | null;
 

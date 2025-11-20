@@ -12,20 +12,20 @@ const paragraphize = (content: string) =>
       margin: line === line.toUpperCase() && line.length < 60 ? [0, 18, 0, 6] : [0, 4, 0, 4],
     }));
 
-export const buildPdfDefinition = (contract: ContractRecord): TDocumentDefinitions => {
-  const generatedAt = new Date(contract.createdAt).toLocaleString("en-US", {
+const buildBaseDefinition = (params: { title: string; content: string; createdAt: string }) => {
+  const generatedAt = new Date(params.createdAt).toLocaleString("en-US", {
     dateStyle: "long",
     timeStyle: "short",
   });
 
   return {
     info: {
-      title: contract.title,
+      title: params.title,
       author: "MakeMyContract",
-      subject: contract.contractType,
+      subject: "contract",
     },
     header: {
-      text: contract.title,
+      text: params.title,
       alignment: "center",
       margin: [0, 20, 0, 0],
       color: "#475467",
@@ -40,7 +40,7 @@ export const buildPdfDefinition = (contract: ContractRecord): TDocumentDefinitio
     }),
     content: [
       {
-        text: contract.title,
+        text: params.title,
         style: "documentTitle",
         margin: [0, 0, 0, 6],
       },
@@ -48,7 +48,7 @@ export const buildPdfDefinition = (contract: ContractRecord): TDocumentDefinitio
         text: `Generated ${generatedAt}`,
         style: "subheader",
       },
-      ...paragraphize(contract.content),
+      ...paragraphize(params.content),
     ],
     styles: {
       documentTitle: {
@@ -78,3 +78,17 @@ export const buildPdfDefinition = (contract: ContractRecord): TDocumentDefinitio
     pageMargins: [60, 80, 60, 80],
   };
 };
+
+export const buildPdfDefinition = (contract: ContractRecord): TDocumentDefinitions =>
+  buildBaseDefinition({
+    title: contract.title,
+    content: contract.content,
+    createdAt: contract.createdAt,
+  });
+
+export const buildPdfDefinitionFromText = (params: { title: string; content: string }) =>
+  buildBaseDefinition({
+    title: params.title,
+    content: params.content,
+    createdAt: new Date().toISOString(),
+  });
