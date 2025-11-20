@@ -80,14 +80,18 @@ export default async function PricingPage() {
   const readablePlan = activePlan ? activePlan.replace(/^[a-z]/, (char) => char.toUpperCase()) : null;
   const canResumeDraft = Boolean(user && hasActivePlan(user.plan));
 
+  const numericPrices = PLAN_CONFIG.map((plan) => Number(plan.price.replace(/[^0-9.]/g, "")));
   const offerSchema = {
     "@context": "https://schema.org",
-    "@type": "OfferCatalog",
+    "@type": "AggregateOffer",
     name: "Make My Contract Pricing",
-    itemListElement: PLAN_CONFIG.map((plan) => ({
+    priceCurrency: "USD",
+    lowPrice: Math.min(...numericPrices).toString(),
+    highPrice: Math.max(...numericPrices).toString(),
+    offers: PLAN_CONFIG.map((plan) => ({
       "@type": "Offer",
       name: plan.label,
-      price: plan.price.replace("$", ""),
+      price: plan.price.replace(/[^0-9.]/g, ""),
       priceCurrency: "USD",
       url: "https://makemycontract.com/pricing",
       description: plan.description,
