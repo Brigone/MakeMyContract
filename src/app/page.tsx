@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { getCurrentUser } from "@/lib/auth";
 import { CONTRACT_LIBRARY } from "@/lib/contracts-engine";
+import { SmartCtaBar } from "@/components/layout/smart-cta-bar";
 
 export const metadata: Metadata = {
   title: "Make My Contract - signature-ready contracts in minutes",
@@ -74,8 +75,9 @@ export default async function Home() {
     : { label: "Buy Now", href: "/pricing" };
 
   return (
-    <main className="bg-white text-slate-900">
-      <article className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-4 pb-16 pt-10 sm:px-6 lg:px-0">
+    <>
+      <main className="bg-white text-slate-900">
+        <article className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-4 pb-32 pt-10 sm:px-6 sm:pb-36 lg:px-0">
         <section
           aria-labelledby="hero"
           className="w-full rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_40px_100px_rgba(15,23,42,0.08)] sm:p-10"
@@ -212,5 +214,7 @@ export default async function Home() {
         </section>
       </article>
     </main>
+    <SmartCtaBar />
+    </>
   );
 }

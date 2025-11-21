@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import { Suspense } from "react";
 import Script from "next/script";
 import "./globals.css";
@@ -7,7 +6,6 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { GA_TRACKING_ID } from "@/lib/analytics";
 import { GA4Tracker } from "@/components/analytics/ga-tracker";
-import { SmartCtaBar } from "@/components/layout/smart-cta-bar";
 
 const SITE_URL = "https://makemycontract.com";
 const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
@@ -206,8 +204,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const currentPath = headers().get("x-current-pathname") ?? "/";
-
   return (
     <html lang="en" className="h-full">
       <body className="min-h-full bg-background overflow-x-hidden antialiased">
@@ -244,9 +240,8 @@ export default function RootLayout({
           />
         ))}
         <Navbar />
-        <main className="min-h-[calc(100vh-160px)] w-full overflow-x-hidden pb-32 sm:pb-36">{children}</main>
+        <main className="min-h-[calc(100vh-160px)] w-full overflow-x-hidden">{children}</main>
         <Footer />
-        {currentPath === "/" ? <SmartCtaBar /> : null}
         {CLARITY_ID ? (
           <Script
             id="microsoft-clarity"
