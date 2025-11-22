@@ -93,21 +93,25 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                 </div>
               </article>
             ))
-          )}
-        </section>
-      ) : (
+      )}
+    </section>
+  ) : (
         <section className="mt-10 w-full rounded-[28px] border border-slate-200 bg-slate-50 p-6 text-center sm:p-10">
-          <h2 className="text-2xl font-semibold text-slate-900">Sign in to save everything</h2>
+          <h2 className="text-2xl font-semibold text-slate-900">Keep every contract in one secure place</h2>
           <p className="mt-2 text-sm text-slate-600">
-            Log in, upgrade when you’re ready, and keep every PDF organized automatically.
+            Create a free account to save drafts, sync PDFs across devices, and unlock unlimited history as soon as you subscribe.
           </p>
-          <Button
-            asChild
-            size="lg"
-            className="mt-6 w-full rounded-2xl py-5 text-base font-semibold sm:mx-auto sm:w-fit sm:px-10"
-          >
-            <Link href="/login">Continue</Link>
-          </Button>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <Button asChild size="lg" className="w-full rounded-2xl py-5 text-base font-semibold sm:w-auto sm:px-10">
+              <Link href="/login">Sign in / Create account</Link>
+            </Button>
+            <Button asChild variant="secondary" size="lg" className="w-full rounded-2xl py-5 text-base font-semibold sm:w-auto sm:px-10">
+              <Link href="/draft">Try without paying</Link>
+            </Button>
+          </div>
+          <p className="mt-4 text-sm text-slate-500">
+            We auto-save your work. When you’re ready to generate a contract, just log in and the draft resumes instantly.
+          </p>
         </section>
       )}
 

@@ -7,20 +7,23 @@ export function Footer() {
             <p className="text-xs text-slate-500 sm:text-sm">
               © {new Date().getFullYear()} Make My Contract. Trusted contracts for modern operators.
             </p>
-            <div className="flex flex-wrap justify-center gap-3 sm:justify-end">
-              <a href="/contracts" className="text-slate-700 hover:text-slate-900">
-                Contracts
+            <nav className="flex flex-wrap justify-center gap-3 sm:justify-end">
+              <a href="/about" className="text-slate-700 hover:text-slate-900">
+                About
+              </a>
+              <a href="/draft" className="text-slate-700 hover:text-slate-900">
+                Start contract
+              </a>
+              <a href="/pricing" className="text-slate-700 hover:text-slate-900">
+                Pricing
               </a>
               <a href="/login" className="text-slate-700 hover:text-slate-900">
                 Login
               </a>
-              <a href="/signup" className="text-slate-700 hover:text-slate-900">
-                Upgrade
-              </a>
               <a href="mailto:hello@makemycontract.com" className="text-slate-700 hover:text-slate-900">
                 Talk to sales
               </a>
-            </div>
+            </nav>
           </div>
         </div>
       </div>

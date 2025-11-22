@@ -111,7 +111,7 @@ export default async function PricingPage() {
           </dl>
         </section>
 
-        <section className="mt-10 w-full rounded-[32px] border border-blue-200 bg-blue-600 p-6 text-white sm:p-10">
+        <section className="mt-10 w-full rounded-[32px] border border-blue-200  p-6 text-white sm:p-10">
           <h2 className="text-3xl font-semibold">Ready to trigger the download?</h2>
           <p className="mt-3 text-base text-white/80">
             Tap {finalCta.label}. If you still need a plan, we guide you to the selector above and keep your spot in the builder.
@@ -119,7 +119,7 @@ export default async function PricingPage() {
           <Button
             asChild
             size="lg"
-            className="mt-6 w-full rounded-2xl border border-white/40 bg-white text-blue-700 hover:bg-white sm:w-fit sm:px-10"
+            className="mt-6 w-full rounded-2xl border border-white/40 hover:bg-white sm:w-fit sm:px-10"
           >
             <Link href={finalCta.href}>{finalCta.label}</Link>
           </Button>

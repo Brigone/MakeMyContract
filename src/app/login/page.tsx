@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { LoginForm } from "@/components/auth/login-form";
 import { Badge } from "@/components/ui/badge";
 import { getCurrentUser } from "@/lib/auth";
+import { RouteAwareLink } from "@/components/route-aware-link";
 
 export default async function LoginPage() {
   const user = await getCurrentUser();
@@ -23,9 +23,13 @@ export default async function LoginPage() {
         </p>
         <p className="mt-3 text-sm text-blue-800">
           Still don&apos;t have an account?{" "}
-          <Link href="/signup" className="font-semibold underline-offset-4 hover:underline">
+          <RouteAwareLink
+            href="/signup"
+            className="font-semibold text-blue-700 underline-offset-4 hover:underline"
+            sameRouteMessage="You’re already on the signup page."
+          >
             Create an account
-          </Link>{" "}
+          </RouteAwareLink>{" "}
           before attempting to log in.
         </p>
       </div>
@@ -33,9 +37,13 @@ export default async function LoginPage() {
         <LoginForm />
         <p className="mt-4 text-center text-sm text-slate-800">
           New here?{" "}
-          <Link href="/signup" className="font-semibold text-blue-600">
+          <RouteAwareLink
+            href="/signup"
+            className="font-semibold text-blue-600"
+            sameRouteMessage="You’re already viewing the signup form."
+          >
             Create an account
-          </Link>
+          </RouteAwareLink>
         </p>
       </div>
     </div>

@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { SignupForm } from "@/components/auth/signup-form";
 import { Badge } from "@/components/ui/badge";
 import { getCurrentUser } from "@/lib/auth";
+import { RouteAwareLink } from "@/components/route-aware-link";
 
 export default async function SignupPage() {
   const user = await getCurrentUser();
@@ -26,9 +26,9 @@ export default async function SignupPage() {
         <SignupForm />
         <p className="mt-4 text-center text-sm text-slate-800">
           Already using Make My Contract?{" "}
-          <Link href="/login" className="font-semibold text-blue-600">
+          <RouteAwareLink href="/login" className="font-semibold text-blue-600" sameRouteMessage="You’re already on the login page.">
             Sign in instead
-          </Link>
+          </RouteAwareLink>
         </p>
       </div>
     </div>

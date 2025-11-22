@@ -10,8 +10,8 @@ export async function SmartCtaBar() {
   const isSubscribed = hasActivePlan(user?.plan);
 
   const cta = isSubscribed
-    ? { label: "Generate Contract", href: "/contracts" }
-    : { label: "Create Contract", href: "/contracts" };
+    ? { label: "Generate Contract", href: "/" }
+    : { label: "Create Contract", href: "/" };
 
   return (
     <div className="fixed inset-x-0 bottom-3 z-50 px-4 sm:px-6">
