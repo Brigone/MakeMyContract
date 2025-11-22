@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { fireAdsConversion } from "@/lib/ads-tracking";
 
 interface RouteAwareButtonProps {
   href: string;
@@ -12,6 +13,7 @@ interface RouteAwareButtonProps {
   size?: "sm" | "md" | "lg";
   sameRouteMessage?: string;
   scrollTargetId?: string;
+  conversionEvent?: "StartContract" | "SignUp" | "Payment";
 }
 
 const normalizePath = (value: string) => {
@@ -27,6 +29,7 @@ export function RouteAwareButton({
   size,
   sameRouteMessage = "You’re already here—scroll down and continue.",
   scrollTargetId,
+  conversionEvent,
 }: RouteAwareButtonProps) {
   const pathname = usePathname();
   const router = useRouter();
@@ -36,6 +39,9 @@ export function RouteAwareButton({
     event.preventDefault();
     const current = normalizePath(pathname ?? "/");
     const destination = normalizePath(href);
+    if (conversionEvent) {
+      fireAdsConversion(conversionEvent);
+    }
     if (current === destination) {
       setHint(true);
       if (scrollTargetId) {

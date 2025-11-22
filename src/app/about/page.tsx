@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { RouteAwareButton } from "@/components/route-aware-button";
 import { getCurrentUser } from "@/lib/auth";
 import { CONTRACT_LIBRARY } from "@/lib/contracts-engine";
 import { SmartCtaBar } from "@/components/layout/smart-cta-bar";
@@ -103,13 +104,15 @@ export default async function Home() {
               </li>
             ))}
           </ul>
-          <Button
-            asChild
+          <RouteAwareButton
+            href="/draft"
             size="lg"
             className="mt-8 w-full rounded-2xl py-5 text-base font-semibold sm:w-fit sm:px-10"
+            sameRouteMessage="You’re already inside the builder. Scroll to keep going."
+            conversionEvent="StartContract"
           >
-            <Link href="/contracts">Create Contract</Link>
-          </Button>
+            Create Contract
+          </RouteAwareButton>
           <p className="mt-3 text-sm text-slate-500">Start without logging in. Drafts auto-resume after signup.</p>
         </section>
 
@@ -134,13 +137,15 @@ export default async function Home() {
               </Link>
             ))}
           </div>
-          <Button
-            asChild
+          <RouteAwareButton
+            href="/draft"
             size="lg"
             className="mt-6 w-full rounded-2xl py-5 text-base font-semibold sm:w-fit sm:px-10"
+            sameRouteMessage="You’re already on the builder—scroll and continue."
+            conversionEvent="StartContract"
           >
-            <Link href="/contracts">Continue</Link>
-          </Button>
+            Continue
+          </RouteAwareButton>
         </section>
 
         <section id="templates" aria-label="Template library" className="w-full rounded-[28px] border border-slate-200 bg-white p-5 sm:p-8">

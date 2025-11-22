@@ -3,6 +3,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { getContractsForUser } from "@/lib/firestore";
 import { Button } from "@/components/ui/button";
 import { DraftResumeWatcher } from "@/components/draft-resume-watcher";
+import { PaymentConversionWatcher } from "@/components/payment-conversion-watcher";
 
 const hasActivePlan = (plan?: string | null) =>
   plan === "weekly" || plan === "monthly" || plan === "annual";
@@ -28,6 +29,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-10 text-slate-900 sm:px-6 lg:px-0">
       <DraftResumeWatcher shouldResume={canResumeDraft} />
+      <PaymentConversionWatcher shouldFire={hasCheckoutSession} />
       <section className="w-full rounded-[32px] border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">Next step</p>
         <h1 className="mt-3 text-3xl font-semibold leading-tight sm:text-4xl">Pick up your contract exactly where you left.</h1>

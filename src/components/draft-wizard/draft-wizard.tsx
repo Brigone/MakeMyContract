@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import type { ContractFormPayload, SubscriptionPlan, ContractType } from "@/types/contracts";
 import { CONTRACT_LIBRARY } from "@/lib/contracts-engine";
+import { fireAdsConversion } from "@/lib/ads-tracking";
 
 interface DraftWizardProps {
   user: {
@@ -211,6 +212,7 @@ export function DraftWizard({ user, showBackLink = true }: DraftWizardProps) {
   }, [formData]);
 
   const updateBasics = (name: string, value: string) => {
+    fireAdsConversion("StartContract");
     setFormData((prev) => ({ ...prev, basics: { ...prev.basics, [name]: value } }));
     setErrors((prev) => {
       const next = { ...prev };
@@ -386,6 +388,7 @@ export function DraftWizard({ user, showBackLink = true }: DraftWizardProps) {
                 formData.contractType === option.id ? "border-blue-500 bg-blue-50" : "border-slate-200 bg-white"
               }`}
               onClick={() => {
+                fireAdsConversion("StartContract");
                 setFormData((prev) => ({ ...prev, contractType: option.id }));
                 setErrors({});
                 setStep(2);

@@ -11,6 +11,7 @@ import { getFirebaseAuth } from "@/lib/firebase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { getDraft } from "@/lib/draft-storage";
+import { fireAdsConversion } from "@/lib/ads-tracking";
 
 const schema = z
   .object({
@@ -69,6 +70,7 @@ export function SignupForm() {
         const result = await createUserWithEmailAndPassword(auth, values.email, values.password);
         const idToken = await result.user.getIdToken();
         await createSession(idToken);
+        fireAdsConversion("SignUp");
         const pendingDraft = getDraft();
         router.push(pendingDraft?.path ?? "/pricing");
         router.refresh();
@@ -90,6 +92,7 @@ export function SignupForm() {
         const result = await signInWithPopup(auth, provider);
         const idToken = await result.user.getIdToken();
         await createSession(idToken);
+        fireAdsConversion("SignUp");
         const pendingDraft = getDraft();
         router.push(pendingDraft?.path ?? "/pricing");
         router.refresh();

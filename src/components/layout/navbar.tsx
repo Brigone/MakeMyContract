@@ -36,6 +36,7 @@ export async function Navbar() {
             className="rounded-full px-5"
             sameRouteMessage="You’re already inside the contract creator—scroll down to keep filling the steps."
             scrollTargetId="wizard-helper"
+            conversionEvent="StartContract"
           >
             Start Contract
           </RouteAwareButton>
